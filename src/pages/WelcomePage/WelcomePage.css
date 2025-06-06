@@ -1,0 +1,87 @@
+.home-container {
+  position: relative;
+  height: 100vh;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)),
+              url('../assets/logo.png') no-repeat center center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
+  color: #fff;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.65);
+  z-index: 0;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 30px;
+  max-width: 800px;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.logo {
+  max-width: 250px;
+  margin-bottom: 25px;
+  filter: drop-shadow(0 0 6px rgba(0,0,0,0.4));
+  animation: fadeIn 2.5s ease;
+}
+
+.tagline {
+  font-size: 3.2rem;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.2;
+  animation: slideIn 3s ease;
+}
+
+.subtext {
+  font-size: 1.3rem;
+  margin: 20px 0 40px;
+  color: #ccc;
+  animation: fadeIn 3.2s ease;
+}
+
+.enter-btn {
+  background-color: #A3D9B1;
+  color: #2C3E50;
+  padding: 14px 28px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.enter-btn:hover {
+  background-color: #89c8a0;
+  transform: translateY(-3px);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

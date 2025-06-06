@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+  
+}
+
+.footer {
+  background-color: #2C3E50;
+  color: #F5F5F5;
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  bottom: 0;
+  width: calc(100% - 220px); /* ancho restante dejando espacio al sidebar */
+  left: 220px; /* mover para no tapar el sidebar */
+}
