@@ -61,7 +61,7 @@ export const useLogin = () => {
       localStorage.removeItem('pendingReservation')
       navigate('/main/reservation', { state: parsedReservation })
     } else {
-      navigate('/main/hotellist')
+      navigate('/main/home')
     }
   }
 
