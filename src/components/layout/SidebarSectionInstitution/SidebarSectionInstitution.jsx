@@ -47,30 +47,20 @@ function SidebarSectionInstitution() {
           style={{ position: 'relative', top: '-40px' }}
         >
           <ul className="list-unstyled mt-3">
-            <li>
-              <Link to="/admin/hotel" className="py-2 px-3 rounded d-block hover-sidebar">
-                <FaHotel className="me-2" /> Institucion 1
+           <li>
+              <Link to="/modificar" className="py-2 px-3 rounded d-block hover-sidebar">
+                <FaHotel className="me-2" />Mi Institucion
+              </Link>
+              <li>
+              <Link to="/modificar" className="py-2 px-3 rounded d-block hover-sidebar">
+                <FaHotel className="me-2" />Donaciones a mi Institucion
               </Link>
             </li>
             <li>
-              <Link to="/admin/room" className="py-2 px-3 rounded d-block hover-sidebar">
-                <FaBed className="me-2" /> Institucion 2
+              <Link to="/modificar" className="py-2 px-3 rounded d-block hover-sidebar">
+                <FaHotel className="me-2" />Configurar Institucion, agregar publicaciones, comentarios
               </Link>
             </li>
-            <li>
-              <Link to="/admin/services" className="py-2 px-3 rounded d-block hover-sidebar">
-                <FaConciergeBell className="me-2" /> Institucion 3
-              </Link>
-            </li>
-            <li>
-              <Link to="/admin/event" className="py-2 px-3 rounded d-block hover-sidebar">
-                <FaCalendarAlt className="me-2" /> Institucion 4 
-              </Link>
-            </li>
-            <li>
-              <Link to="/admin/report" className="py-2 px-3 rounded d-block hover-sidebar">
-                <FaChartBar className="me-2" /> Institucion 5
-              </Link>
             </li>
           </ul>
         </div>

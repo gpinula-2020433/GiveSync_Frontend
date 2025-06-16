@@ -48,28 +48,20 @@ function SidebarUserSettings() {
         >
           <ul className="list-unstyled mt-3">
             <li>
-              <Link to="/admin/hotel" className="py-2 px-3 rounded d-block hover-sidebar">
-                <FaHotel className="me-2" /> User 1
+              <Link to="/modificar" className="py-2 px-3 rounded d-block hover-sidebar">
+                <FaHotel className="me-2" />Información de mi usuario
               </Link>
             </li>
             <li>
-              <Link to="/admin/room" className="py-2 px-3 rounded d-block hover-sidebar">
-                <FaBed className="me-2" /> User 2
+              <Link to="/modificar" className="py-2 px-3 rounded d-block hover-sidebar">
+                <FaHotel className="me-2" />Historial de donaciones hechas
               </Link>
             </li>
             <li>
-              <Link to="/admin/services" className="py-2 px-3 rounded d-block hover-sidebar">
-                <FaConciergeBell className="me-2" />  User 3
-              </Link>
-            </li>
-            <li>
-              <Link to="/admin/event" className="py-2 px-3 rounded d-block hover-sidebar">
-                <FaCalendarAlt className="me-2" /> User 4
-              </Link>
-            </li>
-            <li>
-              <Link to="/admin/report" className="py-2 px-3 rounded d-block hover-sidebar">
-                <FaChartBar className="me-2" /> User 5
+              <Link to="/modificar" className="py-2 px-3 rounded d-block hover-sidebar">
+                <FaHotel className="me-2" />Solicitud para registrar mi institucion
+                {/*Aqui aparece el formulario si la persona logeada no tiene institucion, si 
+                  tiene una institucion. Usted ya tiene una institucion registrada */}
               </Link>
             </li>
           </ul>

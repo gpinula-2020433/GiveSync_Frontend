@@ -48,28 +48,28 @@ function Sidebar() {
         >
           <ul className="list-unstyled mt-3">
             <li>
-              <Link to="/admin/hotel" className="py-2 px-3 rounded d-block hover-sidebar">
-                <FaHotel className="me-2" /> Hotel
+              <Link to="/modificar" className="py-2 px-3 rounded d-block hover-sidebar">
+                <FaHotel className="me-2" />Instituciones
               </Link>
             </li>
             <li>
-              <Link to="/admin/room" className="py-2 px-3 rounded d-block hover-sidebar">
-                <FaBed className="me-2" /> Room
+              <Link to="/modificar" className="py-2 px-3 rounded d-block hover-sidebar">
+                <FaHotel className="me-2" />Solicitudes de Instituciones
               </Link>
             </li>
             <li>
-              <Link to="/admin/services" className="py-2 px-3 rounded d-block hover-sidebar">
-                <FaConciergeBell className="me-2" /> Services
+              <Link to="/modificar" className="py-2 px-3 rounded d-block hover-sidebar">
+                <FaHotel className="me-2" />Donaciones {/*Se listan todas las donaciones que existen */}
               </Link>
             </li>
             <li>
-              <Link to="/admin/event" className="py-2 px-3 rounded d-block hover-sidebar">
-                <FaCalendarAlt className="me-2" /> Events
+              <Link to="/modificar" className="py-2 px-3 rounded d-block hover-sidebar">
+                <FaHotel className="me-2" />Usuarios
               </Link>
             </li>
             <li>
-              <Link to="/admin/report" className="py-2 px-3 rounded d-block hover-sidebar">
-                <FaChartBar className="me-2" /> Reports
+              <Link to="/modificar" className="py-2 px-3 rounded d-block hover-sidebar">
+                <FaHotel className="me-2" />Panel {/*Instituciones registradas, donaciones hechas, personas registradas, dinero recaudado */}
               </Link>
             </li>
           </ul>
