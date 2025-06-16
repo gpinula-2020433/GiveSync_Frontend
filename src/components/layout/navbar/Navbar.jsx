@@ -35,18 +35,18 @@ export function Navbar() {
           GyveSync
         </div>
         <div className="d-flex gap-4">
-          <Link to="/main/hotellist" className="text-light text-decoration-none">Principal</Link>
+          <Link to="/main/home" className="text-light text-decoration-none">Principal</Link>
 
-          {!isLoggedIn && (
+          {isLoggedIn && (
             <Link to="/auth/login" className="text-light text-decoration-none">Iniciar Sesión</Link>
           )}
 
           {isLoggedIn && (
             <>
-              <Link to="/main/invoice" className="text-light text-decoration-none">Reservación</Link>
-              <Link to="/user" className="text-light text-decoration-none">Configuración</Link>  
+              <Link to="/sectioninstitution" className="text-light text-decoration-none">Institucion</Link>
+              <Link to="/usersettings" className="text-light text-decoration-none">Configuración Usuario</Link>  
               {isAdmin && (
-                <Link to="/admin" className="text-light text-decoration-none">Administración Hotel</Link>
+                <Link to="/admin" className="text-light text-decoration-none">Administración</Link>
               )}
               <Link to="/auth/login" className="text-light text-decoration-none" onClick={handleLogout}>Cerrar sesión</Link>
             </>

@@ -7,6 +7,9 @@ import MainPage from './pages/MainPage/MainPage'
 import HomePage from './pages/HomePage/HomePage'
 import { NotFoundPage } from "./pages/NotFound/NotFoundPage";
 import WelcomePage from './pages/WelcomePage/WelcomePage'
+import {AdminPage} from '../src/pages/AdminPage/AdminPage'
+import {SectionInstitutionPage} from '../src/pages/SectionInstitutionPage/SectionInstitutionPage'
+import {UserSettingsPage} from '../src/pages/UserSettingsPage/UserSettingsPage'
 
 export const routes = [
   {
@@ -28,6 +31,18 @@ export const routes = [
     children: [
       { path: 'home', element: <HomePage/>}
     ]
+  },
+  {
+    path: '/admin',
+    element: <AdminPage />
+  },
+  {
+    path: '/sectioninstitution',
+    element: <SectionInstitutionPage/>
+  },
+  {
+    path: '/usersettings',
+    element: <UserSettingsPage/>
   },
   {
     path:'*',
