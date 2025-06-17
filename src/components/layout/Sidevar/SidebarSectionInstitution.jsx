@@ -36,7 +36,7 @@ function SidebarSectionInstitution() {
       </button>
 
       <aside
-        className={`sidebar bg-secondary text-light p-3 d-flex flex-column ${isOpen ? 'open' : 'closed'}`}
+        className={`sidebar p-3 d-flex flex-column ${isOpen ? 'open' : 'closed'}`}
       >
         <div
           className="d-flex flex-column justify-content-center flex-grow-1"
