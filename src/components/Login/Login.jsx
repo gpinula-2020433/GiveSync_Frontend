@@ -83,6 +83,7 @@ export const Login = () => {
       </form>
       <div className='redirect-to-login'>
         <p>¿No tienes una cuenta? <Link to="/auth/register">Regístrate aquí</Link></p>
+        <p>¿Solo quieres explorar? <Link to="/main/home">Continuar sin registrarse</Link></p>
       </div>
     </div>
   )

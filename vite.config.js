@@ -1,11 +1,17 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
   server: {
     port: 5173,
-    cors: true, // Esto habilita CORS para tu desarrollo local
+    cors: true,
+    proxy: {
+      '/uploads': {
+        target: 'http://localhost:3200',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
   },
 });

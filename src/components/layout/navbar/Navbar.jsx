@@ -9,6 +9,7 @@ export function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [userImage, setUserImage] = useState(imgProfile);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -16,9 +17,16 @@ export function Navbar() {
       const decoded = decodeToken(token);
       setIsLoggedIn(true);
       setIsAdmin(decoded?.role === 'ADMIN');
+
+      const imageUrl = decoded?.imageUser
+        ? `/uploads/img/users/${decoded.imageUser}`
+        : imgProfile;
+
+      setUserImage(imageUrl);
     } else {
       setIsLoggedIn(false);
       setIsAdmin(false);
+      setUserImage(imgProfile); // fallback
     }
   }, []);
 
@@ -28,6 +36,7 @@ export function Navbar() {
     navigate('/auth/login');
     setIsLoggedIn(false);
     setIsAdmin(false);
+    setUserImage(imgProfile);
   };
 
   const toggleDropdown = () => {
@@ -55,7 +64,6 @@ export function Navbar() {
             <>
               <Link to="/sectioninstitution" className="text-light text-decoration-none">
                 <i className="fas fa-hands-helping"></i> Institución
-                {/*fas fa-hand-holding-heart me-1 */}
               </Link>
               {isAdmin && (
                 <Link to="/admin" className="text-light text-decoration-none">
@@ -64,10 +72,13 @@ export function Navbar() {
               )}
               <div className="profile-container position-relative">
                 <img
-                  src={imgProfile}
+                  src={userImage}
                   alt="profile"
                   className="profile-img"
                   onClick={toggleDropdown}
+                  onError={(e) => {
+                    e.currentTarget.src = imgProfile
+                  }}
                 />
                 {showDropdown && (
                   <div className="profile-dropdown">
