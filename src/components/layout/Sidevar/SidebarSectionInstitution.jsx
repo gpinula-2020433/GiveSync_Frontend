@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  FaUser,
-  FaHistory,
-  FaPlusCircle
+  FaHotel,
+  FaDonate,
+  FaCog
 } from 'react-icons/fa';
-import './SidebarUserSettings.css';
+import './Sidevar.css';
 
-function SidebarUserSettings() {
+function SidebarSectionInstitution() {
   const [isOpen, setIsOpen] = useState(true);
 
   const toggleSidebar = () => setIsOpen(!isOpen);
@@ -44,19 +44,18 @@ function SidebarUserSettings() {
         >
           <ul className="list-unstyled mt-3">
             <li>
-              <Link to="/usersettings/UserInformation" className="py-2 px-3 rounded d-block hover-sidebar">
-                <FaUser className="me-2" />Información de mi usuario
+              <Link to="/sectioninstitution/MyInstitution" className="py-2 px-3 rounded d-block hover-sidebar">
+                <FaHotel className="me-2" />Mi Institución
               </Link>
             </li>
             <li>
-              <Link to="/usersettings/DonationHistory" className="py-2 px-3 rounded d-block hover-sidebar">
-                <FaHistory className="me-2" />Historial de donaciones hechas
+              <Link to="/sectioninstitution/DonationsToMyInstitution" className="py-2 px-3 rounded d-block hover-sidebar">
+                <FaDonate className="me-2" />Donaciones a mi Institución
               </Link>
             </li>
             <li>
-              <Link to="/usersettings/RequestToRegisterAnInstitution" className="py-2 px-3 rounded d-block hover-sidebar">
-                <FaPlusCircle className="me-2" />Solicitud para registrar mi institución
-                {/* Aquí aparece el formulario si la persona logeada no tiene institución */}
+              <Link to="/sectioninstitution/ConfigurationOfTheInstitution" className="py-2 px-3 rounded d-block hover-sidebar">
+                <FaCog className="me-2" />Configurar Institución
               </Link>
             </li>
           </ul>
@@ -66,4 +65,4 @@ function SidebarUserSettings() {
   );
 }
 
-export default SidebarUserSettings;
+export default SidebarSectionInstitution;
