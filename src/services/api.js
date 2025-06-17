@@ -1,4 +1,5 @@
 import axios from "axios"
+import { data } from "react-router-dom"
 
 const apiClient = axios.create(
     {
@@ -12,6 +13,13 @@ const apiInstitucion = axios.create(
         baseURL: 'http://localhost:3200/v1/institution',
         timeout: 2000
     }
+)
+
+const apiPublication = axios.create(
+  {
+      baseURL: 'http://localhost:3200/v1/publication',
+      timeout: 2000
+  }
 )
 
 apiClient.interceptors.request.use(
@@ -137,4 +145,30 @@ export const getInstitutionById = async (id) => {
   } catch (err) {
     return { error: true, err }
   }
+}
+
+//listar publicaciones por institución
+export const getPublicationsByInstitutionRequest = async (institutionId)=>{
+  try {
+    const res = await apiPublication.get(`/getByInstitution/${institutionId}`)
+    return res
+  } catch (error) {
+    return {error: true, error}
+  }
+}
+
+export const addPublicationRequest = async (data) =>{
+  return await apiPublication.post(`/add`, data)
+}
+
+export const updatePublicationRequest = async (id, data) =>{
+  return await apiPublication.put(`/update/${id}`, data)
+}
+
+export const updateImagePublicationRequest = async (id, data) =>{
+  return await apiPublication.put(`/updateImage/${id}`, data)
+}
+
+export const deletePublicationRequest = async (id)=>{
+  return await apiPublication.delete(`/delete/${id}`)
 }

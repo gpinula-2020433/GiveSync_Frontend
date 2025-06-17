@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useInstitutions } from '../../../shared/hooks/Institution/useInstitution'
+import { usePublicationsByInstitution } from '../../../shared/hooks/publication/usePublication'
+import PublicationCard from '../../../components/publication/PublicationCard'
+import PublicationForm from '../../../components/publication/PublicationForm'
 
 const InstitutionDetail = () => {
   const { id } = useParams()
   const { institution, loading, error, fetchInstitutionById } = useInstitutions()
   const [currentIndex, setCurrentIndex] = useState(0)
   const [carouselActive, setCarouselActive] = useState(true)
+  const { publications, loading: loadingPublications, error: errorPublications, refetch } = usePublicationsByInstitution(id)
 
   useEffect(() => {
     fetchInstitutionById(id)
@@ -216,6 +220,27 @@ const InstitutionDetail = () => {
 
       <p><strong>Tipo:</strong> {institution.type || 'No especificado'}</p>
       <p><strong>Estado:</strong> {institution.status || 'Desconocido'}</p>
+
+      {/* Formulario para agregar publicación */}
+      <h2>Agregar publicación</h2>
+      <PublicationForm institutionId={id} onSuccess={refetch} />
+
+      <div>
+        <h2>Publicaciones recientes</h2>
+        {loadingPublications ? (
+        <p>Cargando publicaciones...</p>
+        ) : errorPublications ? (
+          <p>{errorPublications}</p>
+        ) : publications.length === 0 ? (
+          <p>No hay publicaciones de esta institución.</p>
+        ) : (
+        <ul>
+        {publications.map((pub) => (
+          <PublicationCard key={pub._id} publication={pub} onChange={refetch}/>
+        ))}
+          </ul>
+        )}
+      </div>
     </div>
   )
 }
