@@ -4,12 +4,26 @@ import { Login } from './components/Login/Login'
 import { Register } from './components/Register/Register'
 import { Navigate } from 'react-router-dom'
 import MainPage from './pages/MainPage/MainPage'
-import HomePage from './pages/HomePage/HomePage'
+import HomePage from './pages/MainPage/HomePage/HomePage'
 import { NotFoundPage } from "./pages/NotFound/NotFoundPage";
-import WelcomePage from './pages/WelcomePage/WelcomePage'
+import WelcomePage from './pages/MainPage/WelcomePage/WelcomePage'
 import {AdminPage} from '../src/pages/AdminPage/AdminPage'
 import {SectionInstitutionPage} from '../src/pages/SectionInstitutionPage/SectionInstitutionPage'
 import {UserSettingsPage} from '../src/pages/UserSettingsPage/UserSettingsPage'
+
+import {AllDonationsMade} from '../src/pages/AdminPage/AllDonationsMade/AllDonationsMade'
+import {ListOfInstitutions} from '../src/pages/AdminPage/ListOfInstitutions/ListOfInstitutions'
+import {PanelGeneralInformation} from '../src/pages/AdminPage/PanelGeneralInformation/PanelGeneralInformation'
+import {RegisteredUsers} from '../src/pages/AdminPage/RegisteredUsers/RegisteredUsers'
+import {RequestFromInstitutions} from '../src/pages/AdminPage/RequestFromInstitutions/RequestFromInstitutions'
+
+import {ConfigurationOfTheInstitution} from '../src/pages/SectionInstitutionPage/ConfigurationOfTheInstitution/ConfigurationOfTheInstitution'
+import {DonationsToMyInstitution} from '../src/pages/SectionInstitutionPage/DonationsToMyInstitution/DonationsToMyInstitution'
+import {MyInstitution} from '../src/pages/SectionInstitutionPage/MyInstitution/MyInstitution'
+
+import {DonationHistory} from '../src/pages/UserSettingsPage/DonationHistory/DonationHistory'
+import {RequestToRegisterAnInstitution} from '../src/pages/UserSettingsPage/RequestToRegisterAnInstitution/RequestToRegisterAnInstitution'
+import {UserInformation} from '../src/pages/UserSettingsPage/UserInformation/UserInformation'
 
 export const routes = [
   {
@@ -34,15 +48,32 @@ export const routes = [
   },
   {
     path: '/admin',
-    element: <AdminPage />
+    element: <AdminPage />,
+    children: [
+      { path: 'AllDonationsMade', element: <AllDonationsMade/>},
+      { path: 'ListOfInstitutions', element: <ListOfInstitutions/>},
+      { path: 'PanelGeneralInformation', element: <PanelGeneralInformation/>},
+      { path: 'RegisteredUsers', element: <RegisteredUsers/>},
+      { path: 'RequestFromInstitutions', element: <RequestFromInstitutions/>}
+    ]
   },
   {
     path: '/sectioninstitution',
-    element: <SectionInstitutionPage/>
+    element: <SectionInstitutionPage/>,
+    children: [
+      { path: 'ConfigurationOfTheInstitution', element: <ConfigurationOfTheInstitution/>},
+      { path: 'DonationsToMyInstitution', element: <DonationsToMyInstitution/>},
+      { path: 'MyInstitution', element: <MyInstitution/>}
+    ]
   },
   {
     path: '/usersettings',
-    element: <UserSettingsPage/>
+    element: <UserSettingsPage/>,
+    children: [
+      { path: 'DonationHistory', element: <DonationHistory/>},
+      { path: 'RequestToRegisterAnInstitution', element: <RequestToRegisterAnInstitution/>},
+      { path: 'UserInformation', element: <UserInformation/>}
+    ]
   },
   {
     path:'*',

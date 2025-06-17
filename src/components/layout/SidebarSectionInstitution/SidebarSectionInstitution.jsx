@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   FaHotel,
-  FaBed,
-  FaConciergeBell,
-  FaCalendarAlt,
-  FaChartBar
+  FaDonate,
+  FaCog
 } from 'react-icons/fa';
 import './SidebarSectionInstitution.css';
 
@@ -38,29 +36,27 @@ function SidebarSectionInstitution() {
       </button>
 
       <aside
-        className={`sidebar bg-secondary text-light p-3 d-flex flex-column ${
-          isOpen ? 'open' : 'closed'
-        }`}
+        className={`sidebar bg-secondary text-light p-3 d-flex flex-column ${isOpen ? 'open' : 'closed'}`}
       >
         <div
           className="d-flex flex-column justify-content-center flex-grow-1"
           style={{ position: 'relative', top: '-40px' }}
         >
           <ul className="list-unstyled mt-3">
-           <li>
-              <Link to="/modificar" className="py-2 px-3 rounded d-block hover-sidebar">
-                <FaHotel className="me-2" />Mi Institucion
-              </Link>
-              <li>
-              <Link to="/modificar" className="py-2 px-3 rounded d-block hover-sidebar">
-                <FaHotel className="me-2" />Donaciones a mi Institucion
+            <li>
+              <Link to="/sectioninstitution/MyInstitution" className="py-2 px-3 rounded d-block hover-sidebar">
+                <FaHotel className="me-2" />Mi Institución
               </Link>
             </li>
             <li>
-              <Link to="/modificar" className="py-2 px-3 rounded d-block hover-sidebar">
-                <FaHotel className="me-2" />Configurar Institucion, agregar publicaciones, comentarios
+              <Link to="/sectioninstitution/DonationsToMyInstitution" className="py-2 px-3 rounded d-block hover-sidebar">
+                <FaDonate className="me-2" />Donaciones a mi Institución
               </Link>
             </li>
+            <li>
+              <Link to="/sectioninstitution/ConfigurationOfTheInstitution" className="py-2 px-3 rounded d-block hover-sidebar">
+                <FaCog className="me-2" />Configurar Institución
+              </Link>
             </li>
           </ul>
         </div>

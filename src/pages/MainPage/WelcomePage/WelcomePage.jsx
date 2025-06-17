@@ -1,6 +1,6 @@
 import React from 'react';
 import './WelcomePage.css';
-import logo from '../../assets/logo.png';
+import logo from '../../../assets/logo.png';
 import { FaArrowRight } from 'react-icons/fa';
 
 const WelcomePage = () => {

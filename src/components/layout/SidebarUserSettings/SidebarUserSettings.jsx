@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  FaHotel,
-  FaBed,
-  FaConciergeBell,
-  FaCalendarAlt,
-  FaChartBar
+  FaUser,
+  FaHistory,
+  FaPlusCircle
 } from 'react-icons/fa';
 import './SidebarUserSettings.css';
 
@@ -38,9 +36,7 @@ function SidebarUserSettings() {
       </button>
 
       <aside
-        className={`sidebar bg-secondary text-light p-3 d-flex flex-column ${
-          isOpen ? 'open' : 'closed'
-        }`}
+        className={`sidebar bg-secondary text-light p-3 d-flex flex-column ${isOpen ? 'open' : 'closed'}`}
       >
         <div
           className="d-flex flex-column justify-content-center flex-grow-1"
@@ -48,20 +44,19 @@ function SidebarUserSettings() {
         >
           <ul className="list-unstyled mt-3">
             <li>
-              <Link to="/modificar" className="py-2 px-3 rounded d-block hover-sidebar">
-                <FaHotel className="me-2" />Información de mi usuario
+              <Link to="/usersettings/UserInformation" className="py-2 px-3 rounded d-block hover-sidebar">
+                <FaUser className="me-2" />Información de mi usuario
               </Link>
             </li>
             <li>
-              <Link to="/modificar" className="py-2 px-3 rounded d-block hover-sidebar">
-                <FaHotel className="me-2" />Historial de donaciones hechas
+              <Link to="/usersettings/DonationHistory" className="py-2 px-3 rounded d-block hover-sidebar">
+                <FaHistory className="me-2" />Historial de donaciones hechas
               </Link>
             </li>
             <li>
-              <Link to="/modificar" className="py-2 px-3 rounded d-block hover-sidebar">
-                <FaHotel className="me-2" />Solicitud para registrar mi institucion
-                {/*Aqui aparece el formulario si la persona logeada no tiene institucion, si 
-                  tiene una institucion. Usted ya tiene una institucion registrada */}
+              <Link to="/usersettings/RequestToRegisterAnInstitution" className="py-2 px-3 rounded d-block hover-sidebar">
+                <FaPlusCircle className="me-2" />Solicitud para registrar mi institución
+                {/* Aquí aparece el formulario si la persona logeada no tiene institución */}
               </Link>
             </li>
           </ul>

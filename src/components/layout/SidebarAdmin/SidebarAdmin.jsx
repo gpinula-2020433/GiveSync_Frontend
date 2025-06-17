@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   FaHotel,
-  FaBed,
-  FaConciergeBell,
-  FaCalendarAlt,
+  FaUsers,
+  FaDonate,
+  FaClipboardList,
   FaChartBar
 } from 'react-icons/fa';
-import './Sidebar.css';
+import './SidebarAdmin.css';
 
-function Sidebar() {
+function SidebarAdmin() {
   const [isOpen, setIsOpen] = useState(true);
 
   const toggleSidebar = () => setIsOpen(!isOpen);
@@ -38,38 +38,33 @@ function Sidebar() {
       </button>
 
       <aside
-        className={`sidebar bg-secondary text-light p-3 d-flex flex-column ${
-          isOpen ? 'open' : 'closed'
-        }`}
+        className={`sidebar bg-secondary text-light p-3 d-flex flex-column ${isOpen ? 'open' : 'closed'}`}
       >
-        <div
-          className="d-flex flex-column justify-content-center flex-grow-1"
-          style={{ position: 'relative', top: '-40px' }}
-        >
+        <div className="d-flex flex-column justify-content-center flex-grow-1" style={{ position: 'relative', top: '-40px' }}>
           <ul className="list-unstyled mt-3">
             <li>
-              <Link to="/modificar" className="py-2 px-3 rounded d-block hover-sidebar">
+              <Link to="/admin/ListOfInstitutions" className="py-2 px-3 rounded d-block hover-sidebar">
                 <FaHotel className="me-2" />Instituciones
               </Link>
             </li>
             <li>
-              <Link to="/modificar" className="py-2 px-3 rounded d-block hover-sidebar">
-                <FaHotel className="me-2" />Solicitudes de Instituciones
+              <Link to="/admin/RequestFromInstitutions" className="py-2 px-3 rounded d-block hover-sidebar">
+                <FaClipboardList className="me-2" />Solicitudes de Instituciones
               </Link>
             </li>
             <li>
-              <Link to="/modificar" className="py-2 px-3 rounded d-block hover-sidebar">
-                <FaHotel className="me-2" />Donaciones {/*Se listan todas las donaciones que existen */}
+              <Link to="/admin/AllDonationsMade" className="py-2 px-3 rounded d-block hover-sidebar">
+                <FaDonate className="me-2" />Donaciones
               </Link>
             </li>
             <li>
-              <Link to="/modificar" className="py-2 px-3 rounded d-block hover-sidebar">
-                <FaHotel className="me-2" />Usuarios
+              <Link to="/admin/RegisteredUsers" className="py-2 px-3 rounded d-block hover-sidebar">
+                <FaUsers className="me-2" />Usuarios
               </Link>
             </li>
             <li>
-              <Link to="/modificar" className="py-2 px-3 rounded d-block hover-sidebar">
-                <FaHotel className="me-2" />Panel {/*Instituciones registradas, donaciones hechas, personas registradas, dinero recaudado */}
+              <Link to="/admin/PanelGeneralInformation" className="py-2 px-3 rounded d-block hover-sidebar">
+                <FaChartBar className="me-2" />Panel
               </Link>
             </li>
           </ul>
@@ -79,4 +74,4 @@ function Sidebar() {
   );
 }
 
-export default Sidebar;
+export default SidebarAdmin;
