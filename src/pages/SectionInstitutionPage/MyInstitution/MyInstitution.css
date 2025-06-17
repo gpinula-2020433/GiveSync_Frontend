@@ -1,1 +1,40 @@
-/*Nose*/
+.my-institution-container {
+  background-color: #f8f9fa;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.my-institution-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: black;
+  margin-bottom: 0.5rem;
+}
+
+.my-institution-description {
+  font-size: 1rem;
+  color: #343a40;
+  margin-bottom: 1.5rem;
+}
+
+.my-institution-images-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: black;
+}
+
+.my-institution-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.my-institution-image:hover {
+  transform: scale(1.05);
+}
