@@ -24,6 +24,7 @@ import {MyInstitution} from '../src/pages/SectionInstitutionPage/MyInstitution/M
 import {DonationHistory} from '../src/pages/UserSettingsPage/DonationHistory/DonationHistory'
 import {RequestToRegisterAnInstitution} from '../src/pages/UserSettingsPage/RequestToRegisterAnInstitution/RequestToRegisterAnInstitution'
 import {UserInformation} from '../src/pages/UserSettingsPage/UserInformation/UserInformation'
+import InstitutionDetail from './pages/MainPage/DetailsInstitutionPage/InstitutionDetail'
 
 export const routes = [
   {
@@ -40,12 +41,13 @@ export const routes = [
     ]
   },
   {
-    path: '/main',
-    element: <MainPage />,
-    children: [
-      { path: 'home', element: <HomePage/>}
-    ]
-  },
+  path: '/main',
+  element: <MainPage />,
+  children: [
+    { path: 'home', element: <HomePage /> },
+    { path: 'institution/:id', element: <InstitutionDetail /> }
+  ]
+},
   {
     path: '/admin',
     element: <AdminPage />,
