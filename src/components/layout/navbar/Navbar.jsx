@@ -37,17 +37,17 @@ export function Navbar() {
         <div className="d-flex gap-4">
           <Link to="/main/home" className="text-light text-decoration-none">Principal</Link>
 
-          {isLoggedIn && (
+          {!isLoggedIn && (
             <Link to="/auth/login" className="text-light text-decoration-none">Iniciar Sesión</Link>
           )}
 
           {isLoggedIn && (
             <>
               <Link to="/sectioninstitution" className="text-light text-decoration-none">Institucion</Link>
-              <Link to="/usersettings" className="text-light text-decoration-none">Configuración Usuario</Link>  
               {isAdmin && (
                 <Link to="/admin" className="text-light text-decoration-none">Administración</Link>
               )}
+              <Link to="/usersettings" className="text-light text-decoration-none">Configuración Usuario</Link>  
               <Link to="/auth/login" className="text-light text-decoration-none" onClick={handleLogout}>Cerrar sesión</Link>
             </>
           )}
