@@ -2,11 +2,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 import decodeToken from '../../../shared/utils/decodeToken';
 import { useEffect, useState } from 'react';
+import imgProfile from '../../../assets/logo.png';
 
 export function Navbar() {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -28,27 +30,58 @@ export function Navbar() {
     setIsAdmin(false);
   };
 
+  const toggleDropdown = () => {
+    setShowDropdown(prev => !prev);
+  };
+
   return (
     <nav className="navbar navbar-expand-lg bg-dark text-white px-4 shadow fixed-top">
       <div className="container-fluid d-flex justify-content-between align-items-center">
         <div className="navbar-brand text-white fw-semibold fs-5">
           GyveSync
         </div>
-        <div className="d-flex gap-4">
-          <Link to="/main/home" className="text-light text-decoration-none">Principal</Link>
+        <div className="d-flex gap-4 align-items-center">
+          <Link to="/main/home" className="text-light text-decoration-none">
+            <i className="fas fa-house"></i> Principal
+          </Link>
 
           {!isLoggedIn && (
-            <Link to="/auth/login" className="text-light text-decoration-none">Iniciar Sesión</Link>
+            <Link to="/auth/login" className="text-light text-decoration-none">
+              <i className="fas fa-right-to-bracket"></i> Iniciar Sesión
+            </Link>
           )}
 
           {isLoggedIn && (
             <>
-              <Link to="/sectioninstitution" className="text-light text-decoration-none">Institucion</Link>
+              <Link to="/sectioninstitution" className="text-light text-decoration-none">
+                <i className="fas fa-hands-helping"></i> Institución
+                {/*fas fa-hand-holding-heart me-1 */}
+              </Link>
               {isAdmin && (
-                <Link to="/admin" className="text-light text-decoration-none">Administración</Link>
+                <Link to="/admin" className="text-light text-decoration-none">
+                  <i className="fas fa-tools"></i> Administración
+                </Link>
               )}
-              <Link to="/usersettings" className="text-light text-decoration-none">Configuración Usuario</Link>  
-              <Link to="/auth/login" className="text-light text-decoration-none" onClick={handleLogout}>Cerrar sesión</Link>
+              <div className="profile-container position-relative">
+                <img
+                  src={imgProfile}
+                  alt="profile"
+                  className="profile-img"
+                  onClick={toggleDropdown}
+                />
+                {showDropdown && (
+                  <div className="profile-dropdown">
+                    <button className="dropdown-item" onClick={() => navigate('/usersettings')}>
+                      <i className="fas fa-cog me-2"></i>
+                      <span>Configuración</span>
+                    </button>
+                    <button className="dropdown-item" onClick={handleLogout}>
+                      <i className="fas fa-sign-out-alt me-2"></i>
+                      <span>Cerrar sesión</span>
+                    </button>
+                  </div>
+                )}
+              </div>
             </>
           )}
         </div>

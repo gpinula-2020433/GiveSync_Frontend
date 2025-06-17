@@ -91,35 +91,11 @@
   transform: translateY(-2px);
 }
  
-.navbar a[href*="hotellist"]::after {
-  content: '\f015';
-  font-family: 'Font Awesome 6 Free';
-  font-weight: 900;
-}
- 
-.navbar a[href*="login"]::after {
-  content: '\f2f6';
-  font-family: 'Font Awesome 6 Free';
-  font-weight: 900;
-}
- 
-.navbar a[href*="admin"]::after {
-  content: '\f509';
-  font-family: 'Font Awesome 6 Free';
-  font-weight: 900;
-}
- 
-.navbar a[href*="user"]::after {
-  content: '\f013';
-  font-family: 'Font Awesome 6 Free';
-  font-weight: 900;
-}
- 
-.navbar a[href*="invoice"]::after { 
+/* .navbar a[href*="invoice"]::after { 
   content: '\f571';
   font-family: 'Font Awesome 6 Free';
   font-weight: 900;
-}
+} */
 
 .navbar a.active {
   color: var(--primary-color) !important;
@@ -176,3 +152,56 @@
   100% { transform: translateY(0); }
 }
 
+
+.profile-container {
+  position: relative;
+  cursor: pointer;
+}
+
+.profile-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary-color);
+  transition: transform 0.3s ease;
+}
+
+.profile-img:hover {
+  transform: scale(1.05);
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 110%;
+  right: 0;
+  background-color: #1a1a2e;
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  overflow: hidden;
+  min-width: 220px; /* <- aumenta de 180px a 220px */
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+
+.profile-dropdown .dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* espacio entre icono y texto */
+  color: var(--light-color);
+  padding: 0.75rem 1.25rem;
+  font-weight: 500;
+  text-decoration: none;
+  background-color: transparent;
+  border: none;
+  width: 100%;
+  text-align: left;
+  transition: background-color 0.3s ease;
+}
+
+
+.profile-dropdown .dropdown-item:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
