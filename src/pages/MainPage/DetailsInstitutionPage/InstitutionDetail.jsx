@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { useInstitutions } from '../../../shared/hooks/Institution/useInstitution'
 import { usePublicationsByInstitution } from '../../../shared/hooks/publication/usePublication'
+
 
 const InstitutionDetail = () => {
   const { id } = useParams()
@@ -250,6 +251,7 @@ const InstitutionDetail = () => {
     <li key={pub._id} style={{ marginBottom: '20px', listStyle: 'none', borderBottom: '1px solid #ccc', paddingBottom: '10px' }}>
       <h3>{pub.title}</h3>
       <p>{pub.content}</p>
+      
 
       {pub.imagePublication?.length > 0 && (
           <div style={{
@@ -330,6 +332,10 @@ const InstitutionDetail = () => {
       <p style={{ fontSize: '0.8rem', color: '#666' }}>
         Publicado el: {new Date(pub.date).toLocaleDateString()}
       </p>
+      
+      <Link to={`/main/publication/${pub._id}`}>
+        Ver comentarios y detalles
+      </Link>
     </li>
   ))}
 </ul>

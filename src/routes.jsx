@@ -25,6 +25,7 @@ import {DonationHistory} from '../src/pages/UserSettingsPage/DonationHistory/Don
 import {RequestToRegisterAnInstitution} from '../src/pages/UserSettingsPage/RequestToRegisterAnInstitution/RequestToRegisterAnInstitution'
 import {UserInformation} from '../src/pages/UserSettingsPage/UserInformation/UserInformation'
 import InstitutionDetail from './pages/MainPage/DetailsInstitutionPage/InstitutionDetail'
+import {CommentsPage}  from './pages/CommentsPage/CommentsPage'
 import { element } from 'prop-types'
 import ConfigurationPublication from './pages/SectionInstitutionPage/configurationPublication/ConfigurationPublication'
 
@@ -47,7 +48,8 @@ export const routes = [
   element: <MainPage />,
   children: [
     { path: 'home', element: <HomePage /> },
-    { path: 'institution/:id', element: <InstitutionDetail /> }
+    { path: 'institution/:id', element: <InstitutionDetail /> },
+    { path: 'publication/:publicationId', element: <CommentsPage /> } // <-- Aquí
   ]
 },
   {
