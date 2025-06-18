@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useInstitutions } from '../../../shared/hooks/Institution/useInstitution'
 import { usePublicationsByInstitution } from '../../../shared/hooks/publication/usePublication'
-import PublicationCard from '../../../components/publication/PublicationCard'
-import PublicationForm from '../../../components/publication/PublicationForm'
 
 const InstitutionDetail = () => {
   const { id } = useParams()
   const { institution, loading, error, fetchInstitutionById } = useInstitutions()
   const [currentIndex, setCurrentIndex] = useState(0)
   const [carouselActive, setCarouselActive] = useState(true)
+  const [publicationImageIndexes, setPublicationImageIndexes] = useState({});
   const { publications, loading: loadingPublications, error: errorPublications, refetch } = usePublicationsByInstitution(id)
 
   useEffect(() => {
@@ -51,6 +50,20 @@ const InstitutionDetail = () => {
 
   const nextImage = () => {
     setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
+  }
+
+  const handlePrevImage = (pubId, imagesLength)=>{
+    setPublicationImageIndexes(prev => ({
+      ...prev,
+      [pubId]: prev[pubId] > 0 ? prev[pubId] - 1 : imagesLength - 1,
+    }))
+  }
+
+  const handleNextImage =  (pubId, imagesLength)=>{
+    setPublicationImageIndexes(prev => ({
+      ...prev,
+      [pubId] : prev [pubId] < imagesLength - 1 ? prev[pubId] + 1 : 0
+    }))
   }
 
   return (
@@ -222,8 +235,6 @@ const InstitutionDetail = () => {
       <p><strong>Estado:</strong> {institution.status || 'Desconocido'}</p>
 
       {/* Formulario para agregar publicación */}
-      <h2>Agregar publicación</h2>
-      <PublicationForm institutionId={id} onSuccess={refetch} />
 
       <div>
         <h2>Publicaciones recientes</h2>
@@ -235,10 +246,94 @@ const InstitutionDetail = () => {
           <p>No hay publicaciones de esta institución.</p>
         ) : (
         <ul>
-        {publications.map((pub) => (
-          <PublicationCard key={pub._id} publication={pub} onChange={refetch}/>
-        ))}
-          </ul>
+  {publications.map((pub) => (
+    <li key={pub._id} style={{ marginBottom: '20px', listStyle: 'none', borderBottom: '1px solid #ccc', paddingBottom: '10px' }}>
+      <h3>{pub.title}</h3>
+      <p>{pub.content}</p>
+
+      {pub.imagePublication?.length > 0 && (
+          <div style={{
+            position: 'relative',
+            width: '100%',
+            maxWidth: 400,
+            height: 400,
+            overflow: 'hidden',
+            margin: '10px auto',
+            borderRadius: 8,
+          }}>
+          <img
+            src={`/uploads/img/users/${pub.imagePublication[publicationImageIndexes[pub._id] || 0]}`}
+            alt={`Imagen de publicación`}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              borderRadius: 8
+            }}
+          />
+
+          {/* Botón izquierda */}
+          {pub.imagePublication.length > 1 && (
+            <>
+              <button
+                onClick={() => handlePrevImage(pub._id, pub.imagePublication.length)}
+                style={{
+                  position: 'absolute',
+                  left: 10,
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  background: 'rgba(0,0,0,0.3)',
+                  border: 'none',
+                  color: 'white',
+                  fontSize: 24,
+                  cursor: 'pointer',
+                  borderRadius: '50%',
+                  width: 30,
+                  height: 30,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                ‹
+              </button>
+
+              {/* Botón derecha */}
+              <button
+                onClick={() => handleNextImage(pub._id, pub.imagePublication.length)}
+                style={{
+                  position: 'absolute',
+                  right: 10,
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  background: 'rgba(0,0,0,0.3)',
+                  border: 'none',
+                  color: 'white',
+                  fontSize: 24,
+                  cursor: 'pointer',
+                  borderRadius: '50%',
+                  width: 30,
+                  height: 30,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                ›
+              </button>
+            </>
+          )}
+
+        </div>
+      )}
+
+      <p style={{ fontSize: '0.8rem', color: '#666' }}>
+        Publicado el: {new Date(pub.date).toLocaleDateString()}
+      </p>
+    </li>
+  ))}
+</ul>
+
         )}
       </div>
     </div>

@@ -6,7 +6,7 @@ const PublicationForm = ({ institutionId, onSuccess, existingPublication }) => {
   const [title, setTitle] = useState(existingPublication?.title || '')
   const [content, setContent] = useState(existingPublication?.content || '')
   const [image, setImage] = useState(null)
-  const { createPublication, updatePublication, updatePublicationImage, loading } =
+  const { addPublication, updatePublication, updatePublicationImage, loading } =
   usePublicationActions()
     
 
@@ -21,7 +21,7 @@ const PublicationForm = ({ institutionId, onSuccess, existingPublication }) => {
         await updatePublicationImage(existingPublication._id, formData)
       }
     } else {
-      await createPublication({ title, content, institutionId })
+      await addPublication({ title, content, institutionId })
     }
 
     onSuccess()
