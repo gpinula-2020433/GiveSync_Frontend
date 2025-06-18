@@ -1,1 +1,122 @@
-/*Nose*/
+.donations-container {
+  padding: 2rem;
+  background-color: #0e0e0e;
+  color: #e0e0e0;
+  font-family: 'Segoe UI', sans-serif;
+  animation: fadeIn 0.8s ease-in;
+  min-height: 100vh;
+}
+
+.donations-container h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #5bc0be;
+  margin-bottom: 2rem;
+  text-shadow: 0 0 8px rgba(91, 192, 190, 0.4);
+}
+
+.donations-list {
+  list-style: none;
+  padding: 0;
+}
+
+.donation-item {
+  background-color: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: slideUp 0.6s ease forwards;
+  opacity: 0;
+}
+
+.donation-item:hover {
+  transform: scale(1.015);
+  box-shadow: 0 0 20px rgba(91, 192, 190, 0.4);
+}
+
+.donation-item p {
+  margin: 0.5rem 0;
+  line-height: 1.5;
+}
+
+.donation-item strong {
+  color: #5bc0be;
+}
+
+.user-details {
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+  border-top: 1px dashed #333;
+  animation: fadeIn 0.6s ease-in;
+}
+
+.icon-id::before {
+  content: '🆔 ';
+  color: #00bcd4;
+}
+.icon-money::before {
+  content: '💰 ';
+  color: #4caf50;
+}
+.icon-calendar::before {
+  content: '📅 ';
+  color: #ff9800;
+}
+.icon-institution::before {
+  content: '🏢 ';
+  color: #3f51b5;
+}
+.icon-user::before {
+  content: '👤 ';
+  color: #9c27b0;
+}
+
+hr {
+  margin-top: 1.5rem;
+  border: none;
+  height: 1px;
+  background: linear-gradient(to right, #444, #5bc0be, #444);
+  opacity: 0.5;
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .donations-container {
+    padding: 1rem;
+  }
+
+  .donation-item {
+    padding: 1rem;
+  }
+
+  .donations-container h2 {
+    font-size: 1.8rem;
+  }
+}
+
+.icon-institution-type::before {
+  content: '🏛️ ';
+  color: #00acc1;
+}
