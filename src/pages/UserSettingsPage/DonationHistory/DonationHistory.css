@@ -1,1 +1,106 @@
-/*Nose*/
+.donation-history-container {
+  max-width: 700px;
+  margin: 2rem auto;
+  background-color: #1e1e2f;
+  padding: 20px 30px;
+  border-radius: 12px;
+  color: #d0d0e0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7);
+  animation: fadeIn 1s ease forwards;
+}
+
+.donation-history-container h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  color: #4a90e2;
+  letter-spacing: 1px;
+  text-shadow: 0 0 8px #4a90e2;
+}
+
+.donation-history-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.donation-history-list li {
+  background-color: #2a2a3d;
+  border-radius: 10px;
+  padding: 18px 25px;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(74, 144, 226, 0.4);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
+}
+
+.donation-history-list li:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(74, 144, 226, 0.7);
+}
+
+.donation-history-list li p {
+  margin: 6px 0;
+  font-size: 1rem;
+  color: #d0d0e0;
+  display: flex;
+  align-items: center;
+}
+
+.donation-history-list li p strong {
+  margin-right: 8px;
+  position: relative;
+  padding-left: 26px;
+  font-weight: 600;
+  color: #7aaaff;
+}
+
+.donation-history-list li p:nth-child(1) strong::before {
+  content: '🆔';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+}
+
+.donation-history-list li p:nth-child(2) strong::before {
+  content: '💰';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+}
+
+.donation-history-list li p:nth-child(3) strong::before {
+  content: '📅';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+}
+
+.donation-history-list li p:nth-child(4) strong::before {
+  content: '🏢';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+}
+
+.donation-history-list hr {
+  border: none;
+  border-top: 1px solid #3d4a6d;
+  margin-top: 10px;
+  opacity: 0.3;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(20px);}
+  100% { opacity: 1; transform: translateY(0);}
+}

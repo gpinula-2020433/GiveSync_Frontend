@@ -1,7 +1,7 @@
 .donations-container {
   padding: 2rem;
-  background-color: #0e0e0e;
-  color: #e0e0e0;
+  background-color: #1e1e2f;
+  color: #d0d0e0;
   font-family: 'Segoe UI', sans-serif;
   animation: fadeIn 0.8s ease-in;
   min-height: 100vh;
@@ -10,75 +10,81 @@
 .donations-container h2 {
   text-align: center;
   font-size: 2.5rem;
-  color: #5bc0be;
+  color: #4a90e2; 
   margin-bottom: 2rem;
-  text-shadow: 0 0 8px rgba(91, 192, 190, 0.4);
+  text-shadow: 0 0 8px rgba(74, 144, 226, 0.4);
 }
 
 .donations-list {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .donation-item {
-  background-color: #1a1a1a;
-  border: 1px solid #2a2a2a;
+  background-color: #2a2a3d;
+  border: 1px solid #3d4a6d;
   padding: 1.5rem;
   border-radius: 1rem;
   margin-bottom: 1.5rem;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   animation: slideUp 0.6s ease forwards;
   opacity: 0;
+  cursor: default;
 }
 
 .donation-item:hover {
   transform: scale(1.015);
-  box-shadow: 0 0 20px rgba(91, 192, 190, 0.4);
+  box-shadow: 0 0 20px rgba(74, 144, 226, 0.7);
 }
 
 .donation-item p {
   margin: 0.5rem 0;
   line-height: 1.5;
+  color: #d0d0e0;
 }
 
 .donation-item strong {
-  color: #5bc0be;
+  color: #7aaaff;
+  font-weight: 600;
 }
 
 .user-details {
   margin-top: 1rem;
   padding-top: 0.5rem;
-  border-top: 1px dashed #333;
+  border-top: 1px dashed #3d4a6d;
   animation: fadeIn 0.6s ease-in;
+  color: #999aac;
+  font-size: 0.9rem;
 }
 
 .icon-id::before {
   content: '🆔 ';
-  color: #00bcd4;
+  color: #4a90e2;
 }
 .icon-money::before {
   content: '💰 ';
-  color: #4caf50;
+  color: #4a90e2;
 }
 .icon-calendar::before {
   content: '📅 ';
-  color: #ff9800;
+  color: #4a90e2;
 }
 .icon-institution::before {
   content: '🏢 ';
-  color: #3f51b5;
+  color: #4a90e2;
 }
 .icon-user::before {
   content: '👤 ';
-  color: #9c27b0;
+  color: #4a90e2;
 }
 
 hr {
   margin-top: 1.5rem;
   border: none;
   height: 1px;
-  background: linear-gradient(to right, #444, #5bc0be, #444);
+  background: linear-gradient(to right, #3d4a6d, #4a90e2, #3d4a6d);
   opacity: 0.5;
 }
 
@@ -118,5 +124,5 @@ hr {
 
 .icon-institution-type::before {
   content: '🏛️ ';
-  color: #00acc1;
+  color: #4a90e2;
 }
