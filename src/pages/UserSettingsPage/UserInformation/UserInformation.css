@@ -1,1 +1,68 @@
-/*Nose*/
+.user-container {
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 2rem;
+}
+
+.user-image-box {
+  background-color: #3498db;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.user-profile-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 3px solid white;
+  margin-bottom: 1rem;
+}
+
+.user-image-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.image-action-btn {
+  background-color: white;
+  color: #3498db;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.image-action-btn.delete {
+  color: #e74c3c;
+}
+
+.user-options {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.user-btn {
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 6px;
+  border: none;
+}
+
+.user-btn.delete {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.institution-text {
+  color: green;
+  font-weight: bold;
+}
