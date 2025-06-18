@@ -66,3 +66,48 @@
   color: green;
   font-weight: bold;
 }
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-box {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  width: 300px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.modal-box h3 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1.5rem;
+}
+
+.modal-actions button {
+  padding: 0.5rem 1rem;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.modal-actions button.delete {
+  background-color: #e74c3c;
+}
