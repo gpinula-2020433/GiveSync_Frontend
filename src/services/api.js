@@ -172,3 +172,14 @@ export const updateImagePublicationRequest = async (id, data) =>{
 export const deletePublicationRequest = async (id)=>{
   return await apiPublication.delete(`/delete/${id}`)
 }
+
+export const getAuthenticatedUserRequest = async () => {
+  try {
+    const response = await apiClient.get('/v1/user/getAuthenticatedClient/')
+    // Accede directamente a `response.data.user`
+    return response.data.user
+  } catch (err) {
+    console.error('API error:', err)
+    return { error: true, err }
+  }
+}
