@@ -22,6 +22,13 @@ const apiPublication = axios.create(
   }
 )
 
+
+const apiComment = axios.create({
+  baseURL: 'http://localhost:3200/v1/comment',
+  timeout: 2000
+})
+
+
 apiClient.interceptors.request.use(
     (config)=> {
         const token = localStorage.getItem('token')
@@ -41,6 +48,12 @@ apiInstitucion.interceptors.request.use(
         return config
     }
 )
+
+apiComment.interceptors.request.use(config => {
+  const token = localStorage.getItem('token')
+  if (token) config.headers.Authorization = token
+  return config
+})
 
 export const loginRequest = async(userLoginData)=>{
     try {
@@ -171,4 +184,73 @@ export const updateImagePublicationRequest = async (id, data) =>{
 
 export const deletePublicationRequest = async (id)=>{
   return await apiPublication.delete(`/delete/${id}`)
+}
+
+//listar publicaciones por id
+export const getPublicationByIdRequest = async (id) => {
+  try {
+    const res = await apiPublication.get(`/${id}`)
+    return res.data // ✔️ esto es lo que espera tu fetch
+  } catch (err) {
+    return { error: true, err }
+  }
+}
+
+export const getCommentsByPublicationRequest = async (publicationId) => {
+  try {
+    const res = await apiComment.get(`/publication/${publicationId}`)
+    return res.data // ✔️ esto también
+  } catch (err) {
+    return { error: true, err }
+  }
+}
+
+export const getCommentsByPublication = async (req, res) => {
+  try {
+    const { publicationId } = req.params
+    const comments = await apiComment.find({ publicationId })
+      .populate('userId', 'name email')
+      .populate('publicationId', '-institutionId') // <-- aquí el cambio
+
+    if (comments.length === 0)
+      return res.status(404).send({ success: false, message: 'No hay comentarios para esta publicación' })
+
+    return res.send({ success: true, comments })
+  } catch (err) {
+    console.error(err)
+    return res.status(500).send({ success: false, message: 'Error del servidor', err })
+  }
+}
+
+
+export const addComment = async (data) => {
+  try {
+    const res = await apiComment.post('/', data, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    })
+    return res.data
+  } catch (err) {
+    return { error: true, err }
+  }
+}
+
+
+export const deleteComment = async (id)=>{
+  try{
+    const res = await apiComment.delete(`/${id}`)
+    return res.data
+  } catch (err) {
+    return { error: true, err }
+  }
+}
+
+export const editComment = async (id, data) => {
+  try {
+    const res = await apiComment.put(`/${id}`, data, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    })
+    return res.data
+  } catch (err) {
+    return { error: true, err }
+  }
 }
