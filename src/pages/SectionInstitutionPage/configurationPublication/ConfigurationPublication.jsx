@@ -1,0 +1,171 @@
+import React, { useEffect, useState } from 'react'
+import { usePublicationActions } from '../../../shared/hooks/publication/usePublicationActions'
+import { getMyInstitutionsRequest, getPublicationsByInstitutionRequest } from '../../../services/api'
+
+
+const ConfigurationPublication = () => {
+  const [institutionId, setInstitutionId] = useState(null)
+  const [publications, setPublications] = useState([])
+  const [formData, setFormData] = useState({ title: '', content: '', image: null })
+  const [editPublication, setEditPublication] = useState(null)
+
+  const {
+    addPublication,
+    updatePublication,
+    updateImagePublication,
+    deletePublication,
+    loading,
+    setSuccess
+  } = usePublicationActions()
+
+  // Obtener institución del usuario autenticado
+  useEffect(() => {
+    const fetchInstitution = async () => {
+      const res = await getMyInstitutionsRequest()
+      if (!res.error && res.institutions.length > 0) {
+        const inst = res.institutions[0]
+        setInstitutionId(inst._id)
+        fetchPublications(inst._id)
+        }
+    }
+
+    fetchInstitution()
+  }, [])
+
+  // Obtener publicaciones
+  const fetchPublications = async (instId) => {
+    const res = await getPublicationsByInstitutionRequest(instId)
+    if (!res.error) {
+      setPublications(res.data.publications || [])
+    }
+  }
+
+  // Manejo de inputs
+  const handleChange = e => {
+    const { name, value, files } = e.target
+    if (name === 'image') {
+      setFormData(prev => ({ ...prev, image: files[0] }))
+    } else {
+      setFormData(prev => ({ ...prev, [name]: value }))
+    }
+  }
+
+  // Crear o actualizar publicación
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    if (!institutionId) return
+
+    if (editPublication) {
+      await updatePublication(editPublication._id, {
+        title: formData.title,
+        content: formData.content
+      })
+
+      if (formData.image) {
+        const imgForm = new FormData()
+        imgForm.append('imagePublication', formData.image)
+        await updateImagePublication(editPublication._id, imgForm)
+      }
+    } else {
+        const formDataToSend = new FormData()
+        formDataToSend.append('title', formData.title)
+        formDataToSend.append('content', formData.content)
+        formDataToSend.append('institutionId', institutionId)
+    if (formData.image) {
+        formDataToSend.append('imagePublication', formData.image)
+    }
+
+    await addPublication(formDataToSend)
+
+    }
+
+    resetForm()
+    fetchPublications(institutionId)
+  }
+
+  const resetForm = () => {
+    setFormData({ title: '', content: '', image: null })
+    setEditPublication(null)
+    setSuccess(false)
+  }
+
+  const handleEdit = pub => {
+    setEditPublication(pub)
+    setFormData({
+      title: pub.title,
+      content: pub.content,
+      image: null
+    })
+  }
+
+  const handleDelete = async (id) => {
+    if (window.confirm('¿Estás seguro de eliminar esta publicación?')) {
+      await deletePublication(id)
+      fetchPublications(institutionId)
+    }
+  }
+
+  return (
+    <div>
+      <h2>{editPublication ? 'Editar publicación' : 'Agregar nueva publicación'}</h2>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="title"
+          placeholder="Título"
+          value={formData.title}
+          onChange={handleChange}
+          required
+        />
+        <br />
+        <textarea
+          name="content"
+          placeholder="Contenido"
+          value={formData.content}
+          onChange={handleChange}
+          required
+        />
+        <br />
+        <input type="file" name="image" onChange={handleChange} />
+        <br />
+        <button type="submit" disabled={loading}>
+          {editPublication ? 'Actualizar' : 'Crear'}
+        </button>
+        {editPublication && (
+          <button type="button" onClick={resetForm}>
+            Cancelar edición
+          </button>
+        )}
+      </form>
+
+      <hr />
+
+      <h2>Mis publicaciones</h2>
+      {publications.length === 0 ? (
+        <p>No hay publicaciones aún.</p>
+      ) : (
+        publications.map((pub) => (
+          <div key={pub._id} style={{ border: '1px solid gray', marginBottom: 10, padding: 10 }}>
+            <h3>{pub.title}</h3>
+            <p>{pub.content}</p>
+            {pub.imagePublication?.map((img, i) => (
+              <img
+                key={i}
+                src={`/uploads/img/users/${img}`}
+                alt="publicación"
+                style={{ width: 100, marginRight: 5 }}
+              />
+            ))}
+            <br />
+            <button onClick={() => handleEdit(pub)}>Editar</button>
+            <button onClick={() => handleDelete(pub._id)} style={{ color: 'red', marginLeft: 10 }}>
+              Eliminar
+            </button>
+          </div>
+        ))
+      )}
+    </div>
+  )
+}
+
+export default ConfigurationPublication

@@ -58,6 +58,11 @@ function SidebarSectionInstitution() {
                 <FaCog className="me-2" />Configurar Institución
               </Link>
             </li>
+            <li>
+              <Link to="/sectioninstitution/ConfigurationPublication" className="py-2 px-3 rounded d-block hover-sidebar">
+              <FaCog className='me-2' />Administrar Publicaciones
+              </Link>
+            </li>
           </ul>
         </div>
       </aside>
