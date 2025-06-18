@@ -42,6 +42,16 @@ apiInstitucion.interceptors.request.use(
     }
 )
 
+apiPublication.interceptors.request.use(
+  (config)=> {
+    const token = localStorage.getItem('token')
+    if(token){
+      config.headers.Authorization = token
+    }
+    return config
+  }
+)
+
 export const loginRequest = async(userLoginData)=>{
     try {
         return await apiClient.post('/login', userLoginData, {
@@ -148,9 +158,9 @@ export const getInstitutionById = async (id) => {
 }
 
 //listar publicaciones por institución
-export const getPublicationsByInstitutionRequest = async (institutionId)=>{
+export const getPublicationsByInstitutionRequest = async (institutionId, data)=>{
   try {
-    const res = await apiPublication.get(`/getByInstitution/${institutionId}`)
+    const res = await apiPublication.get(`/getByInstitution/${institutionId}`, data)
     return res
   } catch (error) {
     return {error: true, error}
@@ -166,7 +176,14 @@ export const updatePublicationRequest = async (id, data) =>{
 }
 
 export const updateImagePublicationRequest = async (id, data) =>{
-  return await apiPublication.put(`/updateImage/${id}`, data)
+  try {
+    const res = await apiPublication.put(`/updateImage/${id}`, data, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    })
+    return res.data
+  } catch (error) {
+    return { error: true, error}
+  }
 }
 
 export const deletePublicationRequest = async (id)=>{
