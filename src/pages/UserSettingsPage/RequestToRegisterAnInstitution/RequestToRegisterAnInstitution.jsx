@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import { createInstitutionRequest, getMyInstitutionsRequest } from '../../../services/api'
+import './RequestToRegisterAnInstitution.css'
 
 export const RequestToRegisterAnInstitution = () => {
   const navigate = useNavigate()
@@ -25,7 +26,6 @@ export const RequestToRegisterAnInstitution = () => {
       }
       setLoading(false)
     }
-
     fetchInstitution()
   }, [])
 
@@ -40,20 +40,16 @@ export const RequestToRegisterAnInstitution = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-
     const dataToSend = new FormData()
-    dataToSend.append('name', formData.name)
-    dataToSend.append('description', formData.description)
-    dataToSend.append('address', formData.address)
-    dataToSend.append('phone', formData.phone)
-    dataToSend.append('type', formData.type)
-
-    if (formData.imageInstitution) {
-      dataToSend.append('imageInstitution', formData.imageInstitution)
-    }
+    Object.entries(formData).forEach(([key, val]) => {
+      if (key === 'imageInstitution' && val) {
+        dataToSend.append(key, val)
+      } else if (key !== 'imageInstitution') {
+        dataToSend.append(key, val)
+      }
+    })
 
     const res = await createInstitutionRequest(dataToSend)
-
     if (res.error) {
       toast.error('Error al registrar institución')
     } else {
@@ -62,81 +58,124 @@ export const RequestToRegisterAnInstitution = () => {
     }
   }
 
-  if (loading) return <div className="text-center py-8">Cargando...</div>
+  if (loading) return (
+    <div className="flex items-center justify-center h-screen bg-zinc-950 text-white text-lg">
+      Cargando...
+    </div>
+  )
 
   if (hasInstitution) {
     return (
-      <div className="max-w-xl mx-auto mt-10 text-center bg-yellow-100 border border-yellow-300 p-6 rounded-md shadow">
-        <h2 className="text-2xl font-semibold text-yellow-800">Ya tienes una institución registrada</h2>
-        <p className="mt-2 text-yellow-700">No puedes registrar más de una institución con esta cuenta.</p>
+      
+      <div className="max-w-lg mx-auto mt-20 p-10 bg-zinc-900 rounded-xl shadow-lg border border-zinc-700 text-center">
+        <h1 className="text-white text-3xl font-semibold mb-3">Acceso restringido</h1>
+        <p className="text-zinc-400 text-md">
+          Ya tienes una institución registrada. Solo se permite una por cuenta.
+        </p>
       </div>
     )
   }
 
   return (
-    <div className="max-w-2xl mx-auto mt-8 p-6 bg-white shadow-lg rounded-xl dark:bg-zinc-800">
-      <h2 className="text-2xl font-bold mb-4 text-center text-zinc-700 dark:text-white">Solicitar registro de institución</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          name="name"
-          placeholder="Nombre de la institución"
-          value={formData.name}
-          onChange={handleChange}
-          required
-          className="w-full p-2 border rounded"
-        />
-        <textarea
-          name="description"
-          placeholder="Descripción"
-          value={formData.description}
-          onChange={handleChange}
-          required
-          className="w-full p-2 border rounded"
-        />
-        <input
-          type="text"
-          name="address"
-          placeholder="Dirección"
-          value={formData.address}
-          onChange={handleChange}
-          required
-          className="w-full p-2 border rounded"
-        />
-        <input
-          type="tel"
-          name="phone"
-          placeholder="Teléfono"
-          value={formData.phone}
-          onChange={handleChange}
-          required
-          className="w-full p-2 border rounded"
-        />
-        <select
-          name="type"
-          value={formData.type}
-          onChange={handleChange}
-          required
-          className="w-full p-2 border rounded"
-        >
-          <option value="">Selecciona un tipo de institución</option>
-          <option value="ORPHANAGE">Orfanato</option>
-          <option value="ACYL">Hogar de ancianos</option>
-          <option value="EATERS">Comedor</option>
-        </select>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleFileChange}
-          className="w-full"
-        />
-        <button
-          type="submit"
-          className="w-full py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded"
-        >
-          Enviar solicitud
-        </button>
-      </form>
+    <div className="register-institution-page">
+    <div className="min-h-screen flex items-center justify-center bg-zinc-950 px-4">
+      <div className="w-full max-w-2xl bg-zinc-900 rounded-2xl shadow-xl p-10 border border-zinc-700">
+        <h1 className="text-4xl font-bold text-white mb-8 text-center">
+          Nueva institución
+        </h1>
+
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <Field
+            label="Nombre de la institución"
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+          />
+          <Field
+            label="Descripción"
+            type="textarea"
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+          />
+          <Field
+            label="Dirección"
+            type="text"
+            name="address"
+            value={formData.address}
+            onChange={handleChange}
+          />
+          <Field
+            label="Teléfono"
+            type="tel"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+          />
+          <div>
+            <label className="block text-sm font-medium text-zinc-300 mb-1">
+              Tipo de institución
+            </label>
+            <select
+              name="type"
+              value={formData.type}
+              onChange={handleChange}
+              required
+              className="w-full bg-zinc-800 border border-zinc-600 text-white rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            >
+              <option value="">Selecciona una opción</option>
+              <option value="ORPHANAGE">Orfanato</option>
+              <option value="ACYL">Hogar de ancianos</option>
+              <option value="EATERS">Comedor</option>
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-zinc-300 mb-1">
+              Imagen de la institución
+            </label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleFileChange}
+              className="w-full bg-zinc-800 text-zinc-300 file:mr-4 file:px-4 file:py-2 file:rounded-lg file:border-0 file:bg-emerald-600 file:text-white hover:file:bg-emerald-700 transition"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl transition-shadow shadow-lg hover:shadow-emerald-500/30"
+          >
+            Enviar solicitud
+          </button>
+        </form>
+      </div>
+    </div>
     </div>
   )
 }
+
+const Field = ({ label, name, type, value, onChange }) => (
+  <div>
+    <label className="block text-sm font-medium text-zinc-300 mb-1">{label}</label>
+    {type === 'textarea' ? (
+      <textarea
+        name={name}
+        value={value}
+        onChange={onChange}
+        required
+        className="w-full bg-zinc-800 border border-zinc-600 text-white rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none"
+      />
+    ) : (
+      <input
+        type={type}
+        name={name}
+        value={value}
+        onChange={onChange}
+        required
+        className="w-full bg-zinc-800 border border-zinc-600 text-white rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+      />
+    )}
+  </div>
+)

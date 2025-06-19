@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { usePublicationActions } from '../../../shared/hooks/publication/usePublicationActions'
 import { getMyInstitutionsRequest, getPublicationsByInstitutionRequest } from '../../../services/api'
+import './ConfigurationPublication.css'
 
 
 const ConfigurationPublication = () => {
@@ -94,13 +95,18 @@ const ConfigurationPublication = () => {
   }
 
   const handleEdit = pub => {
-    setEditPublication(pub)
-    setFormData({
-      title: pub.title,
-      content: pub.content,
-      image: null
-    })
-  }
+  setEditPublication(pub)
+  setFormData({
+    title: pub.title,
+    content: pub.content,
+    image: null
+  })
+ setTimeout(() => {
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+}, 100)
+
+}
+
 
   const handleDelete = async (id) => {
     if (window.confirm('¿Estás seguro de eliminar esta publicación?')) {
@@ -110,6 +116,7 @@ const ConfigurationPublication = () => {
   }
 
   return (
+    <div className="configuration-publication-page">
     <div>
       <h2>{editPublication ? 'Editar publicación' : 'Agregar nueva publicación'}</h2>
       <form onSubmit={handleSubmit}>
@@ -145,30 +152,30 @@ const ConfigurationPublication = () => {
       <hr />
 
       <h2>Mis publicaciones</h2>
-      {publications.length === 0 ? (
-        <p>No hay publicaciones aún.</p>
-      ) : (
-        publications.map((pub) => (
-          <div key={pub._id} style={{ border: '1px solid gray', marginBottom: 10, padding: 10 }}>
-            <h3>{pub.title}</h3>
-            <p>{pub.content}</p>
+      <div className="publication-list">
+    {publications.length === 0 ? (
+      <p className="empty-state">No hay publicaciones aún.</p>
+    ) : (
+      publications.map(pub => (
+        <div key={pub._id} className="publication-card">
+          <h3>{pub.title}</h3>
+          <p>{pub.content}</p>
+          <div className="publication-images">
             {pub.imagePublication?.map((img, i) => (
-              <img
-                key={i}
-                src={`/uploads/img/users/${img}`}
-                alt="publicación"
-                style={{ width: 100, marginRight: 5 }}
-              />
+              <img key={i} src={`/uploads/img/users/${img}`} alt="publicación" />
             ))}
-            <br />
-            <button onClick={() => handleEdit(pub)}>Editar</button>
-            <button onClick={() => handleDelete(pub._id)} style={{ color: 'red', marginLeft: 10 }}>
-              Eliminar
-            </button>
           </div>
-        ))
-      )}
-    </div>
+          <div className="btn-group">
+            
+            <button onClick={() => handleEdit(pub)}>Editar</button>
+            <button onClick={() => handleDelete(pub._id)}>Eliminar</button>
+          </div>
+        </div>
+      ))
+    )}
+  </div>
+</div>
+</div>
   )
 }
 

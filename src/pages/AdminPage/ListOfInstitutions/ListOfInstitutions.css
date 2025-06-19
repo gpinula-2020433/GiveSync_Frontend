@@ -1,1 +1,165 @@
-/*Nose*/
+:root {
+  --bg-main: #121417;
+  --bg-table: #1c1f24;
+  --bg-hover: #2a2e36;
+  --text-primary: #d1d5db;
+  --text-muted: #6b7280;
+  --danger: #dc2626;
+  --danger-hover: #b91c1c;
+  --border-color: #374151;
+  --radius: 8px;
+  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --transition: 0.25s ease-in-out;
+  --aaa: black;
+}
+
+.list-institutions-page {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  font-family: var(--font-family);
+}
+
+.list-institutions-page h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  user-select: none;
+}
+
+/* Tabla general */
+.list-institutions-page table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  max-width: 1400px;
+  margin: 0 auto;
+  
+  background-color: transparent;
+}
+
+.list-institutions-page thead tr {
+  background-color: var(--bg-table);
+  
+  border-radius: var(--radius);
+}
+
+.list-institutions-page thead th {
+  padding: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  border-bottom: 2px solid var(--border-color);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.list-institutions-page tbody tr {
+  background-color: var(--bg-table);
+  transition: background-color var(--transition);
+  border-radius: var(--radius);
+  overflow: hidden;
+  
+}
+
+
+.list-institutions-page tbody tr:hover {
+  background-color: var(--bg-hover);
+}
+
+.list-institutions-page tbody td {
+  padding: 1rem;
+  vertical-align: middle;
+  text-align: center;
+  font-weight: 500;
+  color : var(--aaa);
+  border-left: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+}
+
+.list-institutions-page tbody tr td:first-child {
+  border-left: none;
+}
+.list-institutions-page tbody tr td:last-child {
+  border-right: none;
+}
+
+/* Imagen */
+.list-institutions-page img {
+  max-height: 75px;
+  border-radius: var(--radius);
+  object-fit: cover;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* Texto alternativo */
+.list-institutions-page .text-muted {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Botón eliminar */
+.list-institutions-page .btn-danger {
+  background-color: var(--danger);
+  border: none;
+  color: #fff;
+  padding: 0.45rem 1rem;
+  font-size: 0.9rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  transition: background-color var(--transition);
+  cursor: pointer;
+  min-width: 90px;
+}
+
+.list-institutions-page .btn-danger:hover {
+  background-color: var(--danger-hover);
+}
+
+/* Responsive tabla */
+@media (max-width: 768px) {
+  .list-institutions-page table,
+  .list-institutions-page thead,
+  .list-institutions-page tbody,
+  .list-institutions-page th,
+  .list-institutions-page td,
+  .list-institutions-page tr {
+    display: block;
+  }
+
+  .list-institutions-page thead {
+    display: none;
+  }
+
+  .list-institutions-page tbody tr {
+    margin-bottom: 1.5rem;
+    border-radius: var(--radius);
+    padding: 1rem;
+    background-color: var(--bg-table);
+  }
+
+  .list-institutions-page tbody td {
+    border: none;
+    position: relative;
+    padding-left: 50%;
+    text-align: left;
+  }
+
+  .list-institutions-page tbody td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent);
+    font-weight: 700;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .list-institutions-page tbody td:last-child {
+    padding-left: 1rem;
+  }
+}

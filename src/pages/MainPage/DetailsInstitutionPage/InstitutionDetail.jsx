@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 import { useInstitutions } from '../../../shared/hooks/Institution/useInstitution'
 import { usePublicationsByInstitution } from '../../../shared/hooks/publication/usePublication'
 import { useNavigate } from 'react-router-dom';
+import { useAuthenticatedUser } from '../../../shared/hooks/User/useAuthenticatedUser';
 
 const InstitutionDetail = () => {
   const { id } = useParams()
@@ -11,6 +12,7 @@ const InstitutionDetail = () => {
   const [carouselActive, setCarouselActive] = useState(true)
   const [publicationImageIndexes, setPublicationImageIndexes] = useState({});
   const { publications, loading: loadingPublications, error: errorPublications, refetch } = usePublicationsByInstitution(id)
+  const {user} = useAuthenticatedUser()
   const navigate = useNavigate(); 
 
   useEffect(() => {
@@ -82,19 +84,26 @@ const InstitutionDetail = () => {
       <p><strong>Descripción:</strong> {institution.description}</p>
 
        <button
-          onClick={() => navigate(`/main/institution/${institution._id}/donate`)}
-          style={{
-            padding: '10px 20px',
-            margin: '15px 0',
-            backgroundColor: '#007bff',
-            color: 'white',
-            border: 'none',
-            borderRadius: '5px',
-            cursor: 'pointer',
-          }}
-        >
-          Donar
-        </button>
+  onClick={() => {
+    if (!user) {
+      alert('Debes iniciar sesión para donar');
+      return;
+    }
+    navigate(`/main/institution/${institution._id}/donate`);
+  }}
+  style={{
+    padding: '10px 20px',
+    margin: '15px 0',
+    backgroundColor: '#007bff',
+    color: 'white',
+    border: 'none',
+    borderRadius: '5px',
+    cursor: 'pointer',
+  }}
+>
+  Donar
+</button>
+
 
 
       <div style={{marginTop: '20px',
@@ -336,9 +345,11 @@ const InstitutionDetail = () => {
         Publicado el: {new Date(pub.date).toLocaleDateString()}
       </p>
       
-      <Link to={`/main/publication/${pub._id}`}>
-        Ver comentarios y detalles
-      </Link>
+     <Link to={`/main/publication/${pub._id}`} className="btn btn-dark btn-sm px-3 shadow-sm">
+  Ver más
+</Link>
+
+
     </li>
   ))}
 </ul>

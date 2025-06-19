@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
 import { useInstitutions } from '../../../shared/hooks/Institution/useInstitution'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate} from 'react-router-dom'
 
 const HomePage = () => {
   const { institutions, loading, error, fetchAcceptedInstitutions } = useInstitutions()
+  
 
   useEffect(() => {
     fetchAcceptedInstitutions()
@@ -26,6 +27,13 @@ const HomePage = () => {
               firstImage = inst.imageInstitution.split(',')[0]
             }
           }
+
+          /* const handleClick = (e) => {
+            if (!user) {
+              e.preventDefault() // evita la navegación
+              alert('Debes iniciar sesión para ver detalles')
+            }
+          } */
 
           return (
             <div key={inst._id} style={{ border: '1px solid #ccc', padding: '16px', borderRadius: '8px', backgroundColor: '#1a1a1a', color: 'white' }}>

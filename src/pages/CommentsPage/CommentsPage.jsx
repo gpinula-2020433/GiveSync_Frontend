@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useLayoutEffect  } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { usePublicationComments } from '../../shared/hooks/comments/usePublicationComments'
 import { deleteComment, addComment, editComment } from '../../services/api'
 import { CommentForm } from '../../components/comments/CommentForm'
+import { useAuthenticatedUser } from '../../shared/hooks/User/useAuthenticatedUser'
 import './CommentsPage.css'
 
 export const CommentsPage = () => {
@@ -12,10 +13,16 @@ export const CommentsPage = () => {
   const [comments, setComments] = useState([])
   const [showForm, setShowForm] = useState(false)
   const [editData, setEditData] = useState(null)
+  const {user} = useAuthenticatedUser()
 
+ 
   useEffect(() => {
     setComments(initialComments)
   }, [initialComments])
+
+
+  
+  
 
   const handleNewComment = async (formData) => {
     const result = await addComment(formData)
@@ -56,6 +63,13 @@ export const CommentsPage = () => {
     setEditData(null)
     setShowForm(false)
   }
+  const handleClick = (e) => {
+            if (!user) {
+              e.preventDefault() // evita la navegación
+              alert('Debes iniciar sesión para ver detalles')
+            }
+          }
+
 
   return (
     <div className="comments-page">
@@ -83,15 +97,22 @@ export const CommentsPage = () => {
         </div>
       )}
 
+      
+
       <button
-        onClick={() => {
-          setShowForm(!showForm)
-          setEditData(null)
-        }}
-        className="toggle-form-button"
-      >
-        {showForm ? 'Cancelar comentario' : 'Agregar comentario'}
-      </button>
+  onClick={(e) => {
+    if (!user) {
+      e.preventDefault()
+      alert('Debes iniciar sesión para poder comentar')
+      return
+    }
+    setShowForm(!showForm)
+    setEditData(null)
+  }}
+  className="toggle-form-button"
+>
+  {showForm ? 'Cancelar comentario' : 'Agregar comentario'}
+</button>
 
       {showForm && (
         <CommentForm
@@ -109,6 +130,7 @@ export const CommentsPage = () => {
         ) : (
           comments.map((comment) => (
             <div key={comment._id} className="comment-card">
+              <small  className="author">Por: {comment.userId?.name}</small>
               <p>{comment.content}</p>
               {comment.commentImage && (
                 <img
@@ -117,8 +139,8 @@ export const CommentsPage = () => {
                   className="comment-img"
                 />
               )}
-              <small>
-                Por: {comment.userId?.name} -{' '}
+              <small className="date">
+                
                 {new Date(comment.createdAt || comment.fecha).toLocaleString()}
               </small>
               <div className="comment-actions">
