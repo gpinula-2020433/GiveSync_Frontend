@@ -116,6 +116,16 @@ export const getMyInstitutionsRequest = async () => {
 }
 
 
+//Listar todas las instituciones
+export const getInstitutionsRequest = async () => {
+  try {
+    const res = await apiInstitucion.get("/all")
+    return res.data?.institutions || []
+  } catch (err) {
+    return { error: true, message: err?.response?.data?.message || "Error al cargar" }
+  }
+}
+
 //Actualizar institución
 export const updateInstitutionRequest = async (id, data) => {
   try {
