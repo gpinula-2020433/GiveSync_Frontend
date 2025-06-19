@@ -68,7 +68,7 @@ export const ConfigurationOfTheInstitution = () => {
     await deleteInstitutionRequest(institution._id)
     toast.info("Institución eliminada.")
     setInstitution(null)
-    setTimeout(() => navigate("/sectioninstitution/MyInstitution"), 1500)
+    setTimeout(() => navigate("/main/home"), 1500)
   }
 
   if (!institution) return (

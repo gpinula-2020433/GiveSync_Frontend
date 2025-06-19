@@ -55,6 +55,7 @@ export const RequestToRegisterAnInstitution = () => {
     } else {
       toast.success('Institución registrada con éxito')
       navigate('/usersettings/RequestToRegisterAnInstitution')
+      window.location.reload()
     }
   }
 
