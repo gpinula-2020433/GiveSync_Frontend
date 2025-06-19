@@ -310,3 +310,42 @@ export const deleteUserImageRequest = async () => {
     }
   }
 }
+
+export const updateUserRequest = async (data) => {
+  try {
+    const res = await apiClient.put('/v1/user/updateClient/', data)
+    return res.data
+  } catch (err) {
+    return {
+      error: true,
+      message: err.response?.data?.message || 'Error al actualizar usuario',
+      errors: err.response?.data?.errors || null
+    }
+  }
+}
+
+export const deleteUserAccountRequest = async (password) => {
+  try {
+    const res = await apiClient.delete('/v1/user/deleteClient', {
+      data: { password }  // enviar el body en DELETE
+    })
+    return res.data
+  } catch (err) {
+    return {
+      error: true,
+      message: err.response?.data?.message || 'Error al eliminar cuenta'
+    }
+  }
+}
+
+export const updatePasswordRequest = async ({ currentPassword, newPassword }) => {
+  try {
+    const res = await apiClient.put('/v1/user/updatePassword/', { currentPassword, newPassword })
+    return res.data
+  } catch (err) {
+    return {
+      error: true,
+      message: err.response?.data?.message || 'Error al actualizar la contraseña'
+    }
+  }
+}
