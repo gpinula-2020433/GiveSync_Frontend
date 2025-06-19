@@ -39,11 +39,17 @@ export const DonationHistory = () => {
           })
 
           setDonations(userDonations)
+          setError(null)
         } else {
           setError('No se pudo obtener las donaciones')
         }
       } catch (err) {
-        setError(err.message || 'Error al cargar las donaciones')
+        if (err.response?.status === 404) {
+          setDonations([])
+          setError(null) // No error, solo que no hay donaciones
+        } else {
+          setError(err.response?.data?.message || err.message || 'Error al cargar las donaciones')
+        }
       }
       setLoading(false)
     }
@@ -51,9 +57,10 @@ export const DonationHistory = () => {
     fetchDonations()
   }, [])
 
-  if (loading) return <p>Cargando historial de donaciones...</p>
-  if (error) return <p>{error}</p>
-  if (!donations.length) return <p>No has realizado donaciones aún.</p>
+  if (loading) return <p className="loading-message">Cargando historial de donaciones...</p>
+  if (error) return <p className="error-message">{error}</p>
+  if (!donations.length) return <p className="no-donations-message">Aún no has realizado ninguna donación.</p>
+
 
   return (
     <div className="donation-history-container">

@@ -29,9 +29,9 @@ export const AllDonationsMade = () => {
     fetchDonations()
   }, [])
 
-  if (loading) return <p>Cargando donaciones...</p>
-  if (error) return <p>{error}</p>
-  if (!donations.length) return <p>No hay donaciones registradas.</p>
+  if (loading) return <p className="loading-message">Cargando donaciones...</p>
+  if (error) return <p className="error-message">{error}</p>
+  if (!donations.length) return <p className="empty-message">No hay donaciones registradas.</p>
 
   return (
     <div className="donations-container">
