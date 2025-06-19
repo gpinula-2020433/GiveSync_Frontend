@@ -44,7 +44,7 @@ const ConfigurationPublication = () => {
   const handleChange = e => {
     const { name, value, files } = e.target
     if (name === 'image') {
-      setFormData(prev => ({ ...prev, image: files[0] }))
+      setFormData(prev => ({ ...prev, image: [...files] }))
     } else {
       setFormData(prev => ({ ...prev, [name]: value }))
     }
@@ -61,9 +61,11 @@ const ConfigurationPublication = () => {
         content: formData.content
       })
 
-      if (formData.image) {
+      if (formData.image && formData.image.length > 0) {
         const imgForm = new FormData()
-        imgForm.append('imagePublication', formData.image)
+        formData.image.forEach(img =>{
+          imgForm.append('imagePublication', img)
+        })
         await updateImagePublication(editPublication._id, imgForm)
       }
     } else {
@@ -71,8 +73,10 @@ const ConfigurationPublication = () => {
         formDataToSend.append('title', formData.title)
         formDataToSend.append('content', formData.content)
         formDataToSend.append('institutionId', institutionId)
-    if (formData.image) {
-        formDataToSend.append('imagePublication', formData.image)
+    if (formData.image && formData.image.length > 0) {
+        formData.image.forEach(img =>{
+          formDataToSend.append('imagePublication', img)
+        })
     }
 
     await addPublication(formDataToSend)
@@ -126,7 +130,7 @@ const ConfigurationPublication = () => {
           required
         />
         <br />
-        <input type="file" name="image" onChange={handleChange} />
+        <input type="file" name="image" onChange={handleChange} multiple/>
         <br />
         <button type="submit" disabled={loading}>
           {editPublication ? 'Actualizar' : 'Crear'}
