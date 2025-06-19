@@ -143,20 +143,23 @@ export const CommentsPage = () => {
                 
                 {new Date(comment.createdAt || comment.fecha).toLocaleString()}
               </small>
-              <div className="comment-actions">
-                <button
-                  onClick={() => handleEditClick(comment)}
-                  className="edit-btn"
-                >
-                  Editar
-                </button>
-                <button
-                  onClick={() => handleDeleteComment(comment._id)}
-                  className="delete-btn"
-                >
-                  Eliminar
-                </button>
-              </div>
+              {user && user._id === comment.userId?._id && (
+  <div className="comment-actions">
+    <button
+      onClick={() => handleEditClick(comment)}
+      className="edit-btn"
+    >
+      Editar
+    </button>
+    <button
+      onClick={() => handleDeleteComment(comment._id)}
+      className="delete-btn"
+    >
+      Eliminar
+    </button>
+  </div>
+)}
+
             </div>
           ))
         )}
