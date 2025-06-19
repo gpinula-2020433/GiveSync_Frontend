@@ -18,32 +18,37 @@ export const DonationsToMyInstitution = () => {
 
       if (!res.ok) throw new Error(data.message || 'Error al obtener donaciones')
 
-      setDonations(data.donations || []);
+      setDonations(data.donations || [])
     } catch (err) {
       setError(err.message)
     } finally {
       setLoading(false)
     }
-  };
+  }
 
   useEffect(() => {
     fetchDonations()
   }, [])
 
-  if (loading) return <p className="loading-text">Cargando donaciones...</p>
-  if (error) return <p className="error-text">Error: {error}</p>
-  if (donations.length === 0) return <p className="no-donations-text">No hay donaciones para tu institución.</p>
+  if (loading) return <p className="loading">Cargando donaciones...</p>
+  if (error) return <p className="error">Error: {error}</p>
+  if (donations.length === 0) return <p className="empty">No hay donaciones para tu institución.</p>
 
   return (
     <div className="donations-container">
-      <h2>Donaciones a Mi Institución</h2>
-      <ul className="donations-list">
+      <h2 className="title">Donaciones a Mi Institución</h2>
+      <ul className="donation-list">
         {donations.map((donation) => (
           <li key={donation._id} className="donation-card">
-            <p><strong>Monto:</strong> ${donation.monto.toFixed(2)}</p>
-            <p><strong>Fecha:</strong> {new Date(donation.fecha).toLocaleDateString()}</p>
-            <p><strong>Usuario:</strong> {donation.userId?.name || 'Desconocido'}</p>
-            <p><strong>Institución:</strong> {donation.institutionId?.name || 'Desconocida'}</p>
+            <p className="icon-amount"><strong>Monto:</strong> ${donation.amount?.toFixed(2)}</p>
+            <p className="icon-date"><strong>Fecha:</strong> {new Date(donation.createdAt).toLocaleDateString()}</p>
+            <p className="icon-user"><strong>Usuario:</strong> {donation.user?.name || 'Desconocido'}</p>
+
+            <hr style={{ borderColor: '#3d4a6d', margin: '1rem 0' }} />
+
+            <p className="icon-institution-amount"><strong>Institución:</strong> {donation.institution?.name || 'Desconocida'}</p>
+            <p><strong>Tipo:</strong> {donation.institution?.type || 'N/A'}</p>
+            <p><strong>Descripción:</strong> {donation.institution?.description || 'Sin descripción'}</p>
           </li>
         ))}
       </ul>
