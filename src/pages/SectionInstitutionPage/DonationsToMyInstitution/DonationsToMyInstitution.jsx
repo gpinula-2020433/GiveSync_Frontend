@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
-import './DonationsToMyInstitution.css';
+import { useEffect, useState } from 'react'
+import './DonationsToMyInstitution.css'
 
 export const DonationsToMyInstitution = () => {
-  const [donations, setDonations] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [donations, setDonations] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
 
   useEffect(() => {
     const fetchDonations = async () => {
@@ -14,13 +14,13 @@ export const DonationsToMyInstitution = () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: token // Sin "Bearer "
+            Authorization: token
           }
-        });
+        })
 
         const data = await res.json();
 
-        if (!res.ok) throw new Error(data.message || 'Error al obtener donaciones');
+        if (!res.ok) throw new Error(data.message || 'Error al obtener donaciones')
 
         setDonations(data.donations);
       } catch (err) {
@@ -28,13 +28,13 @@ export const DonationsToMyInstitution = () => {
       } finally {
         setLoading(false);
       }
-    };
+    }
 
-    fetchDonations();
-  }, []);
+    fetchDonations()
+  }, [])
 
-  if (loading) return <p className="loading">Cargando donaciones...</p>;
-  if (error) return <p className="error">{error}</p>;
+  if (loading) return <p className="loading">Cargando donaciones...</p>
+  if (error) return <p className="error">{error}</p>
 
   return (
     <div className="donations-container">
@@ -67,5 +67,5 @@ export const DonationsToMyInstitution = () => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
