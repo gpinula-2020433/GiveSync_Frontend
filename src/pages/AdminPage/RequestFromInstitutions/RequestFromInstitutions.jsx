@@ -31,7 +31,7 @@ export const RequestFromInstitutions = () => {
   const updateState = async (id, newState) => {
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`http://localhost:3200/v1/institution/${id}/state`, {
+      const res = await fetch(`http://localhost:3200/v1/institution/updateState/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -49,29 +49,19 @@ export const RequestFromInstitutions = () => {
     }
   };
 
-  if (loading) return <p>Cargando solicitudes...</p>;
-  if (error) return <p>Error: {error}</p>;
-  if (institutions.length === 0) return <p>No hay solicitudes pendientes.</p>;
+  if (loading) return <p className="status-text">Cargando solicitudes...</p>;
+  if (error) return <p className="status-text error-text">Error: {error}</p>;
+  if (institutions.length === 0) return <p className="status-text">No hay solicitudes pendientes.</p>;
 
   return (
     <div className="request-institutions-container">
-      <h2>Solicitudes de Instituciones Pendientes</h2>
+      <h2 className="request-title">Solicitudes de Instituciones Pendientes</h2>
       <ul className="institution-list">
         {institutions.map(inst => (
           <li key={inst._id} className="institution-card">
             <h3>{inst.name}</h3>
-
-            {inst.imageInstitution?.[0] && (
-              <img
-                src={`http://localhost:3200/institutions/${inst.imageInstitution[0]}`}
-                alt={inst.name}
-                className="institution-image"
-              />
-            )}
-
             <p><strong>Tipo:</strong> {inst.type}</p>
             <p><strong>Descripción:</strong> {inst.description}</p>
-
             <div className="buttons">
               <button onClick={() => updateState(inst._id, 'ACCEPTED')} className="accept-btn">
                 <CheckCircle size={18} /> Aceptar
