@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './DonationsToMyInstitution.css'
 
 export const DonationsToMyInstitution = () => {
@@ -6,66 +6,47 @@ export const DonationsToMyInstitution = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
-  useEffect(() => {
-    const fetchDonations = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        const res = await fetch('http://localhost:3200/v1/donation/institution/my', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: token
-          }
-        })
+  const fetchDonations = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const res = await fetch('http://localhost:3200/v1/donation/institution/my', {
+        headers: {
+          Authorization: token,
+        },
+      })
+      const data = await res.json()
 
-        const data = await res.json();
+      if (!res.ok) throw new Error(data.message || 'Error al obtener donaciones')
 
-        if (!res.ok) throw new Error(data.message || 'Error al obtener donaciones')
-
-        setDonations(data.donations);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
+      setDonations(data.donations || []);
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setLoading(false)
     }
+  };
 
+  useEffect(() => {
     fetchDonations()
   }, [])
 
-  if (loading) return <p className="loading">Cargando donaciones...</p>
-  if (error) return <p className="error">{error}</p>
+  if (loading) return <p className="loading-text">Cargando donaciones...</p>
+  if (error) return <p className="error-text">Error: {error}</p>
+  if (donations.length === 0) return <p className="no-donations-text">No hay donaciones para tu institución.</p>
 
   return (
     <div className="donations-container">
-      <h2 className="title">Donaciones recibidas por tu institución</h2>
-      {donations.length === 0 ? (
-        <p className="empty">No se han recibido donaciones.</p>
-      ) : (
-        <div className="donation-list">
-          {donations.map((donation) => (
-            <div className="donation-card" key={donation._id}>
-              <p className="icon-amount">
-                <strong>Monto total:</strong> ${donation.amount.toFixed(2)}
-              </p>
-              <p className="icon-institution-amount">
-                <strong>Para la institución:</strong> ${donation.institutionAmount.toFixed(2)}
-              </p>
-              <p className="icon-maintenance-amount">
-                <strong>Para mantenimiento:</strong> ${donation.maintenanceAmount.toFixed(2)}
-              </p>
-              <p className="icon-date">
-                <strong>Fecha:</strong> {new Date(donation.date).toLocaleDateString()}
-              </p>
-              {donation.userData && (
-                <p className="icon-user">
-                  <strong>Donante:</strong> {donation.userData.name} {donation.userData.surname} ({donation.userData.username})
-                </p>
-              )}
-            </div>
-          ))}
-        </div>
-      )}
+      <h2>Donaciones a Mi Institución</h2>
+      <ul className="donations-list">
+        {donations.map((donation) => (
+          <li key={donation._id} className="donation-card">
+            <p><strong>Monto:</strong> ${donation.monto.toFixed(2)}</p>
+            <p><strong>Fecha:</strong> {new Date(donation.fecha).toLocaleDateString()}</p>
+            <p><strong>Usuario:</strong> {donation.userId?.name || 'Desconocido'}</p>
+            <p><strong>Institución:</strong> {donation.institutionId?.name || 'Desconocida'}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }
