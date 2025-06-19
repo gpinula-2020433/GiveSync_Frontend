@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react'
-import { getAuthenticatedUserRequest } from '../../../services/api'
+import {
+  getAuthenticatedUserRequest,
+  updateUserImageRequest,
+  deleteUserImageRequest
+} from '../../../services/api'
+import toast from 'react-hot-toast'
 
 export const useAuthenticatedUser = () => {
   const [user, setUser] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState(null)
 
   useEffect(() => {
     fetchUser()
@@ -16,21 +20,52 @@ export const useAuthenticatedUser = () => {
       const res = await getAuthenticatedUserRequest()
       if (!res.error) {
         setUser(res)
-        setError(null)
       } else {
-        setError('No se pudo cargar la información del usuario')
+        toast.error(res.message || 'No se pudo cargar la información del usuario')
       }
     } catch (err) {
-      setError('Error al obtener los datos del usuario')
       console.error(err)
+      toast.error('Error al obtener los datos del usuario')
     } finally {
       setIsLoading(false)
+    }
+  }
+
+  const updateUserImage = async (file) => {
+    try {
+      const formData = new FormData()
+      formData.append('imageUser', file)
+
+      const res = await updateUserImageRequest(formData)
+      if (!res.error) {
+        setUser(res.user)
+        toast.success(res.message || 'Imagen actualizada con éxito')
+      } else {
+        toast.error(res.message || 'Error al actualizar imagen')
+      }
+    } catch (err) {
+      toast.error('Error al actualizar la imagen')
+    }
+  }
+
+  const deleteUserImage = async () => {
+    try {
+      const res = await deleteUserImageRequest()
+      if (!res.error) {
+        setUser(res.user)
+        toast.success(res.message || 'Imagen eliminada correctamente')
+      } else {
+        toast.error(res.message || 'Error al eliminar imagen')
+      }
+    } catch (err) {
+      toast.error('Error al eliminar la imagen')
     }
   }
 
   return {
     user,
     isLoading,
-    error
+    updateUserImage,
+    deleteUserImage
   }
 }

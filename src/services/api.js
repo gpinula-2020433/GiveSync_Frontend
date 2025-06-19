@@ -283,3 +283,30 @@ export const getAuthenticatedUserRequest = async () => {
     return { error: true, err }
   }
 }
+
+
+export const updateUserImageRequest = async (formData) => {
+  try {
+    const res = await apiClient.put('/v1/user/updateUserImageClient/', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    })
+    return res.data
+  } catch (err) {
+    return {
+      error: true,
+      message: err.response?.data?.message || 'Error al actualizar imagen'
+    }
+  }
+}
+
+export const deleteUserImageRequest = async () => {
+  try {
+    const res = await apiClient.delete('/v1/user/deleteUserImageClient/')
+    return res.data
+  } catch (err) {
+    return {
+      error: true,
+      message: err.response?.data?.message || 'Error al eliminar imagen'
+    }
+  }
+}
