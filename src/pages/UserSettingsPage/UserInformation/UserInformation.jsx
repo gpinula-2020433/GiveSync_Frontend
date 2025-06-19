@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuthenticatedUser } from '../../../shared/hooks/User/useUser'
-import imgProfile from '../../../assets/logo.png'
+import DefaultUserImage from '../../../assets/DefaultUserImage.jpg'
 import './UserInformation.css'
 import toast from 'react-hot-toast'
 
@@ -113,10 +113,10 @@ const [showConfirmDeleteModal, setShowConfirmDeleteModal] = useState(false)
     <div className="user-container">
       <div className="user-image-box">
         <img
-          src={user.imageUser ? `http://localhost:3200/uploads/img/users/${user.imageUser}` : imgProfile}
+          src={user.imageUser ? `http://localhost:3200/uploads/img/users/${user.imageUser}` : DefaultUserImage}
           alt="Perfil"
           className="user-profile-img"
-          onError={(e) => { e.currentTarget.src = imgProfile }}
+          onError={(e) => { e.currentTarget.src = DefaultUserImage }}
         />
         <div className="user-image-actions">
           <button className="image-action-btn" onClick={handleOpenUpdate}>Actualizar imagen</button>

@@ -359,3 +359,16 @@ export const updatePasswordRequest = async ({ currentPassword, newPassword }) =>
     }
   }
 }
+
+// services/api.js
+export const getAllUsersRequest = async ({ limit = 10, skip = 0 } = {}) => {
+  try {
+    const response = await apiClient.get('/v1/user/getAllUsersADMIN', {
+      params: { limit, skip }
+    });
+    return response.data;
+  } catch (err) {
+    console.error('Error al obtener usuarios:', err);
+    return { error: true, message: 'Error al obtener usuarios' };
+  }
+};

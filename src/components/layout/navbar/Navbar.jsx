@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import './Navbar.css'
 import { useEffect, useState } from 'react'
-import imgProfile from '../../../assets/logo.png'
+import DefaultUserImage from '../../../assets/DefaultUserImage.jpg'
 import { useAuthenticatedUser } from '../../../shared/hooks/User/useAuthenticatedUser'
 
 export function Navbar() {
@@ -27,7 +27,7 @@ export function Navbar() {
 
   const imageUrl = user?.imageUser
     ? `/uploads/img/users/${user.imageUser}`
-    : imgProfile
+    : DefaultUserImage
 
   const isAdmin = user?.role === 'ADMIN'
 
@@ -67,7 +67,7 @@ export function Navbar() {
                   className="profile-img"
                   onClick={toggleDropdown}
                   onError={(e) => {
-                    e.currentTarget.src = imgProfile
+                    e.currentTarget.src = DefaultUserImage
                   }}
                 />
                 {showDropdown && (

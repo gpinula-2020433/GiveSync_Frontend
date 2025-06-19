@@ -62,11 +62,6 @@ function SidebarAdmin() {
                 <FaUsers className="me-2" />Usuarios
               </Link>
             </li>
-            <li>
-              <Link to="/admin/PanelGeneralInformation" className="py-2 px-3 rounded d-block hover-sidebar">
-                <FaChartBar className="me-2" />Panel
-              </Link>
-            </li>
           </ul>
         </div>
       </aside>

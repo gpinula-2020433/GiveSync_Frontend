@@ -14,7 +14,6 @@ import AddDonationPage from './pages/MainPage/AddDonationPage/AddDonationPage'
 
 import {AllDonationsMade} from '../src/pages/AdminPage/AllDonationsMade/AllDonationsMade'
 import {ListOfInstitutions} from '../src/pages/AdminPage/ListOfInstitutions/ListOfInstitutions'
-import {PanelGeneralInformation} from '../src/pages/AdminPage/PanelGeneralInformation/PanelGeneralInformation'
 import {RegisteredUsers} from '../src/pages/AdminPage/RegisteredUsers/RegisteredUsers'
 import {RequestFromInstitutions} from '../src/pages/AdminPage/RequestFromInstitutions/RequestFromInstitutions'
 
@@ -60,7 +59,6 @@ export const routes = [
     children: [
       { path: 'AllDonationsMade', element: <AllDonationsMade/>},
       { path: 'ListOfInstitutions', element: <ListOfInstitutions/>},
-      { path: 'PanelGeneralInformation', element: <PanelGeneralInformation/>},
       { path: 'RegisteredUsers', element: <RegisteredUsers/>},
       { path: 'RequestFromInstitutions', element: <RequestFromInstitutions/>}
     ]
