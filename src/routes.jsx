@@ -26,8 +26,8 @@ import {RequestToRegisterAnInstitution} from '../src/pages/UserSettingsPage/Requ
 import {UserInformation} from '../src/pages/UserSettingsPage/UserInformation/UserInformation'
 import InstitutionDetail from './pages/MainPage/DetailsInstitutionPage/InstitutionDetail'
 import {CommentsPage}  from './pages/CommentsPage/CommentsPage'
-import { element } from 'prop-types'
 import ConfigurationPublication from './pages/SectionInstitutionPage/configurationPublication/ConfigurationPublication'
+import { ProtectedRoute } from './shared/utils/ProtectedRoute'
 
 export const routes = [
   {
@@ -63,25 +63,35 @@ export const routes = [
       { path: 'RequestFromInstitutions', element: <RequestFromInstitutions/>}
     ]
   },
-  {
-    path: '/sectioninstitution',
-    element: <SectionInstitutionPage/>,
-    children: [
-      { path: 'ConfigurationOfTheInstitution', element: <ConfigurationOfTheInstitution/>},
-      { path: 'DonationsToMyInstitution', element: <DonationsToMyInstitution/>},
-      { path: 'MyInstitution', element: <MyInstitution/>},
-      { path: 'ConfigurationPublication', element: <ConfigurationPublication/>}
-    ]
-  },
-  {
-    path: '/usersettings',
-    element: <UserSettingsPage/>,
-    children: [
-      { path: 'DonationHistory', element: <DonationHistory/>},
-      { path: 'RequestToRegisterAnInstitution', element: <RequestToRegisterAnInstitution/>},
-      { path: 'UserInformation', element: <UserInformation/>}
-    ]
-  },
+    {
+      element: <ProtectedRoute/>,
+      children: [
+        {
+            path: '/sectioninstitution',
+            element: <SectionInstitutionPage/>,
+            children: [
+              { path: 'ConfigurationOfTheInstitution', element: <ConfigurationOfTheInstitution/>},
+              { path: 'DonationsToMyInstitution', element: <DonationsToMyInstitution/>},
+              { path: 'MyInstitution', element: <MyInstitution/>},
+              { path: 'ConfigurationPublication', element: <ConfigurationPublication/>}
+            ]
+          },
+      ]
+    },
+    {
+      element: <ProtectedRoute/>,
+      children: [
+          {
+            path: '/usersettings',
+            element: <UserSettingsPage/>,
+            children: [
+              { path: 'DonationHistory', element: <DonationHistory/>},
+              { path: 'RequestToRegisterAnInstitution', element: <RequestToRegisterAnInstitution/>},
+              { path: 'UserInformation', element: <UserInformation/>}
+            ]
+          },
+      ]
+    },
   {
     path:'*',
     element: <NotFoundPage/>

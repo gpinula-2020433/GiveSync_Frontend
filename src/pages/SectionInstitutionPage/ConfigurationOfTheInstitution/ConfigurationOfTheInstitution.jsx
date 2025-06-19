@@ -103,9 +103,9 @@ export const ConfigurationOfTheInstitution = () => {
             onChange={handleInputChange}
           >
             <option value="">Seleccione un tipo</option>
-            <option value="EATERS">EATERS</option>
-            <option value="ORPHANAGE">ORPHANAGE</option>
-            <option value="ACYL">ACYL</option>
+            <option value="EATERS">COMEDOR</option>
+            <option value="ORPHANAGE">ORFANATO</option>
+            <option value="ACYL">ACILO</option>
           </select>
         </div>
 
