@@ -1,1 +1,155 @@
-/*Nose*/
+/* DonationsToMyInstitution.css */
+
+.donations-container {
+  padding: 2rem;
+  background-color: #1e1e2f;
+  color: #d0d0e0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  animation: fadeIn 0.8s ease-in;
+  min-height: 100vh;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #4a90e2;
+  margin-bottom: 2rem;
+  text-shadow: 0 0 8px rgba(74, 144, 226, 0.4);
+  animation: fadeInDown 1s ease forwards;
+}
+
+.loading,
+.error,
+.empty {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 3rem;
+  color: #999aac;
+  animation: fadeIn 1s ease forwards;
+}
+
+.donation-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.donation-card {
+  background-color: #2a2a3d;
+  border: 1px solid #3d4a6d;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: slideUp 0.6s ease forwards;
+  cursor: default;
+  opacity: 0;
+}
+
+.donation-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 25px rgba(74, 144, 226, 0.85);
+}
+
+.donation-card p {
+  margin: 0.5rem 0;
+  line-height: 1.5;
+  color: #d0d0e0;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  animation: fadeIn 1s ease forwards;
+}
+
+.donation-card strong {
+  color: #7aaaff;
+  font-weight: 600;
+}
+
+.icon-amount::before {
+  content: '💰';
+  color: #4a90e2;
+  display: inline-block;
+  width: 20px;
+}
+
+.icon-institution-amount::before {
+  content: '🏢';
+  color: #4a90e2;
+  display: inline-block;
+  width: 20px;
+}
+
+.icon-maintenance-amount::before {
+  content: '🔧';
+  color: #4a90e2;
+  display: inline-block;
+  width: 20px;
+}
+
+.icon-date::before {
+  content: '📅';
+  color: #4a90e2;
+  display: inline-block;
+  width: 20px;
+}
+
+.icon-user::before {
+  content: '👤';
+  color: #4a90e2;
+  display: inline-block;
+  width: 20px;
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .donations-container {
+    padding: 1rem;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .donation-card {
+    padding: 1rem;
+  }
+
+  .donation-card p {
+    font-size: 0.9rem;
+  }
+}
