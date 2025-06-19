@@ -10,6 +10,7 @@ import WelcomePage from './pages/MainPage/WelcomePage/WelcomePage'
 import {AdminPage} from '../src/pages/AdminPage/AdminPage'
 import {SectionInstitutionPage} from '../src/pages/SectionInstitutionPage/SectionInstitutionPage'
 import {UserSettingsPage} from '../src/pages/UserSettingsPage/UserSettingsPage'
+import AddDonationPage from './pages/MainPage/AddDonationPage/AddDonationPage'
 
 import {AllDonationsMade} from '../src/pages/AdminPage/AllDonationsMade/AllDonationsMade'
 import {ListOfInstitutions} from '../src/pages/AdminPage/ListOfInstitutions/ListOfInstitutions'
@@ -49,7 +50,8 @@ export const routes = [
   children: [
     { path: 'home', element: <HomePage /> },
     { path: 'institution/:id', element: <InstitutionDetail /> },
-    { path: 'publication/:publicationId', element: <CommentsPage /> } // <-- Aquí
+    { path: 'institution/:id/donate', element: <AddDonationPage /> },
+    { path: 'publication/:publicationId', element: <CommentsPage /> }
   ]
 },
   {

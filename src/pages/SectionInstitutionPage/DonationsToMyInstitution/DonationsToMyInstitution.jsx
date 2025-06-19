@@ -8,7 +8,7 @@ export const DonationsToMyInstitution = () => {
 
   const fetchDonations = async () => {
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('token')
       const res = await fetch('http://localhost:3200/v1/donation/institution/my', {
         headers: {
           Authorization: token,
@@ -19,6 +19,7 @@ export const DonationsToMyInstitution = () => {
       if (!res.ok) throw new Error(data.message || 'Error al obtener donaciones')
 
       setDonations(data.donations || [])
+      setError('')
     } catch (err) {
       setError(err.message)
     } finally {
@@ -30,9 +31,9 @@ export const DonationsToMyInstitution = () => {
     fetchDonations()
   }, [])
 
-  if (loading) return <p className="loading">Cargando donaciones...</p>
-  if (error) return <p className="error">Error: {error}</p>
-  if (donations.length === 0) return <p className="empty">No hay donaciones para tu institución.</p>
+  if (loading) return <p className="loading-message">Cargando donaciones...</p>
+  if (error) return <p className="error-message">Error: {error}</p>
+  if (donations.length === 0) return <p className="empty-message">No hay donaciones para tu institución.</p>
 
   return (
     <div className="donations-container">
@@ -44,7 +45,7 @@ export const DonationsToMyInstitution = () => {
             <p className="icon-date"><strong>Fecha:</strong> {new Date(donation.createdAt).toLocaleDateString()}</p>
             <p className="icon-user"><strong>Usuario:</strong> {donation.user?.name || 'Desconocido'}</p>
 
-            <hr style={{ borderColor: '#3d4a6d', margin: '1rem 0' }} />
+            <hr />
 
             <p className="icon-institution-amount"><strong>Institución:</strong> {donation.institution?.name || 'Desconocida'}</p>
             <p><strong>Tipo:</strong> {donation.institution?.type || 'N/A'}</p>

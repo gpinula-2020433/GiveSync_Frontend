@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   min-height: 80vh;
-  background-color: #121212; 
+  background-color: #121212;
   padding: 30px;
   color: #e0e0e0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -116,25 +116,40 @@
   box-shadow: 0 6px 20px rgba(229, 57, 53, 0.9);
 }
 
-.no-requests-message {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 220px;
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  color: #bbbbbb;
-  font-size: 1.7rem;
+.status-text {
+  font-size: 1.5rem;
   font-weight: 600;
+  color: #bbbbbb;
+  text-align: center;
+  margin: 60px auto;
+  max-width: 600px;
+  padding: 20px;
   background-color: #1f1f1f;
-  border: 2px dashed #555555;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(100, 100, 100, 0.3);
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(120, 120, 120, 0.4);
   user-select: none;
   animation: pulseGlow 2.5s infinite ease-in-out;
+}
+
+.error-text {
+  color: #ef5350;
+  box-shadow: 0 0 12px rgba(239, 83, 80, 0.8);
+  background-color: #2a1a1a;
+}
+
+.no-requests-message {
+  color: #bbbbbb;
+  background-color: #1f1f1f;
+  border: 2px dashed #555555;
+  box-shadow: 0 0 10px rgba(100, 100, 100, 0.3);
+  padding: 25px;
+  border-radius: 12px;
+  margin: 40px auto;
+  max-width: 600px;
+  font-size: 1.7rem;
+  font-weight: 600;
+  user-select: none;
   text-align: center;
-  padding: 20px;
 }
 
 @keyframes pulseGlow {
