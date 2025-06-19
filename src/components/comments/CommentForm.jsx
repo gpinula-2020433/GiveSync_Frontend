@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import './CommentForm.css'
 
 export const CommentForm = ({ publicationId, onNewComment, onCancel, editCommentData, onEditComment }) => {
   const [content, setContent] = useState(editCommentData?.content || '')
@@ -38,6 +39,7 @@ export const CommentForm = ({ publicationId, onNewComment, onCancel, editComment
   }
 
   return (
+    <div className="comment-form-page">
     <form onSubmit={handleSubmit} style={{ marginBottom: '1rem' }}>
       <textarea
         value={content}
@@ -70,5 +72,6 @@ export const CommentForm = ({ publicationId, onNewComment, onCancel, editComment
         </button>
       </div>
     </form>
+    </div>
   )
 }

@@ -1,0 +1,275 @@
+.register-institution-page {
+  --bg-dark: #12141a;
+  --bg-card: #1f2937;
+  --bg-input: #2c3748;
+  --text-primary: #e0e7ff;
+  --text-muted: #9ca3af;
+  --accent: #10b981;
+  --accent-hover: #059669;
+  --border-color: #374151;
+  --shadow-color: rgba(16, 185, 129, 0.3);
+}
+
+.register-institution-page * {
+  box-sizing: border-box;
+}
+
+.register-institution-page body,
+.register-institution-page html,
+.register-institution-page #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: var(--bg-dark);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-primary);
+}
+
+.register-institution-page .min-h-screen {
+  min-height: 100vh;
+}
+
+.register-institution-page .flex {
+  display: flex;
+}
+
+.register-institution-page .items-center {
+  align-items: center;
+}
+
+.register-institution-page .justify-center {
+  justify-content: center;
+}
+
+.register-institution-page .px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.register-institution-page .max-w-2xl {
+  max-width: 640px;
+}
+
+.register-institution-page .w-full {
+  width: 100%;
+}
+
+.register-institution-page .bg-zinc-950 {
+  background-color: var(--bg-dark);
+}
+
+.register-institution-page .bg-zinc-900 {
+  background-color: var(--bg-card);
+}
+
+.register-institution-page .rounded-2xl {
+  border-radius: 1rem;
+}
+
+.register-institution-page .rounded-xl {
+  border-radius: 0.75rem;
+}
+
+.register-institution-page .shadow-xl {
+  box-shadow: 0 10px 15px -3px var(--shadow-color), 0 4px 6px -4px var(--shadow-color);
+}
+
+.register-institution-page .shadow-lg {
+  box-shadow: 0 10px 15px -3px var(--shadow-color);
+}
+
+.register-institution-page .border {
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--border-color);
+}
+
+.register-institution-page .text-white {
+  color: var(--text-primary);
+}
+
+.register-institution-page .text-zinc-400,
+.register-institution-page .text-zinc-300 {
+  color: var(--text-muted);
+}
+
+.register-institution-page .text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
+.register-institution-page .text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
+.register-institution-page .font-bold {
+  font-weight: 700;
+}
+
+.register-institution-page .font-semibold {
+  font-weight: 600;
+}
+
+.register-institution-page .text-center {
+  text-align: center;
+}
+
+.register-institution-page .mb-8 {
+  margin-bottom: 2rem;
+}
+
+.register-institution-page .mb-3 {
+  margin-bottom: 0.75rem;
+}
+
+.register-institution-page .mb-1 {
+  margin-bottom: 0.25rem;
+}
+
+.register-institution-page .space-y-6 > * + * {
+  margin-top: 1.5rem;
+}
+
+/* Form fields */
+.register-institution-page input[type="text"],
+.register-institution-page input[type="tel"],
+.register-institution-page textarea,
+.register-institution-page select {
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  font-family: inherit;
+}
+
+.register-institution-page input[type="text"]:focus,
+.register-institution-page input[type="tel"]:focus,
+.register-institution-page textarea:focus,
+.register-institution-page select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.4);
+  background-color: #22333b;
+  color: var(--text-primary);
+}
+
+.register-institution-page textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.register-institution-page label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: var(--text-muted);
+}
+
+/* File input styling */
+.register-institution-page input[type="file"] {
+  width: 100%;
+  background-color: var(--bg-input);
+  color: var(--text-muted);
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 1rem;
+  border: 1px solid var(--border-color);
+  transition: border-color 0.3s ease;
+}
+
+.register-institution-page input[type="file"]:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.4);
+}
+
+.register-institution-page input[type="file"]::-webkit-file-upload-button {
+  background-color: var(--accent);
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.register-institution-page input[type="file"]::-webkit-file-upload-button:hover {
+  background-color: var(--accent-hover);
+}
+
+/* Button */
+.register-institution-page button[type="submit"] {
+  background-color: var(--accent);
+  color: white;
+  font-weight: 700;
+  padding: 0.75rem 0;
+  border-radius: 1rem;
+  font-size: 1.125rem;
+  cursor: pointer;
+  border: none;
+  width: 100%;
+  box-shadow: 0 5px 15px rgba(16, 185, 129, 0.5);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.register-institution-page button[type="submit"]:hover {
+  background-color: var(--accent-hover);
+  box-shadow: 0 8px 20px rgba(5, 150, 105, 0.7);
+  transform: translateY(-2px);
+}
+
+/* Restricted access message */
+.register-institution-page .max-w-lg {
+  max-width: 32rem;
+}
+
+.register-institution-page .text-md {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.register-institution-page .bg-zinc-700 {
+  background-color: #374151;
+}
+
+.register-institution-page .text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.register-institution-page .h-screen {
+  height: 100vh;
+}
+
+.register-institution-page .flex.items-center.justify-center.h-screen {
+  background-color: var(--bg-dark);
+}
+
+/* Scrollbar for textarea and inputs (optional) */
+.register-institution-page textarea::-webkit-scrollbar {
+  width: 8px;
+}
+
+.register-institution-page textarea::-webkit-scrollbar-thumb {
+  background-color: var(--accent);
+  border-radius: 4px;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .register-institution-page .max-w-2xl {
+    max-width: 100%;
+  }
+
+  .register-institution-page .p-10 {
+    padding: 1.5rem;
+  }
+}

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+import './ListOfInstitutions.css'
 
 import {
   getInstitutionsRequest,
@@ -35,6 +36,7 @@ export const ListOfInstitutions = () => {
   if (loading) return <div className="container mt-4">Cargando...</div>;
 
   return (
+    <div className="list-institutions-page">
     <div className="container mt-4">
       <ToastContainer position="top-right" autoClose={2500} />
       <h2 className="fw-bold mb-3">Todas las instituciones</h2>
@@ -84,6 +86,7 @@ export const ListOfInstitutions = () => {
           ))}
         </tbody>
       </table>
+    </div>
     </div>
   )
 }
