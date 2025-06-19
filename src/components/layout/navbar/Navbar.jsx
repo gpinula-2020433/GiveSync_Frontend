@@ -33,7 +33,7 @@ export function Navbar() {
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    navigate('/auth/login');
+    navigate('/main/home');
     setIsLoggedIn(false);
     setIsAdmin(false);
     setUserImage(imgProfile);

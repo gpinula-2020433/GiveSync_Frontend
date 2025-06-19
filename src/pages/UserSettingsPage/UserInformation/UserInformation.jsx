@@ -1,23 +1,74 @@
 import React, { useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useAuthenticatedUser } from '../../../shared/hooks/User/useUser'
 import imgProfile from '../../../assets/logo.png'
 import './UserInformation.css'
+import toast from 'react-hot-toast'
 
 export const UserInformation = () => {
+  const navigate = useNavigate()
+
   const {
     user,
     isLoading,
     error,
     message,
     updateUserImage,
-    deleteUserImage
+    deleteUserImage,
+    updateUser,
+    deleteUserAccount
   } = useAuthenticatedUser()
+const [showConfirmDeleteModal, setShowConfirmDeleteModal] = useState(false)
 
   const [showUpdateModal, setShowUpdateModal] = useState(false)
   const [showDeleteModal, setShowDeleteModal] = useState(false)
+  const [showUpdateDataModal, setShowUpdateDataModal] = useState(false)
+  const [showDeleteAccountModal, setShowDeleteAccountModal] = useState(false)
   const [selectedFile, setSelectedFile] = useState(null)
+  const [passwordToDelete, setPasswordToDelete] = useState('')
+  const [isDeleting, setIsDeleting] = useState(false)
+
+  const [formData, setFormData] = useState({
+    name: '',
+    surname: '',
+    email: '',
+    username: ''
+  })
 
   const inputFileRef = useRef()
+
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
+    navigate('/main/home')
+  }
+
+  const handleOpenUpdateData = () => {
+    setFormData({
+      name: user.name || '',
+      surname: user.surname || '',
+      email: user.email || '',
+      username: user.username || ''
+    })
+    setShowUpdateDataModal(true)
+  }
+
+  const handleSubmitData = () => {
+    const updatedFields = Object.entries(formData).reduce((acc, [key, value]) => {
+      if (value !== user[key]) {
+        acc[key] = value
+      }
+      return acc
+    }, {})
+
+    if (Object.keys(updatedFields).length === 0) {
+      toast.error('No hay cambios para actualizar')
+      return
+    }
+
+    updateUser(updatedFields)
+    setShowUpdateDataModal(false)
+  }
 
   const handleOpenUpdate = () => {
     setSelectedFile(null)
@@ -38,6 +89,21 @@ export const UserInformation = () => {
   const handleConfirmDelete = () => {
     deleteUserImage()
     setShowDeleteModal(false)
+  }
+
+  const handleConfirmAccountDelete = async () => {
+    if (!passwordToDelete.trim()) {
+      toast.error('Ingresa tu contraseña para continuar')
+      return
+    }
+
+    setIsDeleting(true)
+    const res = await deleteUserAccount(passwordToDelete)
+    setIsDeleting(false)
+
+    if (res.success) {
+      handleLogout()
+    }
   }
 
   if (isLoading) return <div>Cargando...</div>
@@ -69,8 +135,8 @@ export const UserInformation = () => {
       {message && <p className="success-message">{message}</p>}
 
       <div className="user-options">
-        <button className="user-btn">Actualizar cuenta</button>
-        <button className="user-btn delete">Eliminar cuenta</button>
+        <button className="user-btn" onClick={handleOpenUpdateData}>Actualizar cuenta</button>
+            <button className="user-btn delete" onClick={() => setShowConfirmDeleteModal(true)}>Eliminar cuenta</button>
       </div>
 
       {/* Modal Actualizar Imagen */}
@@ -91,7 +157,7 @@ export const UserInformation = () => {
         </div>
       )}
 
-      {/* Modal Confirmar Eliminación */}
+      {/* Modal Confirmar Eliminación Imagen */}
       {showDeleteModal && (
         <div className="modal-overlay">
           <div className="modal-box">
@@ -99,6 +165,123 @@ export const UserInformation = () => {
             <div className="modal-actions">
               <button onClick={handleConfirmDelete}>Sí, eliminar</button>
               <button className="delete" onClick={() => setShowDeleteModal(false)}>Cancelar</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal Actualizar Datos Usuario */}
+      {showUpdateDataModal && (
+        <div className="modal-overlay">
+          <div className="modal-box">
+            <h3>Actualizar Datos de Usuario</h3>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault()
+                handleSubmitData()
+              }}
+            >
+              <label>
+                Nombre:
+                <input
+                  type="text"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  required
+                />
+              </label>
+              <label>
+                Apellido:
+                <input
+                  type="text"
+                  value={formData.surname}
+                  onChange={(e) => setFormData({ ...formData, surname: e.target.value })}
+                  required
+                />
+              </label>
+              <label>
+                Email:
+                <input
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  required
+                />
+              </label>
+              <label>
+                Username:
+                <input
+                  type="text"
+                  value={formData.username}
+                  onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+                  required
+                />
+              </label>
+              <div className="modal-actions">
+                <button type="submit">Actualizar</button>
+                <button
+                  type="button"
+                  className="delete"
+                  onClick={() => setShowUpdateDataModal(false)}
+                >
+                  Cancelar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Modal Confirmación Simple antes de eliminar cuenta */}
+{showConfirmDeleteModal && (
+  <div className="modal-overlay">
+    <div className="modal-box">
+      <h3>¿Seguro que quieres eliminar tu cuenta?</h3>
+      <div className="modal-actions">
+        <button
+          onClick={() => {
+            setShowConfirmDeleteModal(false)
+            setShowDeleteAccountModal(true)
+          }}
+        >
+          Sí
+        </button>
+        <button
+          className="delete"
+          onClick={() => setShowConfirmDeleteModal(false)}
+        >
+          No
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
+      {/* Modal Eliminar Cuenta */}
+      {showDeleteAccountModal && (
+        <div className="modal-overlay">
+          <div className="modal-box">
+            <h3>¿Estás seguro de que deseas eliminar tu cuenta?</h3>
+            <p>Esta acción no se puede deshacer. Ingresa tu contraseña para confirmar:</p>
+            <input
+              type="password"
+              placeholder="Contraseña actual"
+              value={passwordToDelete}
+              onChange={(e) => setPasswordToDelete(e.target.value)}
+            />
+            <div className="modal-actions">
+              <button onClick={handleConfirmAccountDelete} disabled={isDeleting}>
+                {isDeleting ? 'Eliminando...' : 'Confirmar'}
+              </button>
+              <button
+                className="delete"
+                onClick={() => {
+                  setShowDeleteAccountModal(false)
+                  setPasswordToDelete('')
+                }}
+              >
+                Cancelar
+              </button>
             </div>
           </div>
         </div>
