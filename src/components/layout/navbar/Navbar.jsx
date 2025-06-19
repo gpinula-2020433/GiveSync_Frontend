@@ -1,47 +1,35 @@
-import { Link, useNavigate } from 'react-router-dom';
-import './Navbar.css';
-import decodeToken from '../../../shared/utils/decodeToken';
-import { useEffect, useState } from 'react';
-import imgProfile from '../../../assets/logo.png';
+import { Link, useNavigate } from 'react-router-dom'
+import './Navbar.css'
+import { useEffect, useState } from 'react'
+import imgProfile from '../../../assets/logo.png'
+import { useAuthenticatedUser } from '../../../shared/hooks/User/useAuthenticatedUser'
 
 export function Navbar() {
-  const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [showDropdown, setShowDropdown] = useState(false);
-  const [userImage, setUserImage] = useState(imgProfile);
+  const navigate = useNavigate()
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [showDropdown, setShowDropdown] = useState(false)
+  const { user, isLoading } = useAuthenticatedUser()
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      const decoded = decodeToken(token);
-      setIsLoggedIn(true);
-      setIsAdmin(decoded?.role === 'ADMIN');
-
-      const imageUrl = decoded?.imageUser
-        ? `/uploads/img/users/${decoded.imageUser}`
-        : imgProfile;
-
-      setUserImage(imageUrl);
-    } else {
-      setIsLoggedIn(false);
-      setIsAdmin(false);
-      setUserImage(imgProfile); // fallback
-    }
-  }, []);
+    const token = localStorage.getItem('token')
+    setIsLoggedIn(!!token)
+  }, [])
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    navigate('/main/home');
-    setIsLoggedIn(false);
-    setIsAdmin(false);
-    setUserImage(imgProfile);
-  };
+    localStorage.removeItem('token')
+    navigate('/main/home')
+    setIsLoggedIn(false)
+  }
 
   const toggleDropdown = () => {
-    setShowDropdown(prev => !prev);
-  };
+    setShowDropdown(prev => !prev)
+  }
+
+  const imageUrl = user?.imageUser
+    ? `/uploads/img/users/${user.imageUser}`
+    : imgProfile
+
+  const isAdmin = user?.role === 'ADMIN'
 
   return (
     <nav className="navbar navbar-expand-lg bg-dark text-white px-4 shadow fixed-top">
@@ -60,11 +48,13 @@ export function Navbar() {
             </Link>
           )}
 
-          {isLoggedIn && (
+          {isLoggedIn && user && !isLoading && (
             <>
-              <Link to="/sectioninstitution" className="text-light text-decoration-none">
-                <i className="fas fa-hands-helping"></i> Institución
-              </Link>
+              {user.hasInstitution && (
+                <Link to="/sectioninstitution" className="text-light text-decoration-none">
+                  <i className="fas fa-hands-helping"></i> Institución
+                </Link>
+              )}
               {isAdmin && (
                 <Link to="/admin" className="text-light text-decoration-none">
                   <i className="fas fa-tools"></i> Administración
@@ -72,7 +62,7 @@ export function Navbar() {
               )}
               <div className="profile-container position-relative">
                 <img
-                  src={userImage}
+                  src={imageUrl}
                   alt="profile"
                   className="profile-img"
                   onClick={toggleDropdown}
@@ -98,7 +88,7 @@ export function Navbar() {
         </div>
       </div>
     </nav>
-  );
+  )
 }
 
-export default Navbar;
+export default Navbar
