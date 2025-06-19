@@ -54,7 +54,7 @@ export const RequestToRegisterAnInstitution = () => {
       toast.error('Error al registrar institución')
     } else {
       toast.success('Institución registrada con éxito')
-      navigate('/sectioninstitution/MyInstitution')
+      navigate('/usersettings/RequestToRegisterAnInstitution')
     }
   }
 

@@ -47,6 +47,7 @@ export const routes = [
   path: '/main',
   element: <MainPage />,
   children: [
+    { path: '', element: <Navigate to="home" /> },
     { path: 'home', element: <HomePage /> },
     { path: 'institution/:id', element: <InstitutionDetail /> },
     { path: 'institution/:id/donate', element: <AddDonationPage /> },
@@ -57,6 +58,7 @@ export const routes = [
     path: '/admin',
     element: <AdminPage />,
     children: [
+      { path: '', element: <Navigate to="ListOfInstitutions" /> },
       { path: 'AllDonationsMade', element: <AllDonationsMade/>},
       { path: 'ListOfInstitutions', element: <ListOfInstitutions/>},
       { path: 'RegisteredUsers', element: <RegisteredUsers/>},
@@ -70,6 +72,7 @@ export const routes = [
             path: '/sectioninstitution',
             element: <SectionInstitutionPage/>,
             children: [
+              { path: '', element: <Navigate to="MyInstitution" /> },
               { path: 'ConfigurationOfTheInstitution', element: <ConfigurationOfTheInstitution/>},
               { path: 'DonationsToMyInstitution', element: <DonationsToMyInstitution/>},
               { path: 'MyInstitution', element: <MyInstitution/>},
@@ -85,6 +88,7 @@ export const routes = [
             path: '/usersettings',
             element: <UserSettingsPage/>,
             children: [
+              { path: '', element: <Navigate to="UserInformation" /> },
               { path: 'DonationHistory', element: <DonationHistory/>},
               { path: 'RequestToRegisterAnInstitution', element: <RequestToRegisterAnInstitution/>},
               { path: 'UserInformation', element: <UserInformation/>}
