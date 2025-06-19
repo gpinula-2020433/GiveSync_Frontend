@@ -286,14 +286,13 @@ export const editComment = async (id, data) => {
 export const getAuthenticatedUserRequest = async () => {
   try {
     const response = await apiClient.get('/v1/user/getAuthenticatedClient/')
-    // Accede directamente a `response.data.user`
     return response.data.user
   } catch (err) {
-    console.error('API error:', err)
-    return { error: true, err }
+    // Captura el mensaje del backend si existe
+    const backendMessage = err?.response?.data?.message || 'Error desconocido'
+    return { error: true, message: backendMessage }
   }
 }
-
 
 export const updateUserImageRequest = async (formData) => {
   try {
