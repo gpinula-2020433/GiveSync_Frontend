@@ -269,11 +269,11 @@ const InstitutionDetail = () => {
           <div style={{
             position: 'relative',
             width: '100%',
-            maxWidth: 400,
+            maxWidth: 425,
             height: 400,
             overflow: 'hidden',
-            margin: '10px auto',
-            borderRadius: 8,
+            margin: '25px auto',
+            borderRadius: 10,
           }}>
           <img
             src={`/uploads/img/users/${pub.imagePublication[publicationImageIndexes[pub._id] || 0]}`}
@@ -282,7 +282,7 @@ const InstitutionDetail = () => {
               width: '100%',
               height: '100%',
               objectFit: 'cover',
-              borderRadius: 8
+              borderRadius: 10
             }}
           />
 
