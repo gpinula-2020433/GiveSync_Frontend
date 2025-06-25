@@ -6,137 +6,133 @@
   animation: fadeIn 0.8s ease-in;
   min-height: 100vh;
 }
-
+ 
 .donations-container h2 {
   text-align: center;
-  font-size: 2.5rem;
-  color: #4a90e2;
+  font-size: 2.3rem;
+  color: #7aaaff;
   margin-bottom: 2rem;
-  text-shadow: 0 0 8px rgba(74, 144, 226, 0.4);
+  font-weight: 600;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
-
+ 
 .donations-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-
+ 
 .donation-item {
-  background-color: #2a2a3d;
+  background-color: #2b2b3c;
   border: 1px solid #3d4a6d;
   padding: 1.5rem;
-  border-radius: 1rem;
+  border-radius: 0.8rem;
   margin-bottom: 1.5rem;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   animation: slideUp 0.6s ease forwards;
   opacity: 0;
-  cursor: default;
 }
-
+ 
 .donation-item:hover {
-  transform: scale(1.015);
-  box-shadow: 0 0 20px rgba(74, 144, 226, 0.7);
+  transform: translateY(-4px);
+  box-shadow: 0 0 16px rgba(122, 170, 255, 0.3);
 }
-
+ 
 .donation-item p {
-  margin: 0.5rem 0;
-  line-height: 1.5;
-  color: #d0d0e0;
+  margin: 0.4rem 0;
+  line-height: 1.6;
+  color: #e0e0f0;
+  font-size: 0.95rem;
 }
-
+ 
 .donation-item strong {
   color: #7aaaff;
   font-weight: 600;
 }
-
+ 
 .user-details {
   margin-top: 1rem;
   padding-top: 0.5rem;
   border-top: 1px dashed #3d4a6d;
   animation: fadeIn 0.6s ease-in;
-  color: #999aac;
-  font-size: 0.9rem;
+  color: #aaaac0;
+  font-size: 0.85rem;
 }
-
+ 
 .icon-id::before {
   content: '🆔 ';
   color: #4a90e2;
 }
-
+ 
 .icon-money::before {
   content: '💰 ';
   color: #4a90e2;
 }
-
+ 
 .icon-calendar::before {
   content: '📅 ';
   color: #4a90e2;
 }
-
+ 
 .icon-institution::before {
   content: '🏢 ';
   color: #4a90e2;
 }
-
+ 
 .icon-institution-type::before {
   content: '🏛️ ';
   color: #4a90e2;
 }
-
+ 
 .icon-user::before {
   content: '👤 ';
   color: #4a90e2;
 }
-
+ 
 hr {
   margin-top: 1.5rem;
   border: none;
   height: 1px;
   background: linear-gradient(to right, #3d4a6d, #4a90e2, #3d4a6d);
-  opacity: 0.5;
+  opacity: 0.3;
 }
-
+ 
 .loading-message,
 .error-message,
 .empty-message {
-  max-width: 700px;
-  margin: 3rem auto;
-  background: linear-gradient(145deg, #2a2a3d, #1e1e2f);
-  padding: 2.5rem 3rem;
-  border-radius: 1.2rem;
-  color: #7aaaff;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 1.3rem;
-  font-weight: 600;
+  max-width: 600px;
+  margin: 1rem auto;
+  padding: 0;
+  color: #ff6e6e;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
   text-align: center;
-  box-shadow: 0 12px 30px rgba(122, 170, 255, 0.45);
   user-select: none;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  text-shadow:
-    0 0 12px #4a90e2cc,
-    0 0 30px #4a90e2bb;
-  animation: glowPulse 2.5s ease-in-out infinite alternate;
+  letter-spacing: 0.02em;
+  animation: fadeIn 0.6s ease-in;
   position: relative;
-  overflow: hidden;
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+  text-shadow: none;
 }
-
+ 
+.loading-message {
+  color: #7aaaff;
+}
+ 
+.empty-message {
+  color: #cccccc;
+}
+ 
 .empty-message::before,
 .error-message::before,
 .loading-message::before {
-  content: '💔';
-  position: absolute;
-  font-size: 4rem;
-  top: 50%;
-  left: 50%;
-  color: #4a90e2aa;
-  transform: translate(-50%, -50%);
-  opacity: 0.15;
-  pointer-events: none;
-  user-select: none;
+  display: none;
 }
-
+ 
 @keyframes slideUp {
   0% {
     transform: translateY(30px);
@@ -147,7 +143,7 @@ hr {
     opacity: 1;
   }
 }
-
+ 
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -156,24 +152,7 @@ hr {
     opacity: 1;
   }
 }
-
-@keyframes glowPulse {
-  0% {
-    box-shadow:
-      0 0 10px #4a90e2aa,
-      0 0 20px #4a90e2bb,
-      0 0 30px #4a90e2cc;
-    color: #7aaaff;
-  }
-  100% {
-    box-shadow:
-      0 0 20px #7aaaffcc,
-      0 0 40px #7aaaffdd,
-      0 0 50px #7aaaffee;
-    color: #a8c7ff;
-  }
-}
-
+ 
 @media (max-width: 768px) {
   .donations-container {
     padding: 1rem;
@@ -187,7 +166,7 @@ hr {
   .loading-message,
   .error-message,
   .empty-message {
-    font-size: 1.1rem;
-    padding: 1.8rem 2rem;
+    font-size: 0.9rem;
+    padding: 0;
   }
 }
