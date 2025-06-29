@@ -1,48 +1,68 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { getCommentsByPublicationRequest, getPublicationByIdRequest } from '../../../services/api'
+import { useSocket } from '../useSocket'  // tu hook personalizado para socket.io
 
 export const usePublicationComments = (publicationId) => {
   const [publication, setPublication] = useState(null)
   const [comments, setComments] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
-  useEffect(() => {
+  // Función para cargar publicación y comentarios
+  const fetchData = useCallback(async () => {
     if (!publicationId) return
 
-    const fetchPublication = async () => {
-      try {
-        const data = await getPublicationByIdRequest(publicationId)
-        console.log('data publication:', data)
-
-        if (data?.publication) {
-          setPublication(data.publication)
-        } else {
-          setPublication(null)
-        }
-      } catch (err) {
-        console.error('Error al obtener publicación', err)
+    setLoading(true)
+    try {
+      const pubData = await getPublicationByIdRequest(publicationId)
+      if (pubData?.publication) {
+        setPublication(pubData.publication)
+      } else {
         setPublication(null)
       }
-    }
 
-    const fetchComments = async () => {
-      try {
-        const data = await getCommentsByPublicationRequest(publicationId)
-        console.log('data comments:', data)
-
-        if (Array.isArray(data?.comments)) {
-          setComments(data.comments)
-        } else {
-          setComments([])
-        }
-      } catch (err) {
-        console.error('Error al obtener comentarios', err)
+      const commData = await getCommentsByPublicationRequest(publicationId)
+      if (Array.isArray(commData?.comments)) {
+        setComments(commData.comments)
+      } else {
         setComments([])
       }
+      setError(null)
+    } catch (err) {
+      setError('Error al obtener datos')
+      setPublication(null)
+      setComments([])
+    } finally {
+      setLoading(false)
     }
-
-    fetchPublication()
-    fetchComments()
   }, [publicationId])
 
-  return { publication, comments }
+  useEffect(() => {
+    fetchData()
+  }, [fetchData])
+
+  // Escuchar nuevos comentarios
+  useSocket('addComment', ({ comment, publicationId: pubId }) => {
+    if (pubId === publicationId) {
+      setComments(prev => [comment, ...prev])
+    }
+  })
+
+  // Escuchar comentarios actualizados
+  useSocket('updateComment', ({ comment, publicationId: pubId }) => {
+    if (pubId === publicationId) {
+      setComments(prev =>
+        prev.map(c => (c._id === comment._id ? comment : c))
+      )
+    }
+  })
+
+  // Escuchar comentarios eliminados
+  useSocket('deleteComment', ({ commentId, publicationId: pubId }) => {
+    if (pubId === publicationId) {
+      setComments(prev => prev.filter(c => c._id !== commentId))
+    }
+  })
+
+  return { publication, comments, loading, error, refetch: fetchData }
 }

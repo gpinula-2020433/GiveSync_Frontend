@@ -1,5 +1,6 @@
 import { useRoutes } from "react-router-dom"
-
+import './App.css'
+import './index.css'
 import { routes } from "./routes"
 import { Toaster } from "react-hot-toast"
 

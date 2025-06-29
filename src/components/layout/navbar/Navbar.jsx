@@ -9,6 +9,27 @@ export function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [showDropdown, setShowDropdown] = useState(false)
   const { user, isLoading } = useAuthenticatedUser()
+  const [isDarkMode, setIsDarkMode] = useState(true); // Estado para el modo oscuro/claro
+
+  // Verifica el tema almacenado y establece el tema inicial
+  useEffect(() => {
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme) {
+      setIsDarkMode(currentTheme === 'dark');
+      document.body.setAttribute('data-theme', currentTheme);
+    } else {
+      // Si no hay tema guardado, usamos el valor predeterminado
+      document.body.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
+    }
+  }, [isDarkMode]);
+
+  // Cambiar el tema y guardar la preferencia en localStorage
+  const toggleTheme = () => {
+    const newTheme = isDarkMode ? 'light' : 'dark';
+    setIsDarkMode(!isDarkMode);
+    document.body.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+  };
 
   useEffect(() => {
     const token = localStorage.getItem('token')
@@ -38,6 +59,15 @@ export function Navbar() {
           GyveSync
         </div>
         <div className="d-flex gap-4 align-items-center">
+          {/* Botón de cambio de tema */}
+          <button
+            className="btn btn-light ms-3"
+            onClick={toggleTheme}
+            title={isDarkMode ? 'Modo Claro' : 'Modo Oscuro'}
+          >
+            <i className={`fas fa-${isDarkMode ? 'sun' : 'moon'}`}></i>
+          </button>
+
           <Link to="/main/home" className="text-light text-decoration-none">
             <i className="fas fa-house"></i> Principal
           </Link>
