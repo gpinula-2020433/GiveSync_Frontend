@@ -1,40 +1,27 @@
-:root {
-  --color-primary: #264653;
-  --color-secondary: #E76F51;
-  --color-accent: #F4A261;
-  --color-bg: #F0F0F0;
-  --color-text-primary: #333333;
-  --color-text-light: #FFFFFF;
-}
-
-
 .admin-page-container {
   min-height: 100vh;
-  background-color: #121212;
-  color: #fff;
+  background-color: var(--bg-dark); /* antes #121212 */
+  color: var(--text-light); /* antes #fff */
   display: flex;
   flex-direction: column;
-  
-  
 }
 
 body {
-  background-color: var(--color-bg);
-  color: var(--color-text-primary);
- 
-    
+  background-color: var(--color-bg); /* esta variable NO está en App.css */
+  color: var(--color-text-primary);  /* esta variable NO está en App.css */
 }
 
-.navbar, .sidebar {
-  background-color: var(--color-primary);
-  color: var(--color-text-light);
+.navbar,
+.sidebar {
+  background-color: var(--color-primary); /* NO está en App.css */
+  color: var(--color-text-light);         /* NO está en App.css */
 }
 
 a:hover {
-  color: var(--color-secondary);
+  color: var(--color-secondary); /* NO está en App.css */
 }
 
 button {
-  background-color: var(--color-accent);
-  color: var(--color-text-light);
+  background-color: var(--color-accent);     /* NO está en App.css */
+  color: var(--color-text-light);            /* NO está en App.css */
 }

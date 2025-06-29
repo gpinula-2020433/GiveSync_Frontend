@@ -1,9 +1,5 @@
-App.css
-
-/* app.css */
-
-/* Variables para el modo oscuro */
 :root {
+  /* Variables para el modo oscuro (por defecto) */
   --bg-dark: #0f1217;
   --bg-gradient-start: #1c1f33;
   --bg-gradient-mid: #141621;
@@ -15,10 +11,18 @@ App.css
   --glass-bg: rgba(255, 255, 255, 0.03);
   --input-bg: #1a1c2b;
   --input-border: #2c2f48;
+
+  /* Variables generales para fondo y texto */
+  --color-bg: var(--bg-dark);
+  --color-text-primary: var(--text-light);
+  --color-primary: #264653;
+  --color-secondary: #E76F51;
+  --color-accent: #F4A261;
+  --color-text-light: #FFFFFF;
 }
 
-/* ☀️ Modo Claro */
 [data-theme='light'] {
+  /* Variables para modo claro */
   --bg-dark: #fdfdfd;
   --bg-gradient-start: #edf1fa;
   --bg-gradient-mid: #dee5f2;
@@ -27,11 +31,18 @@ App.css
   --text-light: #1c1e21;
   --text-muted: #5a5f6f;
 
-  --accent: #4682e6;            /* Azul fuerte */
-  --accent-light: #78c6ff;      /* Celeste suave */
+  --accent: #4682e6;
+  --accent-light: #78c6ff;
   --hover-bg: rgba(70, 130, 230, 0.1);
 
   --glass-bg: rgba(0, 0, 0, 0.04);
   --input-bg: #f6f8fc;
   --input-border: #c7d1e0;
+
+  --color-bg: var(--bg-dark);
+  --color-text-primary: var(--text-light);
+  --color-primary: #264653;
+  --color-secondary: #E76F51;
+  --color-accent: #F4A261;
+  --color-text-light: #1c1e21;
 }
