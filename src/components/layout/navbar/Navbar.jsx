@@ -16,10 +16,10 @@ export function Navbar() {
     const currentTheme = localStorage.getItem('theme');
     if (currentTheme) {
       setIsDarkMode(currentTheme === 'dark');
-      document.body.setAttribute('data-theme', currentTheme);
+      document.documentElement.setAttribute('data-theme', currentTheme)
     } else {
       // Si no hay tema guardado, usamos el valor predeterminado
-      document.body.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
     }
   }, [isDarkMode]);
 
@@ -27,7 +27,7 @@ export function Navbar() {
   const toggleTheme = () => {
     const newTheme = isDarkMode ? 'light' : 'dark';
     setIsDarkMode(!isDarkMode);
-    document.body.setAttribute('data-theme', newTheme);
+    document.documentElement.setAttribute('data-theme', newTheme)
     localStorage.setItem('theme', newTheme);
   };
 
