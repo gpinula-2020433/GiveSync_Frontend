@@ -4,7 +4,7 @@
   left: 0;
   height: 100vh;
   width: 290px;
-  background-color: #264653; /* color fijo */
+  background-color: #264653 !important; /* color fijo */
   transition: width 0.3s ease, padding 0.3s ease;
   overflow-x: hidden;
   z-index: 1;
@@ -22,7 +22,7 @@
   top: 15px;
   left: 230px;
   z-index: 1002;
-  background-color: #264653; /* color fijo */
+  background-color: #264653 !important; /* color fijo */
   border: none;
   color: white; /* color fijo */
   padding: 6px 12px;
@@ -51,7 +51,7 @@
 
 .hover-sidebar:hover {
   background-color: rgba(255, 255, 255, 0.2); /* efecto claro fijo */
-  color: #A3D9B1;
+  color: #A3D9B1 !important;
   transform: translateX(8px);
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
   text-decoration: none;
