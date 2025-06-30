@@ -58,7 +58,7 @@ export const RegisteredUsers = () => {
                 />
                 <div className="user-info">
                   <p><strong>Nombre:</strong> {user.name} {user.surname}</p>
-                  <p><strong>Username:</strong> @{user.username}</p>
+                  <p><strong>Username:</strong> {user.username}</p>
                   <p><strong>Email:</strong> {user.email}</p>
                   <p><strong>Rol:</strong> {user.role}</p>
                   <p><strong>¿Tiene institución?</strong> {user.hasInstitution ? 'Sí posee una institución' : 'No posee una institución'}</p>
