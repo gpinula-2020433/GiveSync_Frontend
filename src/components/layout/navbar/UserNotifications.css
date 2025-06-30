@@ -1,0 +1,35 @@
+.notifications-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.notification-list {
+  list-style: none;
+  padding: 0;
+}
+
+.notification-item {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: #fefefe;
+  transition: background-color 0.2s ease;
+}
+
+.notification-item.unread {
+  background-color: #e6f7ff;
+}
+
+.message {
+  font-weight: bold;
+}
+
+.meta {
+  font-size: 0.85rem;
+  color: #555;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+}

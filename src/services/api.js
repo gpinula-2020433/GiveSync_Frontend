@@ -371,3 +371,18 @@ export const getAllUsersRequest = async ({ limit = 10, skip = 0 } = {}) => {
     return { error: true, message: 'Error al obtener usuarios' };
   }
 };
+
+
+// services/api.js
+export const getMyNotificationsRequest = async () => {
+  try {
+    const res = await apiClient.get('/v1/notification/my')
+    return res.data
+  } catch (err) {
+    return {
+      error: true,
+      message: err.response?.data?.message || 'Error al obtener notificaciones',
+      errors: err.response?.data?.errors || null
+    }
+  }
+}

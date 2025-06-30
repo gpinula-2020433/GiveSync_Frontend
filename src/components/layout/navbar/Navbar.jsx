@@ -90,6 +90,12 @@ export function Navbar() {
                   <i className="fas fa-tools"></i> Administración
                 </Link>
               )}
+              <div>
+                <button className="dropdown-item" onClick={() => navigate('/main/myNotifications')}>
+                      <i className="fas fa-bell me-2"></i>
+                      <span>Notificaciones</span>
+                </button>
+              </div>
               <div className="profile-container position-relative">
                 <img
                   src={imageUrl}

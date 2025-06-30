@@ -28,6 +28,8 @@ import InstitutionDetail from './pages/MainPage/DetailsInstitutionPage/Instituti
 import {CommentsPage}  from './pages/CommentsPage/CommentsPage'
 import ConfigurationPublication from './pages/SectionInstitutionPage/configurationPublication/ConfigurationPublication'
 import { ProtectedRoute } from './shared/utils/ProtectedRoute'
+import { UserNotifications } from './components/layout/navbar/UserNotifications'
+
 
 export const routes = [
   {
@@ -51,7 +53,8 @@ export const routes = [
     { path: 'home', element: <HomePage /> },
     { path: 'institution/:id', element: <InstitutionDetail /> },
     { path: 'institution/:id/donate', element: <AddDonationPage /> },
-    { path: 'publication/:publicationId', element: <CommentsPage /> }
+    { path: 'publication/:publicationId', element: <CommentsPage /> },
+    { path: 'myNotifications', element: <UserNotifications /> },
   ]
 },
   {
