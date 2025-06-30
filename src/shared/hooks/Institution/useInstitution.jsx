@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { getAcceptedInstitutions, getInstitutionById } from '../../../services/api'
+import { useSocket } from '../useSocket'
 
 export function useInstitutions() {
   const [institutions, setInstitutions] = useState([])
@@ -47,6 +48,38 @@ export function useInstitutions() {
       })
       .finally(() => setLoading(false))
   }
+
+  // Escuchar actualizaciones de instituciones en tiempo real
+  useSocket('updateInstitution', (updatedInstitution) => {
+    setInstitutions(prev => {
+      const exists = prev.some(inst => inst._id === updatedInstitution._id)
+
+      // Si ya existe, actualiza; si no, lo agrega solo si está ACCEPTED
+      if (exists) {
+        return prev.map(inst =>
+          inst._id === updatedInstitution._id ? updatedInstitution : inst
+        )
+      } else if (updatedInstitution.state === 'ACCEPTED') {
+        return [updatedInstitution, ...prev]
+      } else {
+        return prev
+      }
+    })
+
+    // Actualizar el detalle si corresponde
+    setInstitution(prev => {
+      if (prev?._id === updatedInstitution._id) {
+        return updatedInstitution
+      }
+      return prev
+    })
+  })
+
+    // Escuchar eliminación de institución en tiempo real
+  useSocket('deleteInstitution', ({ _id }) => {
+    setInstitutions(prev => prev.filter(inst => inst._id !== _id))
+    setInstitution(prev => (prev?._id === _id ? null : prev))
+  })
 
   return {
     institutions,
