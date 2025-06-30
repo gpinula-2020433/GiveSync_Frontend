@@ -252,10 +252,10 @@ const InstitutionDetail = () => {
       <div>
         <h2>Publicaciones recientes</h2>
         {loadingPublications ? (
-        <p>Cargando publicaciones...</p>
+          <p>Cargando publicaciones...</p>
         ) : errorPublications ? (
-          <p>{errorPublications}</p>
-        ) : publications.length === 0 ? (
+          <p style={{ color: 'red' }}>{errorPublications}</p>
+        ) : publications && publications.length === 0 ? (
           <p>No hay publicaciones de esta institución.</p>
         ) : (
         <ul>

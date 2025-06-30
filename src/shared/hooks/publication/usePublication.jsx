@@ -11,9 +11,10 @@ export const usePublicationsByInstitution = (institutionId) => {
     setLoading(true)
     try {
       const response = await getPublicationsByInstitutionRequest(institutionId)
-      setPublications(response.data.publications || [])
-      setError(null)
+      setPublications(response.data?.publications || [])
+      setError(null) // limpiar errores si todo va bien
     } catch (err) {
+      setPublications([]) // asegurar array vacío para evitar errores en render
       setError('Error al obtener publicaciones')
     } finally {
       setLoading(false)
@@ -24,23 +25,29 @@ export const usePublicationsByInstitution = (institutionId) => {
     if (institutionId) fetchPublications()
   }, [institutionId, fetchPublications])
 
+  // Nuevas publicaciones por socket
   useSocket('newPublication', (newPub) => {
     if (newPub.institutionId === institutionId) {
       setPublications(prev => [newPub.publication, ...prev])
+      setError(null) // limpiar error si lo había
     }
   })
 
+  // Actualizaciones
   useSocket('updatePublication', (updatedPub) => {
     if (updatedPub.institutionId === institutionId) {
       setPublications(prev =>
         prev.map(pub => (pub._id === updatedPub.publication._id ? updatedPub.publication : pub))
       )
+      setError(null)
     }
   })
 
+  // Eliminaciones
   useSocket('deletePublication', (data) => {
     if (data.institutionId === institutionId) {
       setPublications(prev => prev.filter(pub => pub._id !== data.publicationId))
+      setError(null)
     }
   })
 
