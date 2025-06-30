@@ -1,6 +1,5 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import './AdminPage.css'
 import Navbar from '../../components/Layout/navbar/Navbar'
 import SidebarAdmin from '../../components/Layout/Sidevar/SidebarAdmin'
 import Footer from '../../components/Layout/FooterAdmin/Footer'

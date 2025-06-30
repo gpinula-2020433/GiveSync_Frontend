@@ -1,6 +1,5 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import './SectionInstitutionPage.css'
 import Navbar from '../../components/Layout/navbar/Navbar'
 import SidebarSectionInstitution from '../../components/Layout/Sidevar/SidebarSectionInstitution'
 import Footer from '../../components/Layout/FooterAdmin/Footer'
