@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAuthenticatedUser } from '../../../shared/hooks/User/useUser'
+import { useUser } from '../../../shared/hooks/User/useUser'
 import DefaultUserImage from '../../../assets/DefaultUserImage.jpg'
 import './UserInformation.css'
 import toast from 'react-hot-toast'
@@ -17,7 +17,7 @@ export const UserInformation = () => {
     deleteUserImage,
     updateUser,
     deleteUserAccount
-  } = useAuthenticatedUser()
+  } = useUser()
 const [showConfirmDeleteModal, setShowConfirmDeleteModal] = useState(false)
 
   const [showUpdateModal, setShowUpdateModal] = useState(false)

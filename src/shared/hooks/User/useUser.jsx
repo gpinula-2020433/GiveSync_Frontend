@@ -9,7 +9,7 @@ import {
 } from '../../../services/api'
 import toast from 'react-hot-toast'
 
-export const useAuthenticatedUser = () => {
+export const useUser = () => {
   const [user, setUser] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
 

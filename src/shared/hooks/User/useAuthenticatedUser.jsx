@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { getAuthenticatedUserRequest } from '../../../services/api'
 import { decodeToken } from '../../utils/decodeToken'
+import { useSocket } from '../useSocket'
 
 function isTokenValid(token) {
   const decoded = decodeToken(token)
@@ -15,20 +16,21 @@ export const useAuthenticatedUser = () => {
   const [userId, setUserId] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
 
+  const token = localStorage.getItem('token')
+  const decoded = token ? decodeToken(token) : null
+  const uid = decoded?.uid
+
   useEffect(() => {
     const fetchUser = async () => {
-      const token = localStorage.getItem('token')
-
       if (!token || !isTokenValid(token)) {
         localStorage.removeItem('token')
         setIsLoading(false)
         return
       }
 
-      const decoded = decodeToken(token)
-      if (decoded?.uid) {
-        setUserId(decoded.uid)
-        console.log('ID del usuario logueado:', decoded.uid)
+      if (uid) {
+        setUserId(uid)
+        console.log('ID del usuario logueado:', uid)
       } else {
         console.warn('No se pudo obtener el ID del token')
       }
@@ -53,7 +55,28 @@ export const useAuthenticatedUser = () => {
     }
 
     fetchUser()
-  }, [])
+  }, [token, uid])
+
+  // 🔌 Escuchar cambios en la imagen de perfil
+  useSocket('updateUserImage', (updatedUser) => {
+    if (updatedUser?._id === uid) {
+      setUser(prev => ({
+        ...prev,
+        imageUser: updatedUser.imageUser
+      }))
+    }
+  })
+
+  // 🔌 Escuchar cambios en la relación con institución
+  useSocket('updateUserHasInstitution', (updatedUser) => {
+    if (updatedUser?._id === uid) {
+      setUser(prev => ({
+        ...prev,
+        hasInstitution: updatedUser.hasInstitution,
+        institutionId: updatedUser.institutionId
+      }))
+    }
+  })
 
   return {
     user,
