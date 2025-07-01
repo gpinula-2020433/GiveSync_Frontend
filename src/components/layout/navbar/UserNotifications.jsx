@@ -1,6 +1,6 @@
 import React from 'react'
 import './UserNotifications.css'
-import { useUserNotifications } from '../../../shared/hooks/Notification/useUserNotifications'
+import { useNotificationContext } from '../../../shared/hooks/context/NotificationContext'
 
 export const UserNotifications = () => {
   const {
@@ -8,7 +8,7 @@ export const UserNotifications = () => {
     isLoading,
     markAsRead,
     deleteNotification
-  } = useUserNotifications()
+  } = useNotificationContext()
 
   return (
     <div className="notifications-container">

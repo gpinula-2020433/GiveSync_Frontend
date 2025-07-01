@@ -3,7 +3,7 @@ import './Navbar.css'
 import { useEffect, useState } from 'react'
 import DefaultUserImage from '../../../assets/DefaultUserImage.jpg'
 import { useAuthenticatedUser } from '../../../shared/hooks/User/useAuthenticatedUser'
-import { useUserNotifications } from '../../../shared/hooks/Notification/useUserNotifications'
+import { useNotificationContext } from '../../../shared/hooks/context/NotificationContext'
 
 export function Navbar() {
   const navigate = useNavigate()
@@ -11,7 +11,7 @@ export function Navbar() {
   const [showDropdown, setShowDropdown] = useState(false)
   const { user, isLoading } = useAuthenticatedUser()
   const [isDarkMode, setIsDarkMode] = useState(true); // Estado para el modo oscuro/claro
-  const { unreadCount } = useUserNotifications()
+  const { unreadCount } = useNotificationContext()
 
   
   // Verifica el tema almacenado y establece el tema inicial
