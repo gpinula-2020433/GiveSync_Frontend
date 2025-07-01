@@ -12,17 +12,25 @@ function isTokenValid(token) {
 
 export const useAuthenticatedUser = () => {
   const [user, setUser] = useState(null)
+  const [userId, setUserId] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     const fetchUser = async () => {
       const token = localStorage.getItem('token')
 
-      // Verificamos si el token es válido
       if (!token || !isTokenValid(token)) {
         localStorage.removeItem('token')
         setIsLoading(false)
         return
+      }
+
+      const decoded = decodeToken(token)
+      if (decoded?.uid) {
+        setUserId(decoded.uid)
+        console.log('ID del usuario logueado:', decoded.uid)
+      } else {
+        console.warn('No se pudo obtener el ID del token')
       }
 
       try {
@@ -49,6 +57,7 @@ export const useAuthenticatedUser = () => {
 
   return {
     user,
+    userId,
     isLoading
   }
 }

@@ -26,6 +26,13 @@ export const useUsers = () => {
     )
   })
 
+   // NUEVO: actualizar usuario con institución
+  useSocket('updateUserHasInstitution', (data) => {
+    setUsers((prev) =>
+      prev.map((u) => (u._id === data._id ? data : u))
+    )
+  })
+
   // socket: escuchar cuando un usuario se elimina
   useSocket('deleteUser', (userId) => {
     setUsers((prev) => prev.filter((u) => u._id !== userId))
