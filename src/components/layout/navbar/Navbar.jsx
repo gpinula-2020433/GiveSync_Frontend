@@ -3,6 +3,7 @@ import './Navbar.css'
 import { useEffect, useState } from 'react'
 import DefaultUserImage from '../../../assets/DefaultUserImage.jpg'
 import { useAuthenticatedUser } from '../../../shared/hooks/User/useAuthenticatedUser'
+import { useUserNotifications } from '../../../shared/hooks/Notification/useUserNotifications'
 
 export function Navbar() {
   const navigate = useNavigate()
@@ -10,7 +11,9 @@ export function Navbar() {
   const [showDropdown, setShowDropdown] = useState(false)
   const { user, isLoading } = useAuthenticatedUser()
   const [isDarkMode, setIsDarkMode] = useState(true); // Estado para el modo oscuro/claro
+  const { unreadCount } = useUserNotifications()
 
+  
   // Verifica el tema almacenado y establece el tema inicial
   useEffect(() => {
     const currentTheme = localStorage.getItem('theme');
@@ -90,12 +93,15 @@ export function Navbar() {
                   <i className="fas fa-tools"></i> Administración
                 </Link>
               )}
-              <div>
-                <button className="dropdown-item" onClick={() => navigate('/main/myNotifications')}>
-                      <i className="fas fa-bell me-2"></i>
-                      <span>Notificaciones</span>
-                </button>
-              </div>
+              <div className="position-relative">
+            <button className="dropdown-item" onClick={() => navigate('/main/myNotifications')}>
+              <i className="fas fa-bell me-2"></i>
+              <span>Notificaciones</span>
+              {unreadCount > 0 && (
+                <span className="notification-badge">{unreadCount}</span>
+              )}
+            </button>
+          </div>
               <div className="profile-container position-relative">
                 <img
                   src={imageUrl}

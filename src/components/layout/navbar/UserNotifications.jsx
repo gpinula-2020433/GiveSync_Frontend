@@ -3,7 +3,12 @@ import './UserNotifications.css'
 import { useUserNotifications } from '../../../shared/hooks/Notification/useUserNotifications'
 
 export const UserNotifications = () => {
-  const { notifications, isLoading } = useUserNotifications()
+  const {
+    notifications,
+    isLoading,
+    markAsRead,
+    deleteNotification
+  } = useUserNotifications()
 
   return (
     <div className="notifications-container">
@@ -15,7 +20,7 @@ export const UserNotifications = () => {
       ) : (
         <ul className="notification-list">
           {notifications.map((notif) => (
-            <li key={notif._id} className={`notification-item ${notif.read ? 'read' : 'unread'}`}>
+            <li key={notif._id} className={`notification-item ${notif.isRead ? 'read' : 'unread'}`}>
               <p className="message">{notif.message}</p>
               <div className="meta">
                 <span className="from-user">
@@ -26,6 +31,12 @@ export const UserNotifications = () => {
                 <span className="timestamp">
                   {new Date(notif.createdAt).toLocaleString()}
                 </span>
+              </div>
+              <div className="actions">
+                {!notif.isRead && (
+                  <button onClick={() => markAsRead(notif._id)}>Marcar como leída</button>
+                )}
+                <button onClick={() => deleteNotification(notif._id)}>Eliminar</button>
               </div>
             </li>
           ))}

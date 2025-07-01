@@ -386,3 +386,27 @@ export const getMyNotificationsRequest = async () => {
     }
   }
 }
+
+export const markNotificationAsReadRequest = async (id) => {
+  try {
+    const res = await apiClient.put(`/v1/notification/markAsRead/${id}`)
+    return res.data
+  } catch (err) {
+    return {
+      error: true,
+      message: err.response?.data?.message || 'Error al marcar como leída'
+    }
+  }
+}
+
+export const deleteNotificationRequest = async (id) => {
+  try {
+    const res = await apiClient.delete(`/v1/notification/delete/${id}`)
+    return res.data
+  } catch (err) {
+    return {
+      error: true,
+      message: err.response?.data?.message || 'Error al eliminar notificación'
+    }
+  }
+}
