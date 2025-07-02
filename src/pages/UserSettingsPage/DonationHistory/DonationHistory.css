@@ -1,23 +1,40 @@
-.donation-history-container {
-  max-width: 700px;
-  margin: 2rem auto;
-  background-color: #1e1e2f;
-  padding: 20px 30px;
-  border-radius: 12px;
-  color: #d0d0e0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7);
-  animation: fadeIn 1s ease forwards;
+:root {
+  --donation-bg: #f3f4f6;
+  --donation-text: #111927;
+  --donation-card-bg: #ffffff;
+  --donation-border: #e5e7eb;
+  --donation-shadow: rgba(0, 0, 0, 0.1);
+  --donation-accent: #2563eb;
+  --donation-muted: #6b7280;
 }
 
-.donation-history-container h2 {
+[data-theme='dark'] {
+  --donation-bg: #1f1f2e;
+  --donation-text: #f1f1f1;
+  --donation-card-bg: #2a2a3b;
+  --donation-border: #3f3f52;
+  --donation-shadow: rgba(0, 0, 0, 0.6);
+  --donation-accent: #7aaaff;
+  --donation-muted: #a0a0c0;
+}
+
+.donation-history-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: var(--donation-card-bg);
+  border-radius: 1rem;
+  box-shadow: 0 6px 20px var(--donation-shadow);
+  color: var(--donation-text);
+  animation: fadeIn 0.8s ease-in;
+  box-sizing: border-box;
+}
+
+.donation-history-title {
   text-align: center;
-  margin-bottom: 1.5rem;
-  font-weight: 700;
-  color: #4a90e2;
-  letter-spacing: 1px;
-  text-shadow: 0 0 8px #4a90e2;
-  user-select: none;
+  font-size: 2rem;
+  color: var(--donation-accent);
+  margin-bottom: 2rem;
 }
 
 .donation-history-list {
@@ -26,152 +43,64 @@
   margin: 0;
 }
 
-.donation-history-list li {
-  background-color: #2a2a3d;
-  border-radius: 10px;
-  padding: 18px 25px;
-  margin-bottom: 1rem;
-  box-shadow: 0 2px 8px rgba(74, 144, 226, 0.4);
-  position: relative;
+.donation-history-item {
+  border: 1px solid var(--donation-border);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  background-color: var(--donation-bg);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: default;
-  user-select: none;
 }
 
-.donation-history-list li:hover {
+.donation-history-item:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(74, 144, 226, 0.7);
+  box-shadow: 0 8px 24px var(--donation-shadow);
 }
 
-.donation-history-list li p {
-  margin: 6px 0;
-  font-size: 1rem;
-  color: #d0d0e0;
+.donation-history-item p {
+  margin: 0.6rem 0;
   display: flex;
   align-items: center;
+  font-size: 1rem;
 }
 
-.donation-history-list li p strong {
-  margin-right: 8px;
-  position: relative;
-  padding-left: 26px;
-  font-weight: 600;
-  color: #7aaaff;
-  user-select: text;
+.donation-icon {
+  margin-right: 0.6rem;
+  color: var(--donation-accent);
+  min-width: 20px;
 }
 
-.donation-history-list li p:nth-child(1) strong::before {
-  content: '🆔';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 18px;
-}
-
-.donation-history-list li p:nth-child(2) strong::before {
-  content: '💰';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 18px;
-}
-
-.donation-history-list li p:nth-child(3) strong::before {
-  content: '📅';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 18px;
-}
-
-.donation-history-list li p:nth-child(4) strong::before {
-  content: '🏢';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 18px;
-}
-
-.donation-history-list hr {
-  border: none;
-  border-top: 1px solid #3d4a6d;
-  margin-top: 10px;
-  opacity: 0.3;
-}
-
-.no-donations-message,
-.error-message {
-  max-width: 700px;
-  margin: 3rem auto;
-  background: linear-gradient(145deg, #2a2a3d, #1e1e2f);
-  padding: 2.5rem 3rem;
-  border-radius: 1.2rem;
-  color: #7aaaff;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 1.3rem;
-  font-weight: 600;
+.donation-history-loading,
+.donation-history-error,
+.donation-history-empty {
   text-align: center;
-  box-shadow: 0 12px 30px rgba(122, 170, 255, 0.45);
-  user-select: none;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  text-shadow:
-    0 0 12px #4a90e2cc,
-    0 0 30px #4a90e2bb;
-  animation: glowPulse 2.5s ease-in-out infinite alternate;
-  position: relative;
-  overflow: hidden;
-}
-
-.no-donations-message::before,
-.error-message::before {
-  content: '💔';
-  position: absolute;
-  font-size: 4rem;
-  top: 50%;
-  left: 50%;
-  color: #4a90e2aa;
-  transform: translate(-50%, -50%);
-  opacity: 0.15;
-  pointer-events: none;
-  user-select: none;
-}
-
-@keyframes glowPulse {
-  0% {
-    box-shadow:
-      0 0 10px #4a90e2aa,
-      0 0 20px #4a90e2bb,
-      0 0 30px #4a90e2cc;
-    color: #7aaaff;
-  }
-  100% {
-    box-shadow:
-      0 0 20px #7aaaffcc,
-      0 0 40px #7aaaffdd,
-      0 0 50px #7aaaffee;
-    color: #a8c7ff;
-  }
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--donation-muted);
+  margin-top: 3rem;
+  padding: 1rem;
 }
 
 @keyframes fadeIn {
-  0% { opacity: 0; transform: translateY(20px);}
-  100% { opacity: 1; transform: translateY(0);}
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-@media (max-width: 650px) {
+@media (max-width: 600px) {
   .donation-history-container {
-    margin: 1rem 1rem;
-    padding: 15px 20px;
+    margin: 1rem;
+    padding: 1.2rem;
   }
-  .donation-history-list li {
-    padding: 14px 18px;
+
+  .donation-history-title {
+    font-size: 1.6rem;
   }
-  .donation-history-list li p {
-    font-size: 0.9rem;
+
+  .donation-history-item {
+    padding: 1.2rem;
+  }
+
+  .donation-history-item p {
+    font-size: 0.95rem;
   }
 }

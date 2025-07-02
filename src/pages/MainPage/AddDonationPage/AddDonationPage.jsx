@@ -15,6 +15,7 @@ const AddDonationPage = () => {
   const [expiry, setExpiry] = useState('')
   const [cvv, setCvv] = useState('')
   const [errors, setErrors] = useState({})
+  const [modal, setModal] = useState({ visible: false, message: '', isError: false })
 
   useEffect(() => {
     const fetchInstitution = async () => {
@@ -41,10 +42,7 @@ const AddDonationPage = () => {
   }
 
   const luhnCheck = (num) => {
-    let arr = (num + '')
-      .split('')
-      .reverse()
-      .map(x => parseInt(x))
+    let arr = (num + '').split('').reverse().map(x => parseInt(x))
     let sum = 0
     for (let i = 0; i < arr.length; i++) {
       let val = arr[i]
@@ -63,8 +61,8 @@ const AddDonationPage = () => {
     const month = parseInt(monthStr, 10)
     const year = parseInt('20' + yearStr, 10)
     const today = new Date()
-    const expiryDate = new Date(year, month)
-    if (expiryDate <= today) return 'La tarjeta está vencida'
+    const expiryDate = new Date(year, month, 0, 23, 59, 59)
+    if (expiryDate < today) return 'La tarjeta está vencida'
     return null
   }
 
@@ -91,11 +89,15 @@ const AddDonationPage = () => {
         { amount: Number(amount), maintenanceAmount, institutionAmount, institution: id },
         { headers: { Authorization: token } }
       )
-      alert('Donación realizada con éxito')
-      navigate(`/main/institution/${id}`)
+      setModal({ visible: true, message: 'Donación realizada con éxito', isError: false })
     } catch {
-      alert('Error al registrar la donación')
+      setModal({ visible: true, message: 'Error al registrar la donación', isError: true })
     }
+  }
+
+  const closeModal = () => {
+    setModal({ visible: false, message: '', isError: false })
+    if (!modal.isError) navigate(`/main/institution/${id}`)
   }
 
   if (loading) return <p className="loading">Cargando institución...</p>
@@ -153,7 +155,7 @@ const AddDonationPage = () => {
         </div>
         <div className="inline-group">
           <div className="input-group half-width">
-            <label htmlFor="expiry">Fecha de expiración (MM/AA)</label>
+            <label htmlFor="expiry">Fecha de expiración</label>
             <input
               id="expiry"
               type="text"
@@ -167,7 +169,7 @@ const AddDonationPage = () => {
             />
             {errors.expiry && <p className="error-message">{errors.expiry}</p>}
           </div>
-          <div className="input-group half-width">
+          <div className="input-group half-width cvv-group">
             <label htmlFor="cvv">CVV</label>
             <input
               id="cvv"
@@ -186,6 +188,18 @@ const AddDonationPage = () => {
         </div>
         <button type="submit" className="btn-donate" aria-label="Confirmar donación">Donar</button>
       </form>
+
+      {modal.visible && (
+        <div
+          className={`modal-content ${modal.isError ? 'modal-error' : 'modal-success'}`}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-title"
+        >
+          <h3 id="modal-title">{modal.message}</h3>
+          <button onClick={closeModal} className="modal-close-btn" aria-label="Cerrar modal">Cerrar</button>
+        </div>
+      )}
     </div>
   )
 }

@@ -1,154 +1,112 @@
-.donations-container {
+:root {
+  --institution-bg: #f3f4f6;
+  --institution-text: #111827;
+  --institution-card-bg: #ffffff;
+  --institution-border: #e5e7eb;
+  --institution-shadow: rgba(0, 0, 0, 0.1);
+  --institution-accent: #2563eb;
+  --institution-muted: #6b7280;
+}
+
+[data-theme='dark'] {
+  --institution-bg: #1f1f2f;
+  --institution-text: #f3f3f3;
+  --institution-card-bg: #2a2a3a;
+  --institution-border: #3f3f56;
+  --institution-shadow: rgba(0, 0, 0, 0.6);
+  --institution-accent: #7aaaff;
+  --institution-muted: #a0a0c0;
+}
+
+.institution-donations-container {
+  max-width: 820px;
+  margin: 2rem auto;
   padding: 2rem;
-  background-color: #1e1e2f;
-  color: #d0d0e0;
-  font-family: 'Segoe UI', sans-serif;
+  background: var(--institution-card-bg);
+  border-radius: 1rem;
+  box-shadow: 0 6px 20px var(--institution-shadow);
+  color: var(--institution-text);
   animation: fadeIn 0.8s ease-in;
-  min-height: 100vh;
+  box-sizing: border-box;
 }
- 
-.donations-container .title {
+
+.institution-title {
   text-align: center;
-  font-size: 2.3rem;
-  color: #7aaaff;
+  font-size: 2rem;
+  color: var(--institution-accent);
   margin-bottom: 2rem;
-  font-weight: 600;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
- 
-.donation-list {
+
+.institution-donation-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
- 
-.donation-card {
-  background-color: #2b2b3c;
-  border: 1px solid #3d4a6d;
+
+.institution-donation-card {
+  border: 1px solid var(--institution-border);
+  border-radius: 0.75rem;
   padding: 1.5rem;
-  border-radius: 0.8rem;
   margin-bottom: 1.5rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  background-color: var(--institution-bg);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  animation: slideUp 0.6s ease forwards;
-  opacity: 0;
 }
- 
-.donation-card:hover {
+
+.institution-donation-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 0 16px rgba(122, 170, 255, 0.3);
+  box-shadow: 0 8px 24px var(--institution-shadow);
 }
- 
-.donation-card p {
-  margin: 0.4rem 0;
-  line-height: 1.6;
-  color: #e0e0f0;
-  font-size: 0.95rem;
+
+.institution-donation-card p {
+  margin: 0.6rem 0;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
 }
- 
-.donation-card strong {
-  color: #7aaaff;
-  font-weight: 600;
+
+.icon {
+  margin-right: 0.6rem;
+  color: var(--institution-accent);
+  min-width: 20px;
+  animation: popIn 0.4s ease;
 }
- 
-hr {
-  margin: 1rem 0;
-  border: none;
-  height: 1px;
-  background: linear-gradient(to right, #3d4a6d, #4a90e2, #3d4a6d);
-  opacity: 0.3;
-}
- 
-.icon-amount::before {
-  content: '💰 ';
-  color: #4a90e2;
-}
- 
-.icon-date::before {
-  content: '📅 ';
-  color: #4a90e2;
-}
- 
-.icon-user::before {
-  content: '👤 ';
-  color: #4a90e2;
-}
- 
-.icon-institution-amount::before {
-  content: '🏢 ';
-  color: #4a90e2;
-}
- 
-.loading-message,
-.error-message,
-.empty-message {
-  max-width: 600px;
-  margin: 1.5rem auto;
-  padding: 0;
-  background: none !important;
-  box-shadow: none !important;
-  border-radius: 0 !important;
-  color: #ff6e6e;
-  font-family: 'Segoe UI', sans-serif;
-  font-size: 0.95rem;
-  font-weight: 500;
+
+.institution-loading,
+.institution-error,
+.institution-empty {
   text-align: center;
-  text-shadow: none !important;
-  user-select: none;
-  animation: fadeIn 0.6s ease-in;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--institution-muted);
+  margin-top: 3rem;
+  padding: 1rem;
 }
- 
-.loading-message {
-  color: #7aaaff;
-}
- 
-.empty-message {
-  color: #cccccc;
-}
- 
-.loading-message::before,
-.error-message::before,
-.empty-message::before {
-  content: none !important;
-  display: none !important;
-}
- 
-@keyframes slideUp {
-  0% {
-    transform: translateY(30px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
- 
+
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
- 
-@media (max-width: 768px) {
-  .donations-container {
-    padding: 1rem;
+
+@keyframes popIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@media (max-width: 600px) {
+  .institution-donations-container {
+    margin: 1rem;
+    padding: 1.2rem;
   }
- 
-  .donations-container .title {
-    font-size: 1.8rem;
+
+  .institution-title {
+    font-size: 1.6rem;
   }
- 
-  .donation-card {
-    padding: 1rem;
+
+  .institution-donation-card {
+    padding: 1.2rem;
   }
- 
-  .loading-message,
-  .error-message,
-  .empty-message {
-    font-size: 0.9rem;
+
+  .institution-donation-card p {
+    font-size: 0.95rem;
   }
 }

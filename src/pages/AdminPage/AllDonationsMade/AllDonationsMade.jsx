@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { User, Calendar, DollarSign, Building, Tag } from 'lucide-react'
 import axios from 'axios'
 import './AllDonationsMade.css'
 
@@ -14,49 +15,57 @@ export const AllDonationsMade = () => {
         const res = await axios.get('http://localhost:3200/v1/donation/', {
           headers: { Authorization: token }
         })
-
         if (res.data.success) {
           setDonations(res.data.donations)
+          setError(null)
         } else {
           setError('No se pudo obtener las donaciones')
         }
-      } catch (err) {
+      } catch {
         setError('Error al cargar las donaciones')
       }
       setLoading(false)
     }
-
     fetchDonations()
   }, [])
 
-  if (loading) return <p className="loading-message">Cargando donaciones...</p>
-  if (error) return <p className="error-message">{error}</p>
-  if (!donations.length) return <p className="empty-message">No hay donaciones registradas.</p>
+  if (loading) return <p className="all-loading-message">Cargando donaciones...</p>
+  if (error) return <p className="all-error-message">{error}</p>
+  if (!donations.length) return <p className="all-empty-message">No hay donaciones registradas.</p>
 
   return (
-    <div className="donations-container">
+    <div className="all-donations-container">
       <h2>Donaciones Realizadas</h2>
-      <ul className="donations-list">
+      <ul className="all-donations-list">
         {donations.map((donation) => {
           const fecha = donation.createdAt
             ? new Date(donation.createdAt).toLocaleDateString()
             : 'Fecha no disponible'
-
           return (
-            <li key={donation._id} className="donation-item">
-              <p className="icon-id"><strong>ID Donación:</strong> {donation._id}</p>
-              <p className="icon-money"><strong>Monto:</strong> Q{donation.amount}</p>
-              <p className="icon-calendar"><strong>Fecha:</strong> {fecha}</p>
-              <p className="icon-institution"><strong>Institución:</strong> {donation.institutionData?.name || 'No disponible'}</p>
-              <p className="icon-institution-type">
-                <strong>Tipo de Institución:</strong> {donation.institutionData?.type || 'No disponible'}
+            <li key={donation._id} className="all-donation-item">
+              <p className="all-donation-line">
+                <Tag className="all-icon" size={18} /> <strong>ID Donación:</strong> {donation._id}
+              </p>
+              <p className="all-donation-line">
+                <DollarSign className="all-icon" size={18} /> <strong>Monto:</strong> Q{donation.amount}
+              </p>
+              <p className="all-donation-line">
+                <Calendar className="all-icon" size={18} /> <strong>Fecha:</strong> {fecha}
+              </p>
+              <p className="all-donation-line">
+                <Building className="all-icon" size={18} /> <strong>Institución:</strong> {donation.institutionData?.name || 'No disponible'}
+              </p>
+              <p className="all-donation-line">
+                <Tag className="all-icon" size={18} /> <strong>Tipo de Institución:</strong> {donation.institutionData?.type || 'No disponible'}
               </p>
 
-              <div className="user-details">
+              <div className="all-user-details">
                 <strong>Usuario:</strong>{' '}
                 {donation.userData ? (
                   <>
-                    <p className="icon-user">Nombre: {donation.userData.name} {donation.userData.surname}</p>
+                    <p className="all-donation-line">
+                      <User className="all-icon" size={18} /> Nombre: {donation.userData.name} {donation.userData.surname}
+                    </p>
                     <p>Usuario: {donation.userData.username}</p>
                     {donation.userData.email && <p>Email: {donation.userData.email}</p>}
                     {donation.userData.role && <p>Rol: {donation.userData.role}</p>}
@@ -72,7 +81,7 @@ export const AllDonationsMade = () => {
                 )}
               </div>
 
-              <hr />
+              <hr className="all-donation-separator" />
             </li>
           )
         })}
