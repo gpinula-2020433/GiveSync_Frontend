@@ -3,9 +3,11 @@ import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import { createInstitutionRequest, getMyInstitutionsRequest } from '../../../services/api'
 import './RequestToRegisterAnInstitution.css'
+import { validatePhone } from '../../../shared/validators/validator'
 
 export const RequestToRegisterAnInstitution = () => {
   const navigate = useNavigate()
+  const [phoneError, setPhoneError] = useState(false)
   const [institution, setInstitution] = useState(null)
   const [formData, setFormData] = useState({
     name: '',
@@ -34,6 +36,14 @@ export const RequestToRegisterAnInstitution = () => {
   const handleChange = (e) => {
     const { name, value } = e.target
     setFormData(prev => ({ ...prev, [name]: value }))
+
+    if(name === 'phone'){
+      if(validatePhone(value)){
+        setPhoneError(true)
+      }else{
+        setPhoneError(false)
+      }
+    }
   }
 
   const handleFileChange = (e) => {
@@ -42,6 +52,15 @@ export const RequestToRegisterAnInstitution = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    if(!validatePhone(formData.phone)){
+      setPhoneError(true)
+      toast.error("Ingrese un número de teléfono válido")
+      return
+    }else{
+      setPhoneError(false)
+    }
+
     const dataToSend = new FormData()
 
     Object.entries(formData).forEach(([key, val]) => {
@@ -104,8 +123,8 @@ export const RequestToRegisterAnInstitution = () => {
 
   return (
     <div className="register-institution-page">
-    <div className="min-h-screen flex items-center justify-center bg-zinc-950 px-4">
-      <div className="w-full max-w-2xl bg-zinc-900 rounded-2xl shadow-xl p-10 border border-zinc-700">
+    <div className="form-container">
+      <div>
         <h1 className="text-4xl font-bold text-white mb-8 text-center">
           Nueva institución
         </h1>
@@ -138,6 +157,7 @@ export const RequestToRegisterAnInstitution = () => {
             name="phone"
             value={formData.phone}
             onChange={handleChange}
+            error={phoneError}
           />
           <div>
             <label className="block text-sm font-medium text-zinc-300 mb-1">
@@ -183,7 +203,7 @@ export const RequestToRegisterAnInstitution = () => {
   )
 }
 
-const Field = ({ label, name, type, value, onChange }) => (
+const Field = ({ label, name, type, value, onChange, error }) => (
   <div>
     <label className="block text-sm font-medium text-zinc-300 mb-1">{label}</label>
     {type === 'textarea' ? (
@@ -192,7 +212,11 @@ const Field = ({ label, name, type, value, onChange }) => (
         value={value}
         onChange={onChange}
         required
-        className="w-full bg-zinc-800 border border-zinc-600 text-white rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none"
+        className={`w-full bg-zinc-800 border ${
+          error ? 'border-red-500' : 'border-zinc-600'
+        } text-white rounded-lg px-4 py-3 focus:outline-none focus:ring-2 ${
+          error ? 'focus:ring-red-500' : 'focus:ring-emerald-500'
+        } resize-none`}
       />
     ) : (
       <input
@@ -201,8 +225,15 @@ const Field = ({ label, name, type, value, onChange }) => (
         value={value}
         onChange={onChange}
         required
-        className="w-full bg-zinc-800 border border-zinc-600 text-white rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+        className={`w-full bg-zinc-800 border text-white rounded-lg px-4 
+          py-3 focus:outline-none focus:ring-2 focus:ring-emerald-500 
+          ${error ? 'input-error' : 'border-zinc-600'}`}
       />
+    )}
+    {error && (
+      <p className="error-message">
+          El telefono debe tener entre 8 y 15 dígitos y solo contener números.
+      </p>
     )}
   </div>
 )
