@@ -105,8 +105,7 @@ export const RequestFromInstitutions = () => {
               <h3 className="rfi-inst-name">
                 <Info size={20} /> {inst.name}
               </h3>
-
-              {images.length > 0 && (
+              {images.length > 0 ? (
                 <div className="rfi-carousel">
                   <img
                     src={`/uploads/img/users/${images[currentIndex]}`}
@@ -131,8 +130,9 @@ export const RequestFromInstitutions = () => {
                     </>
                   )}
                 </div>
+              ) : (
+                <p className="rfi-no-image-text">El usuario no envió imágenes de su institución</p>
               )}
-
               <p className="rfi-inst-type">
                 <Tag size={18} /> Tipo: {inst.type?.toUpperCase() || 'N/A'}
               </p>
