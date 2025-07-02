@@ -1,5 +1,6 @@
 .my-institution-container {
-  background-color: #f8f9fa;
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(4px); 
   padding: 2rem;
   border-radius: 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -37,4 +38,20 @@
 
 .my-institution-image:hover {
   transform: scale(1.05);
+}
+
+.my-institution-images-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: flex-start;
+}
+
+.my-institution-images-container.single {
+  justify-content: center;
+}
+
+.my-institution-image-wrapper {
+  flex: 1 1 200px;
+  max-width: 250px;
 }

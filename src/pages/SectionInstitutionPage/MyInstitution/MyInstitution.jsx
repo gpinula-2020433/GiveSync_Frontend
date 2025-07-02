@@ -25,19 +25,37 @@ export const MyInstitution = () => {
       </div>
     )
 
+    const traducirTipo = (tipo) => {
+      switch (tipo) {
+        case "ORPHANAGE": return "ORFANATO";
+        case "EATERS": return "COMEDOR";
+        case "ACYL": return "ASILO";
+        default: return tipo;
+      }
+    }
+
+    const traducirEstado = (estado) => {
+      switch (estado) {
+        case "ACCEPTED": return "ACEPTADO";
+        case "EARRING": return "PENDIENTE";
+        case "REFUSED": return "RECHAZADO";
+        default: return estado;
+      }
+    }
+
     return (
     <div className="container py-4 my-institution-container">
       <h2 className="my-institution-title">{institution.name}</h2>
       <p className="my-institution-description">{institution.description}</p>
-      <p className="my-institution-description">Tipo: {institution.type}</p>
-      <p className="my-institution-description">Estado: {institution.state}</p>
+      <p className="my-institution-description">Tipo: {traducirTipo(institution.type)}</p>
+      <p className="my-institution-description">Estado: {traducirEstado(institution.state)}</p>
 
       {institution.imageInstitution?.length > 0 && (
         <>
           <h4 className="my-institution-images-title">Imágenes de la Institución</h4>
-          <div className="row g-3">
+          <div className={`my-institution-images-container ${institution.imageInstitution.length === 1 ? 'single' : ''}`}>
             {institution.imageInstitution.map((img, i) => (
-              <div className="col-6 col-md-3" key={i}>
+              <div className="my-institution-image-wrapper" key={i}>
                 <img
                   src={`/uploads/img/users/${img}`}
                   alt={institution.name}
