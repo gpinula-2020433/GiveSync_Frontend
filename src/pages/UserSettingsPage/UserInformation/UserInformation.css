@@ -10,7 +10,7 @@
   color: var(--text-primary);
 }
 
-.user-image-box {
+.user-container .user-image-box {
   background-color: var(--bg-gradient-mid);
   padding: 1.5rem;
   border-radius: 16px;
@@ -19,11 +19,11 @@
   transition: background-color 0.3s ease;
 }
 
-.user-image-box:hover {
+.user-container .user-image-box:hover {
   background-color: var(--bg-gradient-top);
 }
 
-.user-profile-img {
+.user-container .user-profile-img {
   width: 160px;
   height: 160px;
   border-radius: 50%;
@@ -34,17 +34,17 @@
   transition: transform 0.3s ease;
 }
 
-.user-profile-img:hover {
+.user-container .user-profile-img:hover {
   transform: scale(1.05);
 }
 
-.user-image-actions {
+.user-container .user-image-actions {
   display: flex;
   justify-content: center;
   gap: 1rem;
 }
 
-.image-action-btn {
+.user-container .image-action-btn {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   border: 2px solid var(--text-primary);
@@ -56,32 +56,32 @@
   transition: all 0.25s ease;
 }
 
-.image-action-btn:hover {
+.user-container .image-action-btn:hover {
   background-color: var(--text-primary);
   color: var(--bg-primary);
   box-shadow: 0 4px 12px var(--shadow-color);
 }
 
-.image-action-btn.delete {
+.user-container .image-action-btn.delete {
   color: var(--danger-color);
   border-color: var(--danger-color);
   box-shadow: 0 2px 6px var(--danger-shadow);
 }
 
-.image-action-btn.delete:hover {
+.user-container .image-action-btn.delete:hover {
   background-color: var(--danger-color);
   color: var(--bg-primary);
   box-shadow: 0 4px 12px var(--danger-shadow);
 }
 
-.user-options {
+.user-container .user-options {
   margin-top: 2.5rem;
   display: flex;
   justify-content: center;
   gap: 1.5rem;
 }
 
-.user-btn {
+.user-container .user-btn {
   padding: 0.6rem 1.5rem;
   font-weight: 700;
   cursor: pointer;
@@ -93,80 +93,77 @@
   transition: all 0.3s ease;
 }
 
-.user-btn:hover {
+.user-container .user-btn:hover {
   background-color: var(--text-primary);
   color: var(--bg-primary);
   box-shadow: 0 5px 15px var(--shadow-color);
 }
 
-.user-btn.delete {
+.user-container .user-btn.delete {
   background-color: var(--danger-color);
   color: var(--bg-primary);
   border-color: var(--danger-color);
   box-shadow: 0 2px 6px var(--danger-shadow);
 }
 
-.user-btn.delete:hover {
+.user-container .user-btn.delete:hover {
   background-color: var(--danger-hover);
   box-shadow: 0 5px 15px var(--danger-shadow);
 }
 
-.institution-text {
+.user-container .institution-text {
   color: var(--success-color);
   font-weight: 700;
   margin-top: 1rem;
   font-size: 1rem;
 }
 
-.modal-overlay {
+.user-container .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: var(--bg-primary);
+  background-color: rgba(10, 10, 10, 0.9);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1100;
-  backdrop-filter: none;
 }
 
-.modal-box {
+.user-container .modal-box {
   background-color: var(--bg-primary);
   padding: 2rem 2.5rem;
   border-radius: 16px;
   text-align: center;
   width: 320px;
   max-width: 90vw;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
   color: var(--text-primary);
-  transition: all 0.25s ease;
   z-index: 1110;
 }
 
-.modal-box h3 {
+.user-container .modal-box h3 {
   margin-bottom: 1.2rem;
   font-size: 1.4rem;
   font-weight: 700;
   color: var(--text-secondary);
 }
 
-.modal-box p {
+.user-container .modal-box p {
   font-size: 1rem;
   margin-bottom: 1.3rem;
   color: var(--text-secondary);
 }
 
-.modal-actions {
+.user-container .modal-actions {
   display: flex;
   justify-content: center;
   gap: 1.2rem;
   margin-top: 1.8rem;
 }
 
-.modal-actions button {
+.user-container .modal-actions button {
   flex: 1;
   padding: 0.6rem 1.3rem;
   background-color: var(--text-primary);
@@ -179,24 +176,25 @@
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.modal-actions button:hover {
+.user-container .modal-actions button:hover {
   background-color: var(--text-secondary);
   box-shadow: 0 6px 20px var(--shadow-color);
 }
 
-.modal-actions button.delete {
+.user-container .modal-actions button.delete {
   background-color: var(--danger-color);
   box-shadow: 0 4px 14px var(--danger-shadow);
 }
 
-.modal-actions button.delete:hover {
+.user-container .modal-actions button.delete:hover {
   background-color: var(--danger-hover);
   box-shadow: 0 6px 20px var(--danger-shadow);
 }
 
-.modal-box input[type="password"],
-.modal-box input[type="email"],
-.modal-box input[type="text"] {
+.user-container .modal-box input[type="password"],
+.user-container .modal-box input[type="email"],
+.user-container .modal-box input[type="text"],
+.user-container .modal-box input[type="file"] {
   width: 100%;
   padding: 0.5rem 0.75rem;
   margin-top: 0.2rem;
@@ -204,19 +202,16 @@
   border-radius: 10px;
   font-size: 1rem;
   outline-offset: 2px;
-  transition: border-color 0.3s ease;
   background-color: var(--bg-primary);
   color: var(--text-primary);
 }
 
-.modal-box input[type="password"]:focus,
-.modal-box input[type="email"]:focus,
-.modal-box input[type="text"]:focus {
+.user-container .modal-box input:focus {
   border-color: var(--text-primary);
   box-shadow: 0 0 6px var(--text-primary)aa;
 }
 
-label {
+.user-container label {
   display: block;
   margin-top: 1rem;
   font-weight: 600;
@@ -230,46 +225,17 @@ label {
     margin: 1rem;
   }
 
-  .user-image-box {
+  .user-container .user-image-box {
     padding: 1rem;
   }
 
-  .user-profile-img {
+  .user-container .user-profile-img {
     width: 130px;
     height: 130px;
   }
 
-  .modal-box {
+  .user-container .modal-box {
     width: 90vw;
     padding: 1.5rem 1.8rem;
   }
-}
-
-/* Variables de color para modo claro y oscuro */
-:root {
-  --bg-primary: #f9fbfd;
-  --text-primary: #333;
-  --text-secondary: #555;
-  --bg-gradient-top: #3498db;
-  --bg-gradient-mid: #2980b9;
-  --shadow-color: rgba(41, 128, 185, 0.25);
-  --danger-color: #c0392b;
-  --danger-shadow: rgba(192, 57, 43, 0.25);
-  --danger-hover: #e74c3c;
-  --success-color: #27ae60;
-  --border-color: #ccc;
-}
-
-[data-theme='dark'] {
-  --bg-primary: #1e1e1e;
-  --text-primary: #eee;
-  --text-secondary: #bbb;
-  --bg-gradient-top: #3a7bd5;
-  --bg-gradient-mid: #265a88;
-  --shadow-color: rgba(58, 123, 213, 0.5);
-  --danger-color: #e74c3c;
-  --danger-shadow: rgba(231, 76, 60, 0.5);
-  --danger-hover: #c0392b;
-  --success-color: #2ecc71;
-  --border-color: #555;
 }
