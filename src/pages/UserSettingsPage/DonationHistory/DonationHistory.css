@@ -1,0 +1,106 @@
+:root {
+  --donation-bg: #f3f4f6;
+  --donation-text: #111927;
+  --donation-card-bg: #ffffff;
+  --donation-border: #e5e7eb;
+  --donation-shadow: rgba(0, 0, 0, 0.1);
+  --donation-accent: #2563eb;
+  --donation-muted: #6b7280;
+}
+
+[data-theme='dark'] {
+  --donation-bg: #1f1f2e;
+  --donation-text: #f1f1f1;
+  --donation-card-bg: #2a2a3b;
+  --donation-border: #3f3f52;
+  --donation-shadow: rgba(0, 0, 0, 0.6);
+  --donation-accent: #7aaaff;
+  --donation-muted: #a0a0c0;
+}
+
+.donation-history-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: var(--donation-card-bg);
+  border-radius: 1rem;
+  box-shadow: 0 6px 20px var(--donation-shadow);
+  color: var(--donation-text);
+  animation: fadeIn 0.8s ease-in;
+  box-sizing: border-box;
+}
+
+.donation-history-title {
+  text-align: center;
+  font-size: 2rem;
+  color: var(--donation-accent);
+  margin-bottom: 2rem;
+}
+
+.donation-history-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.donation-history-item {
+  border: 1px solid var(--donation-border);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  background-color: var(--donation-bg);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.donation-history-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px var(--donation-shadow);
+}
+
+.donation-history-item p {
+  margin: 0.6rem 0;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.donation-icon {
+  margin-right: 0.6rem;
+  color: var(--donation-accent);
+  min-width: 20px;
+}
+
+.donation-history-loading,
+.donation-history-error,
+.donation-history-empty {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--donation-muted);
+  margin-top: 3rem;
+  padding: 1rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+  .donation-history-container {
+    margin: 1rem;
+    padding: 1.2rem;
+  }
+
+  .donation-history-title {
+    font-size: 1.6rem;
+  }
+
+  .donation-history-item {
+    padding: 1.2rem;
+  }
+
+  .donation-history-item p {
+    font-size: 0.95rem;
+  }
+}
