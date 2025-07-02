@@ -105,7 +105,7 @@ export const ConfigurationOfTheInstitution = () => {
             <option value="">Seleccione un tipo</option>
             <option value="EATERS">COMEDOR</option>
             <option value="ORPHANAGE">ORFANATO</option>
-            <option value="ACYL">ACILO</option>
+            <option value="ACYL">ASILO</option>
           </select>
         </div>
 

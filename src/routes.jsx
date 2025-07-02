@@ -29,6 +29,7 @@ import {CommentsPage}  from './pages/CommentsPage/CommentsPage'
 import ConfigurationPublication from './pages/SectionInstitutionPage/configurationPublication/ConfigurationPublication'
 import { ProtectedRoute } from './shared/utils/ProtectedRoute'
 import { UserNotifications } from './components/layout/navbar/UserNotifications'
+import { UnderConstruction } from './components/underConstruction/UnderConstruction'
 
 
 export const routes = [
@@ -98,6 +99,54 @@ export const routes = [
             ]
           },
       ]
+    },
+    {
+      path: '/employer',
+      element: <UnderConstruction />
+    },
+    {
+      path: '/healthplan',
+      element: <UnderConstruction />
+    },
+    {
+      path: '/individual',
+      element: <UnderConstruction />
+    },
+    {
+      path: '/resource',
+      element: <UnderConstruction />
+    },
+    {
+      path: '/about',
+      element: <UnderConstruction />
+    },
+    {
+      path: '/press',
+      element: <UnderConstruction />
+    },
+    {
+      path: '/career',
+      element: <UnderConstruction />
+    },
+    {
+      path: '/contact',
+      element: <UnderConstruction />
+    },
+    {
+      path: '/terms',
+      element: <UnderConstruction />
+    },
+    {
+      path: '/privacy',
+      element: <UnderConstruction />
+    },
+    {
+      path: '/securty',
+      element: <UnderConstruction />
+    },
+    {
+      path: '/cookie',
+      element: <UnderConstruction />
     },
   {
     path:'*',
