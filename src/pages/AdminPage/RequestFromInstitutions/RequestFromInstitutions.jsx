@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+// ✅ components/Admin/RequestFromInstitutions.jsx
+import React from 'react'
 import './RequestFromInstitutions.css'
 import {
   CheckCircle,
@@ -11,82 +12,18 @@ import {
   AlertCircle
 } from 'lucide-react'
 import DefaultUserImage from '../../../assets/DefaultUserImage.jpg'
+import { usePendingInstitutions } from '../../../shared/hooks/donation/usePendingInstitutions'
 
 export const RequestFromInstitutions = () => {
-  const [institutions, setInstitutions] = useState([])
-  const [imageIndexes, setImageIndexes] = useState({})
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState('')
-
-  const fetchPending = async () => {
-    try {
-      const token = localStorage.getItem('token')
-      const res = await fetch('http://localhost:3200/v1/institution/pending', {
-        headers: { Authorization: token }
-      })
-      const data = await res.json()
-
-      if (!res.ok) {
-        if (data.message?.toLowerCase().includes('no pending')) {
-          setInstitutions([])
-          setError('')
-        } else {
-          throw new Error(data.message || 'Error al obtener instituciones')
-        }
-      } else {
-        setInstitutions(data.institutions || [])
-        setError('')
-        const indexMap = {}
-        data.institutions.forEach(inst => {
-          indexMap[inst._id] = 0
-        })
-        setImageIndexes(indexMap)
-      }
-    } catch (err) {
-      setError(err.message)
-      setInstitutions([])
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  useEffect(() => {
-    fetchPending()
-  }, [])
-
-  const updateState = async (id, newState) => {
-    try {
-      const token = localStorage.getItem('token')
-      const res = await fetch(`http://localhost:3200/v1/institution/updateState/${id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: token
-        },
-        body: JSON.stringify({ state: newState })
-      })
-      const data = await res.json()
-      if (!res.ok) throw new Error(data.message || 'Error al actualizar estado')
-
-      setInstitutions(prev => prev.filter(inst => inst._id !== id))
-    } catch (err) {
-      alert(`Error: ${err.message}`)
-    }
-  }
-
-  const handleNextImage = (instId, length) => {
-    setImageIndexes(prev => ({
-      ...prev,
-      [instId]: prev[instId] < length - 1 ? prev[instId] + 1 : 0
-    }))
-  }
-
-  const handlePrevImage = (instId, length) => {
-    setImageIndexes(prev => ({
-      ...prev,
-      [instId]: prev[instId] > 0 ? prev[instId] - 1 : length - 1
-    }))
-  }
+  const {
+    institutions,
+    imageIndexes,
+    loading,
+    error,
+    updateState,
+    nextImage,
+    prevImage
+  } = usePendingInstitutions()
 
   if (loading) return <p className="rfi-status-text">Cargando solicitudes...</p>
   if (error) return <p className="rfi-status-text rfi-error-text">Error: {error}</p>
@@ -115,18 +52,8 @@ export const RequestFromInstitutions = () => {
                   />
                   {images.length > 1 && (
                     <>
-                      <button
-                        className="rfi-carousel-btn left"
-                        onClick={() => handlePrevImage(inst._id, images.length)}
-                      >
-                        ‹
-                      </button>
-                      <button
-                        className="rfi-carousel-btn right"
-                        onClick={() => handleNextImage(inst._id, images.length)}
-                      >
-                        ›
-                      </button>
+                      <button className="rfi-carousel-btn left" onClick={() => prevImage(inst._id, images.length)}>‹</button>
+                      <button className="rfi-carousel-btn right" onClick={() => nextImage(inst._id, images.length)}>›</button>
                     </>
                   )}
                 </div>
@@ -136,28 +63,20 @@ export const RequestFromInstitutions = () => {
               <p className="rfi-inst-type">
                 <Tag size={18} /> Tipo: {inst.type?.toUpperCase() || 'N/A'}
               </p>
-
               <p className="rfi-inst-description">
                 <Info size={18} /> Descripción: {inst.description || 'Sin descripción'}
               </p>
-
               <p className="rfi-inst-state">
                 <AlertCircle size={18} /> Estado: {inst.state || 'No disponible'}
               </p>
-
               <p className="rfi-inst-createdAt">
                 <Info size={18} /> Creado: {inst.createdAt ? new Date(inst.createdAt).toLocaleDateString() : 'No disponible'}
               </p>
-
               <div className="rfi-user-info">
                 <UserCheck size={18} />
                 <strong>Usuario que solicita:</strong>
                 <img
-                  src={
-                    inst.userId?.imageUser
-                      ? `/uploads/img/users/${inst.userId.imageUser}`
-                      : DefaultUserImage
-                  }
+                  src={inst.userId?.imageUser ? `/uploads/img/users/${inst.userId.imageUser}` : DefaultUserImage}
                   alt="Imagen del usuario"
                   className="rfi-user-image"
                   onError={(e) => { e.currentTarget.src = DefaultUserImage }}
@@ -170,18 +89,11 @@ export const RequestFromInstitutions = () => {
                   <Mail size={14} /> {inst.userId?.email || 'Correo no disponible'}
                 </p>
               </div>
-
               <div className="rfi-buttons">
-                <button
-                  onClick={() => updateState(inst._id, 'ACCEPTED')}
-                  className="rfi-accept-btn"
-                >
+                <button onClick={() => updateState(inst._id, 'ACCEPTED')} className="rfi-accept-btn">
                   <CheckCircle size={18} /> Aceptar
                 </button>
-                <button
-                  onClick={() => updateState(inst._id, 'REFUSED')}
-                  className="rfi-reject-btn"
-                >
+                <button onClick={() => updateState(inst._id, 'REFUSED')} className="rfi-reject-btn">
                   <XCircle size={18} /> Rechazar
                 </button>
               </div>

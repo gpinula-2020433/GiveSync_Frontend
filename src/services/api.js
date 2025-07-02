@@ -410,3 +410,37 @@ export const deleteNotificationRequest = async (id) => {
     }
   }
 }
+
+// ✅ services/institutionService.js
+export const fetchPendingInstitutions = async () => {
+  try {
+    const token = localStorage.getItem('token')
+    const res = await fetch('http://localhost:3200/v1/institution/pending', {
+      headers: { Authorization: token }
+    })
+    const data = await res.json()
+    return { status: res.ok, data }
+  } catch (error) {
+    console.error('Error al obtener instituciones:', error)
+    return { status: false, data: { message: 'Error al obtener instituciones' } }
+  }
+}
+
+export const updateInstitutionState = async (id, newState) => {
+  try {
+    const token = localStorage.getItem('token')
+    const res = await fetch(`http://localhost:3200/v1/institution/updateState/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token
+      },
+      body: JSON.stringify({ state: newState })
+    })
+    const data = await res.json()
+    return { status: res.ok, data }
+  } catch (error) {
+    console.error('Error al actualizar estado:', error)
+    return { status: false, data: { message: 'Error al actualizar estado' } }
+  }
+}
