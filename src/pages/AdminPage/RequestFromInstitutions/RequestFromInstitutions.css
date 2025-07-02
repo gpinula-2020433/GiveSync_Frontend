@@ -185,3 +185,160 @@
     gap: 0.8rem;
   }
 }
+
+.rfi-container {
+  padding: 20px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.rfi-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.rfi-status-text {
+  text-align: center;
+  font-size: 18px;
+  margin-top: 30px;
+}
+
+.rfi-error-text {
+  color: red;
+}
+
+.rfi-no-requests-message {
+  color: gray;
+}
+
+.rfi-institution-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.rfi-institution-card {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 16px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.rfi-inst-name {
+  font-size: 20px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rfi-carousel {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.rfi-carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  user-select: none;
+  pointer-events: none;
+}
+
+.rfi-carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.3);
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.rfi-carousel-btn.left {
+  left: 10px;
+}
+
+.rfi-carousel-btn.right {
+  right: 10px;
+}
+
+.rfi-inst-type,
+.rfi-inst-description,
+.rfi-inst-state,
+.rfi-inst-createdAt {
+  margin: 4px 0;
+}
+
+.rfi-user-info {
+  margin-top: 12px;
+  background-color: #f8f8f8;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.rfi-user-info strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.rfi-user-fullname,
+.rfi-user-username,
+.rfi-user-email {
+  margin: 2px 0;
+}
+
+.rfi-user-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 8px;
+  border: 1px solid #ddd;
+}
+
+.rfi-buttons {
+  display: flex;
+  justify-content: end;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.rfi-accept-btn,
+.rfi-reject-btn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rfi-accept-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.rfi-reject-btn {
+  background-color: #dc3545;
+  color: white;
+}
