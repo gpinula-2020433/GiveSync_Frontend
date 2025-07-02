@@ -273,3 +273,28 @@
     padding: 1.5rem;
   }
 }
+
+.my-institution-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.institution-card {
+  max-width: 100%;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #18181b;
+  color: rgb(255, 255, 255);
+  border: 1px solid #9999b8;
+  border-radius: 20px; 
+  box-shadow: 0 8px 24px rgba(22, 16, 185, 0.1); 
+  transition: all 0.5s ease;
+}
+
+.institution-card:hover {
+  box-shadow: 0 12px 32px rgba(22, 16, 185, 0.1); 
+}

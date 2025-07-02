@@ -6,13 +6,14 @@ import './RequestToRegisterAnInstitution.css'
 
 export const RequestToRegisterAnInstitution = () => {
   const navigate = useNavigate()
+  const [institution, setInstitution] = useState(null)
   const [formData, setFormData] = useState({
     name: '',
     description: '',
     address: '',
     phone: '',
     type: '',
-    imageInstitution: null
+    imageInstitution: []
   })
 
   const [hasInstitution, setHasInstitution] = useState(false)
@@ -22,6 +23,7 @@ export const RequestToRegisterAnInstitution = () => {
     const fetchInstitution = async () => {
       const res = await getMyInstitutionsRequest()
       if (!res.error && res.institutions && res.institutions.length > 0) {
+        setInstitution(res.institutions[0])
         setHasInstitution(true)
       }
       setLoading(false)
@@ -35,15 +37,16 @@ export const RequestToRegisterAnInstitution = () => {
   }
 
   const handleFileChange = (e) => {
-    setFormData(prev => ({ ...prev, imageInstitution: e.target.files[0] }))
+    setFormData(prev => ({ ...prev, imageInstitution: Array.from(e.target.files) }))
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     const dataToSend = new FormData()
+
     Object.entries(formData).forEach(([key, val]) => {
-      if (key === 'imageInstitution' && val) {
-        dataToSend.append(key, val)
+      if (key === 'imageInstitution' && val.length > 0) {
+        val.forEach(file => dataToSend.append('imageInstitution', file))
       } else if (key !== 'imageInstitution') {
         dataToSend.append(key, val)
       }
@@ -65,15 +68,37 @@ export const RequestToRegisterAnInstitution = () => {
     </div>
   )
 
-  if (hasInstitution) {
+  if (hasInstitution && institution) {
     return (
+      <div className="institution-card">
+      <h1>Ya tienes una institución registrada</h1>
       
-      <div className="max-w-lg mx-auto mt-20 p-10 bg-zinc-900 rounded-xl shadow-lg border border-zinc-700 text-center">
-        <h1 className="text-white text-3xl font-semibold mb-3">Acceso restringido</h1>
-        <p className="text-zinc-400 text-md">
-          Ya tienes una institución registrada. Solo se permite una por cuenta.
-        </p>
+      <div>
+        <div>
+          <p><span>Nombre:</span> {institution.name}</p>
+          <p><span>Descripción:</span> {institution.description}</p>
+          <p><span>Dirección:</span> {institution.address}</p>
+          <p><span>Teléfono:</span> {institution.phone}</p>
+          <p><span>Tipo:</span> {institution.type}</p>
+        </div>
+
+        <div>
+          <p className="font-semibold mb-2">Imágenes:</p>
+          <div className="row g-3">
+            {(institution.imageInstitution || []).map((imgUrl, i) => (
+              <div className='col-6 col-md-3'>
+                <img
+                  key={i}
+                  src={`/uploads/img/users/${imgUrl}`}
+                  alt={institution.name}
+                  className="my-institution-image"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
+    </div>
     )
   }
 
@@ -139,6 +164,7 @@ export const RequestToRegisterAnInstitution = () => {
             <input
               type="file"
               accept="image/*"
+              multiple
               onChange={handleFileChange}
               className="w-full bg-zinc-800 text-zinc-300 file:mr-4 file:px-4 file:py-2 file:rounded-lg file:border-0 file:bg-emerald-600 file:text-white hover:file:bg-emerald-700 transition"
             />
