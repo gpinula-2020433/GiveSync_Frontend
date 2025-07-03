@@ -1,13 +1,13 @@
 .configuration-publication-page {
-  --bg-color: #0f1117;
-  --card-bg: #1e1f25;
-  --input-bg: #2c2f36;
-  --text-color: #f1f5f9;
-  --text-muted: #94a3b8;
-  --accent: #10b981;
-  --accent-hover: #059669;
+  --bg-color: var(--institution-bg);
+  --card-bg: var(--institution-card-bg);
+  --input-bg: var(--institution-card-bg);
+  --text-color: var(--institution-text);
+  --text-muted: var(--institution-muted);
+  --accent: var(--institution-accent);
+  --accent-hover: #1e40af; /* O una variación más oscura de --institution-accent */
   --danger: #ef4444;
-  --border-color: #334155;
+  --border-color: var(--institution-border);
   --radius: 0.75rem;
   --transition: 0.3s ease;
 }
@@ -35,7 +35,7 @@
   background: var(--card-bg);
   padding: 2rem;
   border-radius: var(--radius);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 12px var(--institution-shadow);
   max-width: 700px;
   margin: 2rem auto;
   display: flex;
@@ -59,7 +59,7 @@
 .configuration-publication-page input[type="text"]:focus,
 .configuration-publication-page textarea:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 30%, transparent);
   outline: none;
 }
 
@@ -115,7 +115,7 @@
   margin: 1rem auto;
   border-radius: var(--radius);
   max-width: 700px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 10px var(--institution-shadow);
 }
 
 .configuration-publication-page .publication-card h3 {
@@ -134,7 +134,7 @@
   margin-right: 0.5rem;
   border-radius: 0.4rem;
   object-fit: cover;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 6px var(--institution-shadow);
 }
 
 .configuration-publication-page .publication-card button {
