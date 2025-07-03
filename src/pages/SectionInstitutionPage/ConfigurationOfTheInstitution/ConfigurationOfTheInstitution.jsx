@@ -21,6 +21,7 @@ export const ConfigurationOfTheInstitution = () => {
   })
   const [imagesPreview, setImagesPreview] = useState([])
   const [images, setImages] = useState([])
+  const [showModal, setShowModal] = useState(false)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -52,7 +53,6 @@ export const ConfigurationOfTheInstitution = () => {
   const handleUpdate = async () => {
     if (!institution) return
 
-    console.log("FormData enviado:", formData)
     await updateInstitutionRequest(institution._id, formData)
 
     if (images.length > 0) {
@@ -65,13 +65,12 @@ export const ConfigurationOfTheInstitution = () => {
     setTimeout(() => window.location.reload(), 1500)
   }
 
-  const handleDelete = async () => {
+  const confirmDelete = async () => {
     if (!institution) return
-    if (!confirm("¿Estás seguro de que deseas eliminar tu institución?")) return
-
     await deleteInstitutionRequest(institution._id)
     toast.info("Institución eliminada.")
     setInstitution(null)
+    setShowModal(false)
     setTimeout(() => navigate("/main/home"), 1500)
   }
 
@@ -174,11 +173,32 @@ export const ConfigurationOfTheInstitution = () => {
           <button className="btn btn-primary" onClick={handleUpdate}>
             Guardar cambios
           </button>
-          <button className="btn btn-danger" onClick={handleDelete}>
+          <button className="btn btn-danger" onClick={() => setShowModal(true)}>
             Eliminar institución
           </button>
         </div>
       </div>
+
+      {showModal && (
+        <div className="modal fade show" style={{ display: 'block' }} tabIndex="-1">
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header bg-danger text-white">
+                <h5 className="modal-title">¿Eliminar institución?</h5>
+                <button type="button" className="btn-close" onClick={() => setShowModal(false)}></button>
+              </div>
+              <div className="modal-body">
+                <p>¿Estás seguro de que deseas eliminar tu institución de forma permanente?</p>
+              </div>
+              <div className="modal-footer">
+                <button className="btn btn-secondary" onClick={() => setShowModal(false)}>Cancelar</button>
+                <button className="btn btn-danger" onClick={confirmDelete}>Eliminar</button>
+              </div>
+            </div>
+          </div>
+          <div className="modal-backdrop fade show"></div>
+        </div>
+      )}
     </div>
   )
 }

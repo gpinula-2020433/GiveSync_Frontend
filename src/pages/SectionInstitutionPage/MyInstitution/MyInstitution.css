@@ -1,21 +1,21 @@
 .my-institution-container {
-  background-color: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(4px); 
+  background-color: var(--institution-card-bg);
+  backdrop-filter: blur(4px);
   padding: 2rem;
   border-radius: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px var(--institution-shadow);
 }
 
 .my-institution-title {
   font-size: 2rem;
   font-weight: 700;
-  color: black;
+  color: var(--institution-text);
   margin-bottom: 0.5rem;
 }
 
 .my-institution-description {
   font-size: 1rem;
-  color: #343a40;
+  color: var(--institution-text);
   margin-bottom: 1.5rem;
 }
 
@@ -24,7 +24,7 @@
   font-weight: 600;
   margin-top: 2rem;
   margin-bottom: 1rem;
-  color: black;
+  color: var(--institution-text);
 }
 
 .my-institution-image {
@@ -33,7 +33,7 @@
   object-fit: cover;
   border-radius: 12px;
   transition: transform 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px var(--institution-shadow);
 }
 
 .my-institution-image:hover {
