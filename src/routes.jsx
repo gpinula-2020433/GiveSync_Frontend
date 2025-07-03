@@ -52,9 +52,14 @@ export const routes = [
     { path: '', element: <Navigate to="home" /> },
     { path: 'home', element: <HomePage /> },
     { path: 'institution/:id', element: <InstitutionDetail /> },
-    { path: 'institution/:id/donate', element: <AddDonationPage /> },
     { path: 'publication/:publicationId', element: <CommentsPage /> },
-    { path: 'myNotifications', element: <UserNotifications /> },
+    {
+      element: <ProtectedRoute/>,
+      children: [
+        { path: 'institution/:id/donate', element: <AddDonationPage /> },
+        { path: 'myNotifications', element: <UserNotifications /> },
+      ]
+    }
   ]
 },
   {

@@ -16,6 +16,10 @@ export const ProtectedRouteAdmin = () => {
 
   if (isLoading) return null
 
+  if (!user) {
+    return <Navigate to="/auth/login" replace />
+  }
+
   if (user?.role !== 'ADMIN') {
     toast.error('No tienes acceso a esta sección')
     return <Navigate to="/main/home" replace />
@@ -28,6 +32,10 @@ export const ProtectedRouteInstitution = () => {
   const { user, isLoading } = useAuthenticatedUser()
 
   if (isLoading) return null
+
+  if (!user) {
+    return <Navigate to="/auth/login" replace />
+  }
 
   if (!user?.hasInstitution) {
     toast.error('No tienes acceso a esta sección')
