@@ -22,12 +22,25 @@ export const AllDonationsMade = () => {
           setError('No se pudo obtener las donaciones')
         }
       } catch {
-        setError('Error al cargar las donaciones')
+        setError('No se ha hecho ninguna donación.')
       }
       setLoading(false)
     }
     fetchDonations()
   }, [])
+
+  const traducirTipo = (tipo) => {
+    switch (tipo) {
+      case 'ACYL':
+        return 'Asilo'
+      case 'ORPHANAGE':
+        return 'Orfanato'
+      case 'EATERS':
+        return 'Comedor'
+      default:
+        return tipo
+    }
+  }
 
   if (loading) return <p className="all-loading-message">Cargando donaciones...</p>
   if (error) return <p className="all-error-message">{error}</p>
@@ -44,40 +57,40 @@ export const AllDonationsMade = () => {
           return (
             <li key={donation._id} className="all-donation-item">
               <p className="all-donation-line">
-                <Tag className="all-icon" size={18} /> <strong>ID Donación:</strong> {donation._id}
+                <Tag className="all-icon" size={18} /> <strong>ID Donación:</strong> {` ${donation._id}`}
               </p>
               <p className="all-donation-line">
-                <DollarSign className="all-icon" size={18} /> <strong>Monto:</strong> Q{donation.amount}
+                <DollarSign className="all-icon" size={18} /> <strong>Monto:</strong> {` Q${donation.amount}`}
               </p>
               <p className="all-donation-line">
-                <Calendar className="all-icon" size={18} /> <strong>Fecha:</strong> {fecha}
+                <Calendar className="all-icon" size={18} /> <strong>Fecha:</strong> {` ${fecha}`}
               </p>
               <p className="all-donation-line">
-                <Building className="all-icon" size={18} /> <strong>Institución:</strong> {donation.institutionData?.name || 'No disponible'}
+                <Building className="all-icon" size={18} /> <strong>Institución:</strong> {` ${donation.institutionData?.name || 'No disponible'}`}
               </p>
               <p className="all-donation-line">
-                <Tag className="all-icon" size={18} /> <strong>Tipo de Institución:</strong> {donation.institutionData?.type || 'No disponible'}
+                <Tag className="all-icon" size={18} /> <strong>Tipo de Institución:</strong> {` ${traducirTipo(donation.institutionData?.type) || 'No disponible'}`}
               </p>
 
               <div className="all-user-details">
-                <strong>Usuario:</strong>{' '}
+                <strong>Usuario:</strong>
                 {donation.userData ? (
                   <>
                     <p className="all-donation-line">
-                      <User className="all-icon" size={18} /> Nombre: {donation.userData.name} {donation.userData.surname}
+                      <User className="all-icon" size={18} /> Nombre: {` ${donation.userData.name} ${donation.userData.surname}`}
                     </p>
-                    <p>Usuario: {donation.userData.username}</p>
-                    {donation.userData.email && <p>Email: {donation.userData.email}</p>}
-                    {donation.userData.role && <p>Rol: {donation.userData.role}</p>}
+                    <p className="all-donation-line">Usuario: {` ${donation.userData.username}`}</p>
+                    {donation.userData.email && <p className="all-donation-line">Email: {` ${donation.userData.email}`}</p>}
+                    {donation.userData.role && <p className="all-donation-line">Rol: {` ${donation.userData.role}`}</p>}
                     {donation.userData.createdAt && (
-                      <p>Registrado: {new Date(donation.userData.createdAt).toLocaleDateString()}</p>
+                      <p className="all-donation-line">Registrado: {` ${new Date(donation.userData.createdAt).toLocaleDateString()}`}</p>
                     )}
                     {donation.userData.updatedAt && (
-                      <p>Última actualización: {new Date(donation.userData.updatedAt).toLocaleDateString()}</p>
+                      <p className="all-donation-line">Última actualización: {` ${new Date(donation.userData.updatedAt).toLocaleDateString()}`}</p>
                     )}
                   </>
                 ) : (
-                  'No disponible'
+                  ' No disponible'
                 )}
               </div>
 

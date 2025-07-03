@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import './DonationsToMyInstitution.css'
-import { FaUser, FaCalendarAlt, FaHandHoldingUsd, FaBuilding, FaTags, FaInfoCircle } from 'react-icons/fa'
+import {
+  FaUser,
+  FaCalendarAlt,
+  FaHandHoldingUsd,
+  FaBuilding,
+  FaTags,
+  FaInfoCircle
+} from 'react-icons/fa'
 
 export const DonationsToMyInstitution = () => {
   const [donations, setDonations] = useState([])
@@ -28,6 +35,19 @@ export const DonationsToMyInstitution = () => {
     }
   }
 
+  const translateType = (type) => {
+    switch (type) {
+      case 'ACYL':
+        return 'Asilo'
+      case 'ORPHANAGE':
+        return 'Orfanato'
+      case 'EATERS':
+        return 'Comedor'
+      default:
+        return 'Desconocido'
+    }
+  }
+
   useEffect(() => {
     fetchDonations()
   }, [])
@@ -42,13 +62,16 @@ export const DonationsToMyInstitution = () => {
       <ul className="institution-donation-list">
         {donations.map((donation) => (
           <li key={donation._id} className="institution-donation-card">
-            <p><FaHandHoldingUsd className="icon" /> <strong>Monto:</strong> Q{donation.amount?.toFixed(2)}</p>
-            <p><FaCalendarAlt className="icon" /> <strong>Fecha:</strong> {new Date(donation.createdAt).toLocaleDateString()}</p>
-            <p><FaUser className="icon" /> <strong>Usuario:</strong> {donation.user?.name || 'Desconocido'}</p>
-            <hr />
-            <p><FaBuilding className="icon" /> <strong>Institución:</strong> {donation.institution?.name || 'Desconocida'}</p>
-            <p><FaTags className="icon" /> <strong>Tipo:</strong> {donation.institution?.type || 'N/A'}</p>
-            <p><FaInfoCircle className="icon" /> <strong>Descripción:</strong> {donation.institution?.description || 'Sin descripción'}</p>
+            <div className="donation-section">
+              <p><FaHandHoldingUsd className="icon" /><strong>Monto:</strong> Q{donation.institutionAmount?.toFixed(2)}</p>
+              <p><FaCalendarAlt className="icon" /><strong>Fecha:</strong> {new Date(donation.createdAt).toLocaleDateString()}</p>
+              <p><FaUser className="icon" /><strong>Usuario:</strong> {donation.user?.name || 'Desconocido'}</p>
+            </div>
+            <div className="institution-section">
+              <p><FaBuilding className="icon" /><strong>Institución:</strong> {donation.institution?.name || 'Desconocida'}</p>
+              <p><FaTags className="icon" /><strong>Tipo:</strong> {translateType(donation.institution?.type)}</p>
+              <p><FaInfoCircle className="icon" /><strong>Descripción:</strong> {donation.institution?.description || 'Sin descripción'}</p>
+            </div>
           </li>
         ))}
       </ul>

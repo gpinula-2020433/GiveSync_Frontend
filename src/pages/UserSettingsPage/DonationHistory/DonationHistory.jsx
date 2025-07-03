@@ -18,6 +18,15 @@ export const DonationHistory = () => {
     }
   }
 
+  const translateType = (type) => {
+  const translations = {
+    EATERS: 'Comedor',
+    ORPHANAGE: 'Orfanato',
+    ACYL: 'Asilo'
+    }
+    return translations[type?.toUpperCase()] || type || 'No disponible'
+  }
+
   useEffect(() => {
     const fetchDonations = async () => {
       try {
@@ -73,11 +82,11 @@ export const DonationHistory = () => {
 
           return (
             <li key={donation._id} className="donation-history-item">
-              <p><FaHandHoldingHeart className="donation-icon" /> <strong>Monto:</strong> Q{donation.amount}</p>
-              <p><FaCalendarAlt className="donation-icon" /> <strong>Fecha:</strong> {fecha}</p>
-              <p><FaBuilding className="donation-icon" /> <strong>Institución:</strong> {donation.institutionData?.name || 'No disponible'}</p>
-              <p><FaTags className="donation-icon" /> <strong>Tipo:</strong> {donation.institutionData?.type || 'No disponible'}</p>
-              <p><FaInfoCircle className="donation-icon" /> <strong>Descripción:</strong> {donation.institutionData?.description || 'No disponible'}</p>
+              <p><FaHandHoldingHeart className="donation-icon" /> <strong>Monto:&nbsp;</strong>Q{donation.amount}</p>
+              <p><FaCalendarAlt className="donation-icon" /> <strong>Fecha:&nbsp;</strong>{fecha}</p>
+              <p><FaBuilding className="donation-icon" /> <strong>Institución:&nbsp;</strong>{donation.institutionData?.name || 'No disponible'}</p>
+              <p><FaTags className="donation-icon" /> <strong>Tipo:&nbsp;</strong>{translateType(donation.institutionData?.type)}</p>
+              <p><FaInfoCircle className="donation-icon" /> <strong>Descripción:&nbsp;</strong>{donation.institutionData?.description || 'No disponible'}</p>
             </li>
           )
         })}
