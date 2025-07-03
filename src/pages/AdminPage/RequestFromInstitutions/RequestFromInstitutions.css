@@ -1,20 +1,30 @@
+:root {
+  --rfi-bg: var(--institution-bg);
+  --rfi-text: var(--institution-text);
+  --rfi-card-bg: var(--institution-card-bg);
+  --rfi-border: var(--institution-border);
+  --rfi-shadow: var(--institution-shadow);
+  --rfi-accent: var(--institution-accent);
+  --rfi-muted: var(--institution-muted);
+}
+
 .rfi-container {
-  max-width: 720px;
+  max-width: 960px;
   margin: 2rem auto;
-  padding: 1.5rem 2rem;
-  background: var(--input-bg);
+  padding: 2rem;
+  background: var(--rfi-card-bg);
   border-radius: 1rem;
-  box-shadow: 0 4px 15px var(--shadow);
-  color: var(--color-text-primary);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 8px 24px var(--rfi-shadow);
+  color: var(--rfi-text);
+  animation: fadeIn 0.6s ease-in-out;
+  box-sizing: border-box;
 }
 
 .rfi-title {
   font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
-  color: var(--accent);
   text-align: center;
+  margin-bottom: 2rem;
+  color: var(--rfi-accent);
 }
 
 .rfi-institution-list {
@@ -24,331 +34,274 @@
 }
 
 .rfi-institution-card {
-  border: 1.8px solid var(--input-border);
-  border-radius: 0.9rem;
-  padding: 1.3rem 1.7rem;
+  background-color: var(--rfi-bg);
+  border: 1px solid var(--rfi-border);
+  border-radius: 1rem;
+  padding: 1rem;
   margin-bottom: 1.5rem;
-  background: var(--input-bg);
-  box-shadow: 0 2px 8px var(--shadow);
-  transition: box-shadow 0.3s ease, border-color 0.3s ease;
-  outline-offset: 3px;
+  box-shadow: 0 4px 12px var(--rfi-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.rfi-institution-card:focus,
 .rfi-institution-card:hover {
-  box-shadow: 0 0 15px var(--accent);
-  border-color: var(--accent);
-  cursor: pointer;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px var(--rfi-shadow);
 }
 
 .rfi-inst-name {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 0.7rem;
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  color: var(--accent);
-}
-
-.rfi-inst-type,
-.rfi-inst-description,
-.rfi-inst-country,
-.rfi-inst-city,
-.rfi-inst-phone,
-.rfi-inst-address,
-.rfi-inst-createdAt {
-  font-size: 1rem;
-  margin: 0.3rem 0;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--color-text-primary);
-}
-
-.rfi-user-info {
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1.2px solid var(--input-border);
-  color: var(--color-text-primary);
-  font-size: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 0.2rem;
-}
-
-.rfi-user-info strong {
-  margin-bottom: 0.3rem;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 1.1rem;
-  color: var(--accent);
-}
-
-.rfi-user-fullname {
-  font-weight: 600;
-}
-
-.rfi-user-username,
-.rfi-user-email {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  color: var(--text-muted);
-}
-
-.rfi-buttons {
-  margin-top: 1.3rem;
-  display: flex;
-  gap: 1.2rem;
-}
-
-.rfi-accept-btn,
-.rfi-reject-btn {
-  flex: 1;
-  padding: 0.5rem 0;
-  border: none;
-  border-radius: 0.7rem;
-  font-weight: 700;
-  font-size: 1rem;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-  user-select: none;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.rfi-accept-btn {
-  background-color: var(--btn-bg);
-  color: var(--btn-text);
-  box-shadow: 0 4px 10px var(--shadow);
-}
-
-.rfi-accept-btn:hover,
-.rfi-accept-btn:focus {
-  background-color: var(--btn-hover-bg);
-  outline: none;
-  box-shadow: 0 0 15px var(--btn-hover-bg);
-}
-
-.rfi-reject-btn {
-  background-color: #dc2626;
-  color: white;
-  box-shadow: 0 4px 10px rgba(220, 38, 38, 0.6);
-}
-
-.rfi-reject-btn:hover,
-.rfi-reject-btn:focus {
-  background-color: #b91c1c;
-  outline: none;
-  box-shadow: 0 0 15px #b91c1c;
-}
-
-.rfi-status-text {
-  max-width: 720px;
-  margin: 3rem auto;
-  text-align: center;
   font-size: 1.2rem;
-  font-weight: 600;
-  color: var(--color-text-primary);
-}
-
-.rfi-error-text {
-  color: var(--input-error);
-}
-
-.rfi-no-requests-message {
-  color: var(--text-muted);
-}
-
-@media (max-width: 600px) {
-  .rfi-container {
-    margin: 1rem;
-    padding: 1rem 1.2rem;
-  }
-  .rfi-title {
-    font-size: 1.5rem;
-  }
-  .rfi-inst-name {
-    font-size: 1.2rem;
-  }
-  .rfi-accept-btn,
-  .rfi-reject-btn {
-    font-size: 0.9rem;
-    padding: 0.45rem 0;
-  }
-  .rfi-buttons {
-    flex-direction: column;
-    gap: 0.8rem;
-  }
-}
-
-.rfi-container {
-  padding: 20px;
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-.rfi-title {
-  font-size: 24px;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.rfi-status-text {
-  text-align: center;
-  font-size: 18px;
-  margin-top: 30px;
-}
-
-.rfi-error-text {
-  color: red;
-}
-
-.rfi-no-requests-message {
-  color: gray;
-}
-
-.rfi-institution-list {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.rfi-institution-card {
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 16px;
-  background-color: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-
-.rfi-inst-name {
-  font-size: 20px;
-  margin-bottom: 10px;
+  color: var(--rfi-accent);
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 0.4rem;
+  margin-bottom: 0.8rem;
+  word-break: break-word;
 }
 
 .rfi-carousel {
   position: relative;
-  width: 100%;
-  height: 250px;
-  border-radius: 10px;
+  margin-bottom: 1rem;
   overflow: hidden;
-  margin-bottom: 10px;
+  border-radius: 0.5rem;
+  max-width: 250px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .rfi-carousel-image {
   width: 100%;
-  height: 100%;
+  max-width: 250px;
+  height: auto;
   object-fit: cover;
-  border-radius: 10px;
-  user-select: none;
-  pointer-events: none;
+  object-position: center;
+  border-radius: 0.5rem;
+  border: 1px solid var(--rfi-border);
+  box-shadow: 0 1px 6px var(--rfi-shadow);
+  animation: fadeIn 0.4s ease;
+  display: block;
+  image-rendering: auto;
 }
 
 .rfi-carousel-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.3);
+  background-color: var(--rfi-card-bg);
+  color: var(--rfi-accent);
   border: none;
-  color: white;
-  font-size: 24px;
+  padding: 0.4rem 0.6rem;
   cursor: pointer;
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  user-select: none;
+  font-size: 1.3rem;
+  box-shadow: 0 1px 4px var(--rfi-shadow);
+  transition: background-color 0.3s;
+  z-index: 2;
 }
 
 .rfi-carousel-btn.left {
-  left: 10px;
+  left: 8px;
 }
 
 .rfi-carousel-btn.right {
-  right: 10px;
+  right: 8px;
+}
+
+.rfi-carousel-btn:hover {
+  background-color: var(--rfi-accent);
+  color: var(--rfi-card-bg);
+}
+
+.rfi-no-image-text {
+  color: var(--rfi-muted);
+  font-style: italic;
+  margin-bottom: 1rem;
+  text-align: center;
 }
 
 .rfi-inst-type,
 .rfi-inst-description,
 .rfi-inst-state,
 .rfi-inst-createdAt {
-  margin: 4px 0;
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  word-break: break-word;
 }
 
 .rfi-user-info {
-  margin-top: 12px;
-  background-color: #f8f8f8;
-  padding: 10px;
-  border-radius: 8px;
+  margin-top: 1rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rfi-border);
+  text-align: center;
 }
 
 .rfi-user-info strong {
   display: block;
-  margin-bottom: 6px;
-}
-
-.rfi-user-fullname,
-.rfi-user-username,
-.rfi-user-email {
-  margin: 2px 0;
+  margin-bottom: 0.8rem;
+  font-size: 1rem;
+  color: var(--rfi-accent);
 }
 
 .rfi-user-image {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
+  width: 60px;
+  height: 60px;
   object-fit: cover;
-  margin-bottom: 8px;
-  border: 1px solid #ddd;
+  border-radius: 50%;
+  border: 2px solid var(--rfi-accent);
+  box-shadow: 0 1px 6px var(--rfi-shadow);
+  margin-bottom: 0.6rem;
+}
+
+.rfi-user-fullname {
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+  font-size: 0.95rem;
+  word-break: break-word;
+}
+
+.rfi-user-username,
+.rfi-user-email {
+  font-size: 0.85rem;
+  color: var(--rfi-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  word-break: break-word;
 }
 
 .rfi-buttons {
   display: flex;
-  justify-content: end;
-  gap: 10px;
-  margin-top: 12px;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
 }
 
 .rfi-accept-btn,
 .rfi-reject-btn {
-  padding: 8px 12px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 0.3rem;
+  padding: 0.5rem 1.2rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 6px var(--rfi-shadow);
+  color: white;
 }
 
 .rfi-accept-btn {
-  background-color: #28a745;
-  color: white;
+  background-color: #22c55e;
+}
+
+.rfi-accept-btn:hover {
+  background-color: #16a34a;
+  transform: translateY(-1.5px);
+  box-shadow: 0 3px 8px var(--rfi-shadow);
 }
 
 .rfi-reject-btn {
-  background-color: #dc3545;
-  color: white;
+  background-color: #ef4444;
 }
 
+.rfi-reject-btn:hover {
+  background-color: #dc2626;
+  transform: translateY(-1.5px);
+  box-shadow: 0 3px 8px var(--rfi-shadow);
+}
 
-.rfi-no-image-text {
-  font-style: italic;
-  color: var(--text-muted, #888);
+.rfi-status-text {
   text-align: center;
-  margin-bottom: 10px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--rfi-muted);
+  margin-top: 2rem;
+}
+
+.rfi-error-text {
+  color: #f87171;
+}
+
+.rfi-no-requests-message {
+  font-style: italic;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .rfi-container {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+
+  .rfi-title {
+    font-size: 1.7rem;
+  }
+
+  .rfi-carousel {
+    max-width: 200px;
+  }
+
+  .rfi-carousel-image {
+    max-width: 200px;
+  }
+
+  .rfi-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .rfi-accept-btn,
+  .rfi-reject-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .rfi-container {
+    padding: 1.2rem;
+  }
+
+  .rfi-title {
+    font-size: 1.5rem;
+  }
+
+  .rfi-inst-name {
+    font-size: 1rem;
+  }
+
+  .rfi-inst-type,
+  .rfi-inst-description,
+  .rfi-inst-state,
+  .rfi-inst-createdAt {
+    font-size: 0.85rem;
+  }
+
+  .rfi-user-image {
+    width: 48px;
+    height: 48px;
+  }
+
+  .rfi-user-fullname {
+    font-size: 0.9rem;
+  }
+
+  .rfi-carousel {
+    max-width: 160px;
+  }
+
+  .rfi-carousel-image {
+    max-width: 160px;
+  }
 }

@@ -1,4 +1,3 @@
-// ✅ components/Admin/RequestFromInstitutions.jsx
 import React from 'react'
 import './RequestFromInstitutions.css'
 import {
@@ -32,7 +31,6 @@ const translateState = (state) => {
   return map[state] || state
 }
 
-
 export const RequestFromInstitutions = () => {
   const {
     institutions,
@@ -59,7 +57,7 @@ export const RequestFromInstitutions = () => {
           return (
             <li key={inst._id} className="rfi-institution-card">
               <h3 className="rfi-inst-name">
-                <Info size={20} /> {inst.name}
+                <Info size={20} strokeWidth={2} /> {inst.name}
               </h3>
               {images.length > 0 ? (
                 <div className="rfi-carousel">
@@ -92,8 +90,7 @@ export const RequestFromInstitutions = () => {
                 <Info size={18} /> Creado: {inst.createdAt ? new Date(inst.createdAt).toLocaleDateString() : 'No disponible'}
               </p>
               <div className="rfi-user-info">
-                <UserCheck size={18} />
-                <strong>Usuario que solicita:</strong>
+                <strong><UserCheck size={18} /> Usuario que solicita</strong>
                 <img
                   src={inst.userId?.imageUser ? `/uploads/img/users/${inst.userId.imageUser}` : DefaultUserImage}
                   alt="Imagen del usuario"
