@@ -1,7 +1,40 @@
+:root {
+  --notification-bg: #f9fafb;
+  --notification-text: #1f2937;
+  --notification-card-bg: #ffffff;
+  --notification-border: #d1d5db;
+  --notification-shadow: rgba(0, 0, 0, 0.05);
+  --notification-accent: #2563eb;
+  --notification-muted: #6b7280;
+  --notification-danger: #dc2626;
+}
+
+[data-theme='dark'] {
+  --notification-bg: #18181b;
+  --notification-text: #f9fafb;
+  --notification-card-bg: #27272a;
+  --notification-border: #3f3f46;
+  --notification-shadow: rgba(0, 0, 0, 0.4);
+  --notification-accent: #60a5fa;
+  --notification-muted: #a1a1aa;
+  --notification-danger: #f87171;
+}
+
 .notifications-container {
   max-width: 800px;
   margin: 2rem auto;
-  padding: 1rem;
+  padding: 2rem;
+  background-color: var(--notification-bg);
+  color: var(--notification-text);
+  font-family: system-ui, sans-serif;
+}
+.notifications-container h2 {
+  color: var(--notification-accent);
+}
+
+.notifications-container h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .notification-list {
@@ -10,26 +43,71 @@
 }
 
 .notification-item {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 1rem;
+  background-color: var(--notification-card-bg);
+  border: 1px solid var(--notification-border);
+  border-radius: 10px;
+  padding: 1.25rem;
   margin-bottom: 1rem;
-  background-color: #fefefe;
-  transition: background-color 0.2s ease;
+  box-shadow: 0 2px 6px var(--notification-shadow);
+  transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 .notification-item.unread {
-  background-color: #e6f7ff;
+  border-left: 4px solid var(--notification-accent);
+  background-color: rgba(37, 99, 235, 0.05);
+}
+
+.notification-item.unread.dark {
+  background-color: rgba(96, 165, 250, 0.1);
 }
 
 .message {
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .meta {
   font-size: 0.85rem;
-  color: #555;
+  color: var(--notification-muted);
   display: flex;
   justify-content: space-between;
   margin-top: 0.5rem;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.actions {
+  margin-top: 1rem;
+}
+
+.actions button {
+  margin-right: 0.5rem;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Botón primario */
+.actions button.mark-read {
+  background-color: var(--notification-accent);
+  color: white;
+}
+
+.actions button.mark-read:hover {
+  background-color: #1d4ed8;
+}
+
+/* Botón de eliminar */
+.actions button.delete {
+  background-color: var(--notification-danger);
+  color: white;
+}
+
+.actions button.delete:hover {
+  background-color: #b91c1c;
 }

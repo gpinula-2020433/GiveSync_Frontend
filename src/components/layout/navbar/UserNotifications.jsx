@@ -34,9 +34,19 @@ export const UserNotifications = () => {
               </div>
               <div className="actions">
                 {!notif.isRead && (
-                  <button onClick={() => markAsRead(notif._id)}>Marcar como leída</button>
+                  <button
+                    className="mark-read"
+                    onClick={() => markAsRead(notif._id)}
+                  >
+                    Marcar como leída
+                  </button>
                 )}
-                <button onClick={() => deleteNotification(notif._id)}>Eliminar</button>
+                <button
+                  className="delete"
+                  onClick={() => deleteNotification(notif._id)}
+                >
+                  Eliminar
+                </button>
               </div>
             </li>
           ))}
