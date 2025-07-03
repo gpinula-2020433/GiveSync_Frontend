@@ -27,10 +27,9 @@ import {UserInformation} from '../src/pages/UserSettingsPage/UserInformation/Use
 import InstitutionDetail from './pages/MainPage/DetailsInstitutionPage/InstitutionDetail'
 import {CommentsPage}  from './pages/CommentsPage/CommentsPage'
 import ConfigurationPublication from './pages/SectionInstitutionPage/configurationPublication/ConfigurationPublication'
-import { ProtectedRoute } from './shared/utils/ProtectedRoute'
 import { UserNotifications } from './components/layout/navbar/UserNotifications'
 import { UnderConstruction } from './components/underConstruction/UnderConstruction'
-
+import { ProtectedRoute, ProtectedRouteAdmin, ProtectedRouteInstitution } from './shared/utils/ProtectedRoute'
 
 export const routes = [
   {
@@ -59,18 +58,23 @@ export const routes = [
   ]
 },
   {
-    path: '/admin',
-    element: <AdminPage />,
+    element: <ProtectedRouteAdmin/>,
     children: [
-      { path: '', element: <Navigate to="ListOfInstitutions" /> },
-      { path: 'AllDonationsMade', element: <AllDonationsMade/>},
-      { path: 'ListOfInstitutions', element: <ListOfInstitutions/>},
-      { path: 'RegisteredUsers', element: <RegisteredUsers/>},
-      { path: 'RequestFromInstitutions', element: <RequestFromInstitutions/>}
+      {
+        path: '/admin',
+        element: <AdminPage />,
+        children: [
+          { path: '', element: <Navigate to="ListOfInstitutions" /> },
+          { path: 'AllDonationsMade', element: <AllDonationsMade/>},
+          { path: 'ListOfInstitutions', element: <ListOfInstitutions/>},
+          { path: 'RegisteredUsers', element: <RegisteredUsers/>},
+          { path: 'RequestFromInstitutions', element: <RequestFromInstitutions/>}
+        ]
+      },
     ]
   },
     {
-      element: <ProtectedRoute/>,
+      element: <ProtectedRouteInstitution/>,
       children: [
         {
             path: '/sectioninstitution',
