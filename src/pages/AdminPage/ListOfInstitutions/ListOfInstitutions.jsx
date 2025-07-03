@@ -5,7 +5,8 @@ import './ListOfInstitutions.css';
 
 import {
   getInstitutionsRequest,
-  deleteInstitutionRequest
+  deleteInstitutionRequest,
+  generateExcel
 } from "../../../services/api";
 
 export const ListOfInstitutions = () => {
@@ -76,7 +77,9 @@ export const ListOfInstitutions = () => {
       <div className="container mt-4">
         <ToastContainer position="top-right" autoClose={2500} />
         <h2 className="fw-bold mb-3">Todas las instituciones</h2>
-
+        <button className="btn btn-success" onClick={generateExcel}>
+          Descargar Excel
+        </button>
         <table className="table table-hover table-bordered align-middle shadow-sm">
           <thead className="table-dark text-center">
             <tr>
