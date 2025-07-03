@@ -14,6 +14,12 @@ const InstitutionDetail = () => {
   const { publications, loading: loadingPublications, error: errorPublications, refetch } = usePublicationsByInstitution(id)
   const {user} = useAuthenticatedUser()
   const navigate = useNavigate(); 
+  // Diccionario para traducir tipos al español
+  const typeLabels = {
+    EATERS: 'Comedor',
+    ORPHANAGE: 'Orfanato',
+    ACYL: 'Hogar de Ancianos',
+  }
 
   useEffect(() => {
     fetchInstitutionById(id)
@@ -244,8 +250,8 @@ const InstitutionDetail = () => {
         {carouselActive ? 'Ver imágenes estáticas' : 'Ver como carrusel'}
       </button>
 
-      <p><strong>Tipo:</strong> {institution.type || 'No especificado'}</p>
-      <p><strong>Estado:</strong> {institution.status || 'Desconocido'}</p>
+
+<p><strong>Tipo:</strong> {typeLabels[institution.type] || 'No especificado'}</p>
 
       {/* Formulario para agregar publicación */}
 

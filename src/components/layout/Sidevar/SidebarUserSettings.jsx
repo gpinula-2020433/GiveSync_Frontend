@@ -3,16 +3,29 @@ import { Link } from 'react-router-dom';
 import {
   FaUser,
   FaHistory,
-  FaPlusCircle
+  FaPlusCircle,
 } from 'react-icons/fa';
 import './Sidevar.css';
+import './sidebaruser.css'
 
 function SidebarUserSettings() {
   const [isOpen, setIsOpen] = useState(true);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   const toggleSidebar = () => setIsOpen(!isOpen);
 
   useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+      if (window.innerWidth > 768) setIsOpen(true);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) return;
+
     const handleMouseMove = (e) => {
       if (e.clientX < 60 && !isOpen) {
         setIsOpen(true);
@@ -23,7 +36,7 @@ function SidebarUserSettings() {
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [isOpen]);
+  }, [isOpen, isMobile]);
 
   return (
     <>
@@ -35,13 +48,9 @@ function SidebarUserSettings() {
         {isOpen ? '←' : '→'}
       </button>
 
-      <aside
-        className={`sidebar p-3 d-flex flex-column ${isOpen ? 'open' : 'closed'}`}
-      >
-        <div
-          className="d-flex flex-column justify-content-center flex-grow-1"
-          style={{ position: 'relative', top: '-40px' }}
-        >
+      <aside className={`sidebar user-sidebar p-3 d-flex flex-column ${isOpen ? 'open' : 'closed'}`}>
+
+        <div className="d-flex flex-column justify-content-center flex-grow-1" style={{ position: 'relative', top: '-40px' }}>
           <ul className="list-unstyled mt-3">
             <li>
               <Link to="/usersettings/UserInformation" className="py-2 px-3 rounded d-block hover-sidebar">
@@ -56,7 +65,6 @@ function SidebarUserSettings() {
             <li>
               <Link to="/usersettings/RequestToRegisterAnInstitution" className="py-2 px-3 rounded d-block hover-sidebar">
                 <FaPlusCircle className="me-2" />Solicitud para registrar mi institución
-                {/* Aquí aparece el formulario si la persona logeada no tiene institución */}
               </Link>
             </li>
           </ul>

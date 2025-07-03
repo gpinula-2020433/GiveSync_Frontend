@@ -5,16 +5,27 @@ import {
   FaUsers,
   FaDonate,
   FaClipboardList,
-  FaChartBar
 } from 'react-icons/fa';
 import './Sidevar.css';
 
 function SidebarAdmin() {
   const [isOpen, setIsOpen] = useState(true);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   const toggleSidebar = () => setIsOpen(!isOpen);
 
   useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+      if (window.innerWidth > 768) setIsOpen(true);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) return;
+
     const handleMouseMove = (e) => {
       if (e.clientX < 60 && !isOpen) {
         setIsOpen(true);
@@ -25,7 +36,7 @@ function SidebarAdmin() {
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [isOpen]);
+  }, [isOpen, isMobile]);
 
   return (
     <>
@@ -37,9 +48,7 @@ function SidebarAdmin() {
         {isOpen ? '←' : '→'}
       </button>
 
-      <aside
-        className={`sidebar p-3 d-flex flex-column ${isOpen ? 'open' : 'closed'}`}
-      >
+      <aside className={`sidebar p-3 d-flex flex-column ${isOpen ? 'open' : 'closed'}`}>
         <div className="d-flex flex-column justify-content-center flex-grow-1" style={{ position: 'relative', top: '-40px' }}>
           <ul className="list-unstyled mt-3">
             <li>

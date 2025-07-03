@@ -1,0 +1,86 @@
+html, body {
+  width: 100%;
+}
+
+body {
+  background-size: cover;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+}
+
+.homepage-container {
+  width: 100%;
+  padding: 40px 100px;
+  box-sizing: border-box;
+}
+
+.title {
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+}
+
+.filter-buttons {
+  margin-bottom: 40px;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.filter-buttons button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.filter-buttons button:hover {
+  background-color: #0056b3;
+}
+
+.institution-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 40px; /* más separación horizontal */
+}
+
+.institution-card {
+  border: 1px solid #ccc;
+  padding: 28px;
+  border-radius: 12px;
+  background-color: #1a1a1a;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.institution-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 18px;
+}
+
+.details-button {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 10px 22px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.details-button:hover {
+  background-color: #0056b3;
+}

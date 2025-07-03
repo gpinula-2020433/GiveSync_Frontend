@@ -33,7 +33,7 @@ html, body, #root {
   padding: 2rem;
   margin: 2rem auto;
   width: 95%;
-  max-width: 1200px;
+  max-width: 1600px;
   background: var(--glass-bg);
   border-radius: 20px;
   backdrop-filter: blur(10px);
