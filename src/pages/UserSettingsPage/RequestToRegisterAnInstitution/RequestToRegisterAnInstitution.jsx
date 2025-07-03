@@ -87,6 +87,19 @@ export const RequestToRegisterAnInstitution = () => {
     </div>
   )
 
+  const translateType = (type) => {
+    switch (type) {
+      case 'ORPHANAGE':
+        return 'ORFANATO'
+      case 'ACYL':
+        return 'ASILO'
+      case 'EATERS':
+        return 'COMEDOR'
+      default:
+        return type
+    }
+  }
+
   if (hasInstitution && institution) {
     return (
       <div className="institution-card">
@@ -98,7 +111,7 @@ export const RequestToRegisterAnInstitution = () => {
           <p><span>Descripción:</span> {institution.description}</p>
           <p><span>Dirección:</span> {institution.address}</p>
           <p><span>Teléfono:</span> {institution.phone}</p>
-          <p><span>Tipo:</span> {institution.type}</p>
+          <p><span>Tipo:</span> {translateType(institution.type)}</p>
         </div>
 
         <div>

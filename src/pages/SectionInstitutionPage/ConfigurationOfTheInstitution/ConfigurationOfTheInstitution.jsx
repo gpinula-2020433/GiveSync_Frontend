@@ -16,6 +16,8 @@ export const ConfigurationOfTheInstitution = () => {
     name: "",
     type: "",
     description: "",
+    address: "",
+    phone: ""
   })
   const [imagesPreview, setImagesPreview] = useState([])
   const [images, setImages] = useState([])
@@ -31,6 +33,8 @@ export const ConfigurationOfTheInstitution = () => {
           name: inst.name,
           type: inst.type || 'EATERS',
           description: inst.description,
+          address: inst.address,
+          phone: inst.phone
         })
         setImagesPreview(inst.imageInstitution || [])
       }
@@ -118,6 +122,28 @@ export const ConfigurationOfTheInstitution = () => {
             value={formData.description}
             onChange={handleInputChange}
           ></textarea>
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label">Dirección</label>
+          <input
+            type="text"
+            name="address"
+            className="form-control"
+            value={formData.address}
+            onChange={handleInputChange}
+          />
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label">Teléfono</label>
+          <input
+            type="text"
+            name="phone"
+            className="form-control"
+            value={formData.phone}
+            onChange={handleInputChange}
+          />
         </div>
 
         <div className="mb-3">
