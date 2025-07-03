@@ -77,7 +77,8 @@ export const NotificationProvider = ({ children }) => {
         unreadCount,
         isLoading,
         markAsRead,
-        deleteNotification
+        deleteNotification,
+        fetchNotifications
       }}
     >
       {children}

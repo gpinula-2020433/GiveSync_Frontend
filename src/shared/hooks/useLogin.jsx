@@ -2,11 +2,13 @@ import React, { useState } from 'react'
 import { loginRequest } from '../../services/api'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
+import { useNotificationContext } from './context/NotificationContext'
 
 export const useLogin = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(false)
   const navigate = useNavigate()
+  const { fetchNotifications } = useNotificationContext()
 
   const login = async (userLoggin, password) => {
     setIsLoading(true)
@@ -49,6 +51,8 @@ export const useLogin = () => {
     // Guardar datos del login
     localStorage.setItem('token', token)
     localStorage.setItem('user', JSON.stringify(loggedUser))
+    //Asi refresca las notiticaciones del usuario
+    fetchNotifications()
 
     setError(false)
     toast.success(response.data?.message || 'Login exitoso')
