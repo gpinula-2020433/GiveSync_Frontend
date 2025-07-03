@@ -14,6 +14,25 @@ import {
 import DefaultUserImage from '../../../assets/DefaultUserImage.jpg'
 import { usePendingInstitutions } from '../../../shared/hooks/donation/usePendingInstitutions'
 
+const translateType = (type) => {
+  const map = {
+    ORPHANAGE: 'ORFANATO',
+    EATERS: 'COMEDOR',
+    ACYL: 'ASILO'
+  }
+  return map[type] || type
+}
+
+const translateState = (state) => {
+  const map = {
+    ACCEPTED: 'ACEPTADO',
+    EARRING: 'PENDIENTE',
+    REFUSED: 'RECHAZADO'
+  }
+  return map[state] || state
+}
+
+
 export const RequestFromInstitutions = () => {
   const {
     institutions,
@@ -61,13 +80,13 @@ export const RequestFromInstitutions = () => {
                 <p className="rfi-no-image-text">El usuario no envió imágenes de su institución</p>
               )}
               <p className="rfi-inst-type">
-                <Tag size={18} /> Tipo: {inst.type?.toUpperCase() || 'N/A'}
+                <Tag size={18} /> Tipo: {translateType(inst.type) || 'No especificado'}
               </p>
               <p className="rfi-inst-description">
                 <Info size={18} /> Descripción: {inst.description || 'Sin descripción'}
               </p>
               <p className="rfi-inst-state">
-                <AlertCircle size={18} /> Estado: {inst.state || 'No disponible'}
+                <AlertCircle size={18} /> Estado: {translateState(inst.state) || 'No disponible'}
               </p>
               <p className="rfi-inst-createdAt">
                 <Info size={18} /> Creado: {inst.createdAt ? new Date(inst.createdAt).toLocaleDateString() : 'No disponible'}

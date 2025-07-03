@@ -47,6 +47,8 @@ export const MyInstitution = () => {
     <div className="container py-4 my-institution-container">
       <h2 className="my-institution-title">{institution.name}</h2>
       <p className="my-institution-description">{institution.description}</p>
+      <p className="my-institution-description">Dirección: {institution.address}</p>
+      <p className="my-institution-description">Teléfono: {institution.phone}</p>
       <p className="my-institution-description">Tipo: {traducirTipo(institution.type)}</p>
       <p className="my-institution-description">Estado: {traducirEstado(institution.state)}</p>
 

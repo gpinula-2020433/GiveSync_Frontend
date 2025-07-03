@@ -44,6 +44,24 @@ const InstitutionDetail = () => {
     return () => clearInterval(interval)
   }, [institution, carouselActive])
 
+  const translateType = (type) => {
+    const map = {
+      ORPHANAGE: 'ORFANATO',
+      EATERS: 'COMEDOR',
+      ACYL: 'ASILO'
+    }
+    return map[type] || type
+  }
+
+  const translateState = (state) => {
+    const map = {
+      ACCEPTED: 'ACEPTADO',
+      EARRING: 'PENDIENTE',
+      REFUSED: 'RECHAZADO'
+    }
+    return map[state] || state
+  }
+
   if (loading) return <p>Cargando detalles...</p>
   if (error) return <p>{error}</p>
   if (!institution) return null
@@ -250,8 +268,10 @@ const InstitutionDetail = () => {
         {carouselActive ? 'Ver imágenes estáticas' : 'Ver como carrusel'}
       </button>
 
-
-<p><strong>Tipo:</strong> {typeLabels[institution.type] || 'No especificado'}</p>
+      <p><strong>Dirección:</strong> {institution.address}</p>
+      <p><strong>Teléfono:</strong> {institution.phone}</p>
+      <p><strong>Tipo:</strong> {translateType(institution.type) || 'No especificado'}</p>
+      <p><strong>Estado:</strong> {translateState(institution.state) || 'Desconocido'}</p>
 
       {/* Formulario para agregar publicación */}
 
