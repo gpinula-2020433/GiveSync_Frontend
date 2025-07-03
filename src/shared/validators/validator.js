@@ -42,7 +42,7 @@ export const validatePassConfirm = (password, passConfirm) => {
 /* ---------------------VALIDACIÓN DE TELÉFONO--------------------- */
 export const validatePhone = (phone) => {
     // El teléfono debe tener entre 8 y 15 caracteres (solo números permitidos).
-    const regex = /^[0-9]{8,15}$/
+    const regex = /^[0-9]{8,8}$/
     return regex.test(phone)
 }
 

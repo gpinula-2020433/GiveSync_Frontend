@@ -39,9 +39,9 @@ export const RequestToRegisterAnInstitution = () => {
 
     if(name === 'phone'){
       if(validatePhone(value)){
-        setPhoneError(true)
-      }else{
         setPhoneError(false)
+      }else{
+        setPhoneError(true)
       }
     }
   }
@@ -225,6 +225,7 @@ const Field = ({ label, name, type, value, onChange, error }) => (
         value={value}
         onChange={onChange}
         required
+        maxLength={name === 'phone' ? 15: undefined}
         className={`w-full bg-zinc-800 border ${
           error ? 'border-red-500' : 'border-zinc-600'
         } text-white rounded-lg px-4 py-3 focus:outline-none focus:ring-2 ${
@@ -238,6 +239,7 @@ const Field = ({ label, name, type, value, onChange, error }) => (
         value={value}
         onChange={onChange}
         required
+        maxLength={name === 'phone' ? 8 : undefined}
         className={`w-full bg-zinc-800 border text-white rounded-lg px-4 
           py-3 focus:outline-none focus:ring-2 focus:ring-emerald-500 
           ${error ? 'input-error' : 'border-zinc-600'}`}
@@ -245,7 +247,7 @@ const Field = ({ label, name, type, value, onChange, error }) => (
     )}
     {error && (
       <p className="error-message">
-          El telefono debe tener entre 8 y 15 dígitos y solo contener números.
+          El telefono debe tener 8 dígitos y solo contener números.
       </p>
     )}
   </div>
