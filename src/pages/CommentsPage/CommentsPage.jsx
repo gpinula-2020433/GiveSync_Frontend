@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect  } from 'react'
+import React, { useState, useEffect, useLayoutEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { usePublicationComments } from '../../shared/hooks/comments/usePublicationComments'
 import { deleteComment, addComment, editComment } from '../../services/api'
@@ -13,16 +13,13 @@ export const CommentsPage = () => {
   const [comments, setComments] = useState([])
   const [showForm, setShowForm] = useState(false)
   const [editData, setEditData] = useState(null)
-  const {user} = useAuthenticatedUser()
+  const { user } = useAuthenticatedUser()
 
- 
+
+
   useEffect(() => {
     setComments(initialComments)
   }, [initialComments])
-
-
-  
-  
 
   const handleNewComment = async (formData) => {
     const result = await addComment(formData)
@@ -63,13 +60,13 @@ export const CommentsPage = () => {
     setEditData(null)
     setShowForm(false)
   }
-  const handleClick = (e) => {
-            if (!user) {
-              e.preventDefault() // evita la navegación
-              alert('Debes iniciar sesión para ver detalles')
-            }
-          }
 
+  const handleClick = (e) => {
+    if (!user) {
+      e.preventDefault()
+      alert('Debes iniciar sesión para ver detalles')
+    }
+  }
 
   return (
     <div className="comments-page">
@@ -97,22 +94,20 @@ export const CommentsPage = () => {
         </div>
       )}
 
-      
-
       <button
-  onClick={(e) => {
-    if (!user) {
-      e.preventDefault()
-      alert('Debes iniciar sesión para poder comentar')
-      return
-    }
-    setShowForm(!showForm)
-    setEditData(null)
-  }}
-  className="toggle-form-button"
->
-  {showForm ? 'Cancelar comentario' : 'Agregar comentario'}
-</button>
+        onClick={(e) => {
+          if (!user) {
+            e.preventDefault()
+            alert('Debes iniciar sesión para poder comentar')
+            return
+          }
+          setShowForm(!showForm)
+          setEditData(null)
+        }}
+        className="toggle-form-button"
+      >
+        {showForm ? 'Cancelar comentario' : 'Agregar comentario'}
+      </button>
 
       {showForm && (
         <CommentForm
@@ -130,7 +125,7 @@ export const CommentsPage = () => {
         ) : (
           comments.map((comment) => (
             <div key={comment._id} className="comment-card">
-              <small  className="author">Por: {comment.userId?.name}</small>
+              <small className="author">Por: {comment.userId?.name}</small>
               <p>{comment.content}</p>
               {comment.commentImage && (
                 <img
@@ -140,26 +135,24 @@ export const CommentsPage = () => {
                 />
               )}
               <small className="date">
-                
                 {new Date(comment.createdAt || comment.fecha).toLocaleString()}
               </small>
               {user && user._id === comment.userId?._id && (
-  <div className="comment-actions">
-    <button
-      onClick={() => handleEditClick(comment)}
-      className="edit-btn"
-    >
-      Editar
-    </button>
-    <button
-      onClick={() => handleDeleteComment(comment._id)}
-      className="delete-btn"
-    >
-      Eliminar
-    </button>
-  </div>
-)}
-
+                <div className="comment-actions">
+                  <button
+                    onClick={() => handleEditClick(comment)}
+                    className="edit-btn"
+                  >
+                    Editar
+                  </button>
+                  <button
+                    onClick={() => handleDeleteComment(comment._id)}
+                    className="delete-btn"
+                  >
+                    Eliminar
+                  </button>
+                </div>
+              )}
             </div>
           ))
         )}

@@ -351,9 +351,14 @@ const InstitutionDetail = () => {
         Publicado el: {new Date(pub.date).toLocaleDateString()}
       </p>
       
-     <Link to={`/main/publication/${pub._id}`} className="btn btn-dark btn-sm px-3 shadow-sm">
+     <Link
+  to={`/main/publication/${pub._id}`}
+  className="btn btn-dark btn-sm px-3 shadow-sm"
+  onClick={() => window.scrollTo(0, 0)}
+>
   Ver más
 </Link>
+
 
 
     </li>
