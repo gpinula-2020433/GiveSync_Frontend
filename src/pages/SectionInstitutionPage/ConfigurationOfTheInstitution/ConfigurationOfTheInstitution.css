@@ -1,4 +1,4 @@
-.config-institution {
+.institution-editor {
   max-width: 900px;
   margin: 0 auto;
   padding: 2rem;
@@ -7,13 +7,13 @@
   box-shadow: 0 4px 12px var(--institution-shadow);
 }
 
-.config-institution-form {
+.institution-editor-form {
   max-height: calc(100vh - 170px);
   overflow-y: auto;
   padding-right: 10px;
 }
 
-.config-institution-form select:focus {
+.institution-editor-form select:focus {
   background-color: var(--institution-card-bg) !important;
   color: var(--institution-text) !important;
 }
@@ -24,16 +24,14 @@ h2 {
   color: var(--institution-text);
 }
 
-.form-label {
+.institution-label {
   font-weight: 600;
   margin-bottom: 6px;
   display: inline-block;
   color: var(--institution-text);
 }
 
-input[type="text"],
-textarea,
-input[type="file"] {
+.institution-input {
   border: 1px solid var(--institution-border);
   border-radius: 8px;
   padding: 10px 14px;
@@ -44,18 +42,17 @@ input[type="file"] {
   transition: all 0.3s ease;
 }
 
-input[type="text"]:focus,
-textarea:focus {
+.institution-input:focus {
   border-color: var(--institution-accent);
   outline: none;
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
 }
 
-textarea {
+textarea.institution-input {
   resize: vertical;
 }
 
-.img-fluid {
+.institution-image {
   width: 100%;
   height: auto;
   object-fit: cover;
@@ -63,7 +60,7 @@ textarea {
   transition: transform 0.2s ease;
 }
 
-.img-fluid:hover {
+.institution-image:hover {
   transform: scale(1.02);
 }
 
@@ -82,7 +79,7 @@ textarea {
 }
 
 .btn-primary:hover {
-  background-color: #1e4db7; /* tono más oscuro del accent */
+  background-color: #1e4db7;
   transform: scale(1.02);
 }
 
@@ -107,13 +104,7 @@ textarea {
   }
 }
 
-.form-select {
-  background-color: var(--institution-card-bg) !important;
-  color: var(--institution-text) !important;
-  border: 1px solid var(--institution-border) !important;
-}
-
-.form-control {
+.institution-select {
   background-color: var(--institution-card-bg) !important;
   color: var(--institution-text) !important;
   border: 1px solid var(--institution-border) !important;
