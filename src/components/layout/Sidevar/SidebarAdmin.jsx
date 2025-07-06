@@ -9,7 +9,8 @@ import {
 import './Sidevar.css';
 
 function SidebarAdmin() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(() => window.innerWidth > 768);
+
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   const toggleSidebar = () => setIsOpen(!isOpen);
