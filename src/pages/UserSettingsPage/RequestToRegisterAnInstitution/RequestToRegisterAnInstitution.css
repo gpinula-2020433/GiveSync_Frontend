@@ -147,4 +147,155 @@
   margin-bottom: 1.2rem;
 }
 
-/* ...El resto del CSS queda igual ... */
+.institution-card {
+  background-color: var(--card-bg);
+  padding: 2.5rem 2rem;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 18px var(--shadow-color);
+  border: 1px solid var(--border-color);
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+  animation: fadeIn 0.7s ease forwards;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.institution-card::before {
+  content: "";
+  position: absolute;
+  top: -40%;
+  left: -30%;
+  width: 150%;
+  height: 200%;
+  background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.03), transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.institution-card h1 {
+  font-size: 2rem;
+  margin-bottom: 2.5rem;
+  color: var(--accent);
+  text-align: center;
+  font-weight: bold;
+  letter-spacing: 0.6px;
+  position: relative;
+  z-index: 1;
+}
+
+.institution-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem 2rem;
+  margin-bottom: 2.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.institution-details p {
+  font-size: 1rem;
+  color: var(--text-color);
+  margin: 0;
+  line-height: 1.6;
+  background-color: rgba(255, 255, 255, 0.02);
+  border-left: 4px solid var(--accent);
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+}
+
+.institution-details p span {
+  display: block;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.institution-images-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.institution-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.institution-images img {
+  width: 180px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.institution-images img:hover {
+  transform: scale(1.03);
+}
+
+@media (max-width: 768px) {
+  .institution-details {
+    grid-template-columns: 1fr;
+  }
+
+  .institution-details p {
+    font-size: 0.95rem;
+    padding: 0.75rem;
+  }
+
+  .institution-card {
+    padding: 1.5rem 1.2rem;
+  }
+
+  .institution-card h1 {
+    font-size: 1.5rem;
+  }
+
+  .institution-images {
+    justify-content: center;
+  }
+
+  .institution-images img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .register-institution-page {
+    padding: 1rem 0.5rem;
+  }
+
+  .institution-card {
+    padding: 1.2rem 1rem;
+  }
+
+  .institution-details p span {
+    font-size: 0.8rem;
+  }
+
+  .institution-details p {
+    font-size: 0.9rem;
+  }
+
+  .institution-images {
+    gap: 0.75rem;
+  }
+}

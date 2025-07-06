@@ -106,7 +106,7 @@ export const RequestToRegisterAnInstitution = () => {
       <h1>Ya tienes una institución registrada</h1>
       
       <div>
-        <div>
+        <div className='institution-details'>
           <p><span>Nombre:</span> {institution.name}</p>
           <p><span>Descripción:</span> {institution.description}</p>
           <p><span>Dirección:</span> {institution.address}</p>
@@ -115,17 +115,15 @@ export const RequestToRegisterAnInstitution = () => {
         </div>
 
         <div>
-          <p className="font-semibold mb-2">Imágenes:</p>
-          <div className="row g-3">
+          <p className="institution-images-title">Imágenes:</p>
+          <div className="institution-images">
             {(institution.imageInstitution || []).map((imgUrl, i) => (
-              <div className='col-6 col-md-3'>
                 <img
                   key={i}
                   src={`/uploads/img/users/${imgUrl}`}
                   alt={institution.name}
                   className="my-institution-image"
                 />
-              </div>
             ))}
           </div>
         </div>
