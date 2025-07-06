@@ -82,7 +82,7 @@ export const RequestToRegisterAnInstitution = () => {
   }
 
   if (loading) return (
-    <div className="flex items-center justify-center h-screen bg-zinc-950 text-white text-lg">
+    <div >
       Cargando...
     </div>
   )
@@ -138,7 +138,7 @@ export const RequestToRegisterAnInstitution = () => {
     <div className="register-institution-page">
     <div className="form-container">
       <div>
-        <h1 className="text-4xl font-bold text-white mb-8 text-center">
+        <h1 className="text-4xl font-bold mb-8 text-center">
           Nueva institución
         </h1>
 
@@ -181,7 +181,7 @@ export const RequestToRegisterAnInstitution = () => {
               value={formData.type}
               onChange={handleChange}
               required
-              className="w-full bg-zinc-800 border border-zinc-600 text-white rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-full bg-zinc-800 border border-zinc-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-500"
             >
               <option value="">Selecciona una opción</option>
               <option value="ORPHANAGE">Orfanato</option>
@@ -199,13 +199,13 @@ export const RequestToRegisterAnInstitution = () => {
               accept="image/*"
               multiple
               onChange={handleFileChange}
-              className="w-full bg-zinc-800 text-zinc-300 file:mr-4 file:px-4 file:py-2 file:rounded-lg file:border-0 file:bg-emerald-600 file:text-white hover:file:bg-emerald-700 transition"
+              className="w-full bg-zinc-800 text-zinc-300 file:mr-4 file:px-4 file:py-2 file:rounded-lg file:border-0 file:bg-emerald-600 file: hover:file:bg-emerald-700 transition"
             />
           </div>
 
           <button
             type="submit"
-            className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl transition-shadow shadow-lg hover:shadow-emerald-500/30"
+            className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 font-bold rounded-xl transition-shadow shadow-lg hover:shadow-emerald-500/30"
           >
             Enviar solicitud
           </button>
@@ -228,7 +228,7 @@ const Field = ({ label, name, type, value, onChange, error }) => (
         maxLength={name === 'phone' ? 15: undefined}
         className={`w-full bg-zinc-800 border ${
           error ? 'border-red-500' : 'border-zinc-600'
-        } text-white rounded-lg px-4 py-3 focus:outline-none focus:ring-2 ${
+        } rounded-lg px-4 py-3 focus:outline-none focus:ring-2 ${
           error ? 'focus:ring-red-500' : 'focus:ring-emerald-500'
         } resize-none`}
       />
@@ -240,7 +240,7 @@ const Field = ({ label, name, type, value, onChange, error }) => (
         onChange={onChange}
         required
         maxLength={name === 'phone' ? 8 : undefined}
-        className={`w-full bg-zinc-800 border text-white rounded-lg px-4 
+        className={`w-full bg-zinc-800 border rounded-lg px-4 
           py-3 focus:outline-none focus:ring-2 focus:ring-emerald-500 
           ${error ? 'input-error' : 'border-zinc-600'}`}
       />
