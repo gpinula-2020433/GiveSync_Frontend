@@ -1,4 +1,3 @@
-/* Variables para modo claro */
 :root {
   --bg-primary: #fff;
   --bg-gradient-mid: #e0e0e0;
@@ -11,9 +10,16 @@
   --danger-shadow: rgba(231, 76, 60, 0.4);
   --success-color: #27ae60;
   --border-color: #ccc;
+
+  --user-bg: #f3f4f6;
+  --user-text: #111927;
+  --user-card-bg: #ffffff;
+  --user-border: #e5e7eb;
+  --user-shadow: rgba(0, 0, 0, 0.1);
+  --user-accent: #2563eb;
+  --user-muted: #6b7280;
 }
 
-/* Variables para modo oscuro */
 [data-theme='dark'] {
   --bg-primary: #121212;
   --bg-gradient-mid: #1f1f1f;
@@ -26,17 +32,22 @@
   --danger-shadow: rgba(231, 76, 60, 0.8);
   --success-color: #2ecc71;
   --border-color: #444;
+
+  --user-bg: #1f1f2e;
+  --user-text: #f1f1f1;
+  --user-card-bg: #333349;
+  --user-border: #3f3f52;
+  --user-shadow: rgba(0, 0, 0, 0.6);
+  --user-accent: #7aaaff;
+  --user-muted: #a0a0c0;
 }
 
-/* Tu CSS existente pero con variables */
-
-/* Contenedor */
 .user-container {
   max-width: 500px;
   margin: 2rem auto;
   text-align: center;
   padding: 2rem;
-  background: var(--bg-primary);
+  background: var(--user-bg);
   border-radius: 16px;
   box-shadow: 0 8px 20px var(--shadow-color);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -44,7 +55,7 @@
 }
 
 .user-container .user-image-box {
-  background-color: var(--bg-gradient-mid);
+  background-color: var(--user-card-bg);
   padding: 1.5rem;
   border-radius: 16px;
   margin-bottom: 2rem;
@@ -53,7 +64,7 @@
 }
 
 .user-container .user-image-box:hover {
-  background-color: var(--bg-gradient-top);
+  background-color: var(--user-bg);
 }
 
 .user-container .user-profile-img {
@@ -61,7 +72,7 @@
   height: 160px;
   border-radius: 50%;
   object-fit: cover;
-  border: 4px solid var(--bg-primary);
+  border: 4px solid var(--user-card-bg);
   margin-bottom: 1.25rem;
   box-shadow: 0 4px 12px var(--shadow-color);
   transition: transform 0.3s ease;
@@ -78,7 +89,7 @@
 }
 
 .user-container .image-action-btn {
-  background-color: var(--bg-primary);
+  background-color: var(--user-card-bg);
   color: var(--text-primary);
   border: 2px solid var(--text-primary);
   padding: 0.5rem 1.2rem;
@@ -91,7 +102,7 @@
 
 .user-container .image-action-btn:hover {
   background-color: var(--text-primary);
-  color: var(--bg-primary);
+  color: var(--user-card-bg);
   box-shadow: 0 4px 12px var(--shadow-color);
 }
 
@@ -103,7 +114,7 @@
 
 .user-container .image-action-btn.delete:hover {
   background-color: var(--danger-color);
-  color: var(--bg-primary);
+  color: var(--user-card-bg);
   box-shadow: 0 4px 12px var(--danger-shadow);
 }
 
@@ -120,7 +131,7 @@
   cursor: pointer;
   border-radius: 8px;
   border: 2px solid var(--text-primary);
-  background-color: var(--bg-primary);
+  background-color: var(--user-card-bg);
   color: var(--text-primary);
   box-shadow: 0 2px 6px var(--shadow-color);
   transition: all 0.3s ease;
@@ -128,13 +139,13 @@
 
 .user-container .user-btn:hover {
   background-color: var(--text-primary);
-  color: var(--bg-primary);
+  color: var(--user-card-bg);
   box-shadow: 0 5px 15px var(--shadow-color);
 }
 
 .user-container .user-btn.delete {
   background-color: var(--danger-color);
-  color: var(--bg-primary);
+  color: var(--user-card-bg);
   border-color: var(--danger-color);
   box-shadow: 0 2px 6px var(--danger-shadow);
 }
@@ -165,7 +176,7 @@
 }
 
 .user-container .modal-box {
-  background-color: var(--bg-primary);
+  background-color: var(--user-card-bg);
   padding: 2rem 2.5rem;
   border-radius: 16px;
   text-align: center;
@@ -200,7 +211,7 @@
   flex: 1;
   padding: 0.6rem 1.3rem;
   background-color: var(--text-primary);
-  color: var(--bg-primary);
+  color: var(--user-card-bg);
   border: none;
   cursor: pointer;
   border-radius: 10px;
@@ -235,7 +246,7 @@
   border-radius: 10px;
   font-size: 1rem;
   outline-offset: 2px;
-  background-color: var(--bg-primary);
+  background-color: var(--user-card-bg);
   color: var(--text-primary);
 }
 
