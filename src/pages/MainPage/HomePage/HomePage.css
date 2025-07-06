@@ -104,3 +104,95 @@ html, body {
   background-color: var(--color-card-bg) !important;
   color: var(--color-text-primary) !important;
 }
+
+
+/* Móvil (pantallas hasta 600px) */
+@media (max-width: 600px) {
+  .homepage-container {
+    padding: 20px 16px;
+  }
+
+  .title {
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+  }
+
+  .filter-buttons {
+    gap: 10px;
+  }
+
+  .filter-buttons button {
+    padding: 8px 14px;
+    font-size: 0.9rem;
+  }
+
+  .institution-grid {
+    grid-template-columns: 1fr; /* Solo 1 columna para pantallas pequeñas */
+    gap: 24px;
+  }
+
+  .institution-card {
+    padding: 20px;
+  }
+
+  .institution-image {
+    height: 180px;
+    margin-bottom: 12px;
+  }
+
+  .details-button {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Tablet (entre 601px y 900px) */
+@media (min-width: 601px) and (max-width: 900px) {
+  .homepage-container {
+    padding: 30px 40px;
+  }
+
+  .title {
+    font-size: 1.9rem;
+  }
+
+  .filter-buttons button {
+    padding: 9px 18px;
+    font-size: 1rem;
+  }
+
+  .institution-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+    gap: 32px;
+  }
+
+  .institution-image {
+    height: 200px;
+  }
+}
+
+/* Escritorio pequeño (901px a 1200px) */
+@media (min-width: 901px) and (max-width: 1200px) {
+  .homepage-container {
+    padding: 40px 60px;
+  }
+
+  .institution-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+  }
+
+  .institution-image {
+    height: 210px;
+  }
+}
+
+/* Escritorio grande (más de 1200px) */
+@media (min-width: 1201px) {
+  .homepage-container {
+    padding: 40px 100px;
+  }
+
+  .institution-grid {
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); /* ya está definido */
+  }
+}
