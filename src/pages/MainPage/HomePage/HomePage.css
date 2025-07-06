@@ -1,21 +1,25 @@
 /* MODO CLARO */
 :root {
-  --color-bg: #f5f5f5;
-  --color-text-primary: #111;
-  --color-card-bg: #ffffff;
-  --color-card-border: #ccc;
-  --color-button-bg: #007bff;
-  --color-button-hover: #0056b3;
+  --color-bg: var(--institucion-details-bg);
+  --color-text-primary: var(--institucion-details-text);
+  --color-card-bg: var(--institucion-details-card-bg);
+  --color-card-border: var(--institucion-details-border);
+  --color-button-bg: var(--institucion-details-accent);
+  --color-button-hover: #1c4ed8; /* Un azul más oscuro para hover */
+  --color-muted-text: var(--institucion-details-muted);
+  --color-shadow: var(--institucion-details-shadow);
 }
 
 /* MODO OSCURO */
 [data-theme='dark'] {
-  --color-bg: #121212;
-  --color-text-primary: #ffffff;
-  --color-card-bg: #1e1e1e;
-  --color-card-border: #444;
-  --color-button-bg: #3399ff;
-  --color-button-hover: #2370b8;
+  --color-bg: var(--institucion-details-bg);
+  --color-text-primary: var(--institucion-details-text);
+  --color-card-bg: var(--institucion-details-card-bg);
+  --color-card-border: var(--institucion-details-border);
+  --color-button-bg: var(--institucion-details-accent);
+  --color-button-hover: #5599ff; /* Azul más claro en modo oscuro */
+  --color-muted-text: var(--institucion-details-muted);
+  --color-shadow: var(--institucion-details-shadow);
 }
 
 /* Estilos globales */
@@ -23,6 +27,7 @@ html, body {
   width: 100%;
   background-color: var(--color-bg);
   color: var(--color-text-primary);
+  font-family: 'Arial', sans-serif;
 }
 
 /* Estilos HomePage */
@@ -30,11 +35,14 @@ html, body {
   width: 100%;
   padding: 40px 100px;
   box-sizing: border-box;
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
 }
 
 .title {
   font-size: 2.2rem;
   margin-bottom: 30px;
+  color: var(--color-text-primary);
 }
 
 .filter-buttons {
@@ -53,6 +61,7 @@ html, body {
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  box-shadow: 0 2px 6px var(--color-shadow);
 }
 
 .filter-buttons button:hover {
@@ -74,6 +83,12 @@ html, body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  box-shadow: 0 2px 6px var(--color-shadow);
+  transition: box-shadow 0.3s ease;
+}
+
+.institution-card:hover {
+  box-shadow: 0 6px 12px var(--color-shadow);
 }
 
 .institution-image {
@@ -82,6 +97,7 @@ html, body {
   object-fit: cover;
   border-radius: 8px;
   margin-bottom: 18px;
+  box-shadow: 0 2px 6px var(--color-shadow);
 }
 
 .details-button {
@@ -94,19 +110,24 @@ html, body {
   border-radius: 6px;
   font-weight: bold;
   transition: background-color 0.3s ease;
+  box-shadow: 0 2px 6px var(--color-shadow);
 }
 
 .details-button:hover {
   background-color: var(--color-button-hover);
 }
 
-.institution-card {
-  background-color: var(--color-card-bg) !important;
-  color: var(--color-text-primary) !important;
+.error {
+  color: #ff4d4f; /* rojo para errores, podrías personalizar */
+  font-weight: bold;
 }
 
+.no-institutions-message {
+  color: var(--color-muted-text);
+  font-style: italic;
+}
 
-/* Móvil (pantallas hasta 600px) */
+/* Responsive: igual que antes, no cambian colores */
 @media (max-width: 600px) {
   .homepage-container {
     padding: 20px 16px;
@@ -127,7 +148,7 @@ html, body {
   }
 
   .institution-grid {
-    grid-template-columns: 1fr; /* Solo 1 columna para pantallas pequeñas */
+    grid-template-columns: 1fr;
     gap: 24px;
   }
 
@@ -146,7 +167,6 @@ html, body {
   }
 }
 
-/* Tablet (entre 601px y 900px) */
 @media (min-width: 601px) and (max-width: 900px) {
   .homepage-container {
     padding: 30px 40px;
@@ -162,7 +182,7 @@ html, body {
   }
 
   .institution-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+    grid-template-columns: repeat(2, 1fr);
     gap: 32px;
   }
 
@@ -171,14 +191,13 @@ html, body {
   }
 }
 
-/* Escritorio pequeño (901px a 1200px) */
 @media (min-width: 901px) and (max-width: 1200px) {
   .homepage-container {
     padding: 40px 60px;
   }
 
   .institution-grid {
-    grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .institution-image {
@@ -186,13 +205,12 @@ html, body {
   }
 }
 
-/* Escritorio grande (más de 1200px) */
 @media (min-width: 1201px) {
   .homepage-container {
     padding: 40px 100px;
   }
 
   .institution-grid {
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); /* ya está definido */
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   }
 }
