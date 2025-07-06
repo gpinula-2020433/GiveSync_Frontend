@@ -1,0 +1,158 @@
+.institution-detail {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  transition: max-width 0.3s ease;
+}
+
+.carousel-inactive {
+  max-width: 1000px;
+}
+
+.donate-button {
+  padding: 10px 20px;
+  margin: 15px 0;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.image-wrapper.carousel-mode {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  overflow-x: hidden;
+}
+
+.image-wrapper.static-mode {
+  width: 120%;
+  overflow-x: auto;
+  margin-left: 0%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.carousel-container {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+}
+
+.static-image {
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.3);
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.carousel-button.small {
+  width: 30px;
+  height: 30px;
+}
+
+.carousel-button.left {
+  left: 10px;
+}
+
+.carousel-button.right {
+  right: 10px;
+}
+
+.toggle-carousel {
+  padding: 8px 16px;
+  margin: 0 0 20px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.toggle-carousel.carousel-on {
+  background-color: #dc3545;
+}
+
+.toggle-carousel.carousel-off {
+  background-color: #28a745;
+}
+
+.publication-item {
+  margin-bottom: 20px;
+  list-style: none;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+}
+
+.publication-image-container {
+  position: relative;
+  width: 100%;
+  max-width: 425px;
+  height: 400px;
+  overflow: hidden;
+  margin: 25px auto;
+  border-radius: 10px;
+}
+
+.publication-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.publication-date {
+  font-size: 0.8rem;
+  color: #535151;
+}
+.donate-button:hover {
+  background-color: #0056b3; /* un azul más oscuro */
+}
+
+.toggle-carousel.carousel-on:hover {
+  background-color: #c82333;
+}
+
+.toggle-carousel.carousel-off:hover {
+  background-color: #218838;
+}
+
+.carousel-button:hover {
+  background: rgba(0, 0, 0, 0.5);
+}

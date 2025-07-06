@@ -176,12 +176,18 @@ export const deleteInstitutionRequest = async (id) => {
 }
 
 //ruta para el home donde se mostraran las instituciones acpetadas
-
 export const getAcceptedInstitutions = async () => {
   try {
     const res = await apiClient.get('/v1/institution/all?state=ACCEPTED')
     return res.data
   } catch (err) {
+    if (err.response && err.response.status === 404) {
+      // No hay instituciones, devuelve estructura válida pero vacía
+      return {
+        success: true,
+        institutions: []
+      }
+    }
     return { error: true, err }
   }
 }

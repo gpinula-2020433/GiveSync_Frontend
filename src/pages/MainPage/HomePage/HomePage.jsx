@@ -24,7 +24,6 @@ const HomePage = () => {
       : institutions.filter(inst => inst.type === filteredType)
 
   if (loading) return <p>Cargando instituciones...</p>
-  if (error) return <p>{error}</p>
 
   return (
     <div className="homepage-container">
@@ -37,36 +36,42 @@ const HomePage = () => {
         <button onClick={() => setFilteredType('ACYL')}>{typeLabels.ACYL}</button>
       </div>
 
-      <div className="institution-grid">
-        {filteredInstitutions.map(inst => {
-          let firstImage = null
+      {error && <p className="error">{error}</p>}
 
-          if (inst.imageInstitution) {
-            firstImage = Array.isArray(inst.imageInstitution)
-              ? inst.imageInstitution[0]
-              : inst.imageInstitution.split(',')[0]
-          }
+      {filteredInstitutions.length === 0 ? (
+        <p className="no-institutions-message">No existen instituciones para mostrar.</p>
+      ) : (
+        <div className="institution-grid">
+          {filteredInstitutions.map(inst => {
+            let firstImage = null
 
-          return (
-            <div className="institution-card" key={inst._id}>
-              {firstImage && (
-                <img
-                  src={`/uploads/img/users/${firstImage.trim()}`}
-                  alt={inst.name}
-                  className="institution-image"
-                />
-              )}
-              <h2>{inst.name}</h2>
-              <p><strong>Tipo:</strong> {typeLabels[inst.type]}</p>
-              <p><strong>Dirección:</strong> {inst.address}</p>
-              <p><strong>Descripción:</strong> {inst.description}</p>
-              <Link to={`/main/institution/${inst._id}`} className="details-button">
-                Ver detalles
-              </Link>
-            </div>
-          )
-        })}
-      </div>
+            if (inst.imageInstitution) {
+              firstImage = Array.isArray(inst.imageInstitution)
+                ? inst.imageInstitution[0]
+                : inst.imageInstitution.split(',')[0]
+            }
+
+            return (
+              <div className="institution-card" key={inst._id}>
+                {firstImage && (
+                  <img
+                    src={`/uploads/img/users/${firstImage.trim()}`}
+                    alt={inst.name}
+                    className="institution-image"
+                  />
+                )}
+                <h2>{inst.name}</h2>
+                <p><strong>Tipo:</strong> {typeLabels[inst.type]}</p>
+                <p><strong>Dirección:</strong> {inst.address}</p>
+                <p><strong>Descripción:</strong> {inst.description}</p>
+                <Link to={`/main/institution/${inst._id}`} className="details-button">
+                  Ver detalles
+                </Link>
+              </div>
+            )
+          })}
+        </div>
+      )}
     </div>
   )
 }
