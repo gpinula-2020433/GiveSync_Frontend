@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import DefaultUserImage from '../../../assets/DefaultUserImage.jpg'
 import { useAuthenticatedUser } from '../../../shared/hooks/User/useAuthenticatedUser'
 import { useNotificationContext } from '../../../shared/hooks/context/NotificationContext'
-import logo from '../../../assets/fb.png'
+import logo from '../../../assets/logo.png'
 
 export function Navbar() {
   const navigate = useNavigate()
@@ -77,7 +77,7 @@ export function Navbar() {
       <div className="container-fluid d-flex justify-content-between align-items-center">
         <div className="navbar-brand d-flex align-items-center">
           <img src={logo} alt="logo" className="navbar-logo" />
-          <span className="brand-text">GyveSync</span>
+          <span className="brand-text">GiveSync</span>
         </div>
 
         {/* Botón hamburguesa móvil */}
