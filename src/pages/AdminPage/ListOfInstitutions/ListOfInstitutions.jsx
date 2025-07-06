@@ -81,7 +81,7 @@ export const ListOfInstitutions = () => {
           Descargar Excel
         </button>
         <table className="table table-hover table-bordered align-middle shadow-sm">
-          <thead className="table-dark text-center">
+          <thead className="text-center">
             <tr>
               <th style={{ width: "110px" }}>Imagen</th>
               <th>Usuario / Correo</th>

@@ -13,6 +13,17 @@
   --aaa: black;
 }
 
+:root {
+  --text-primary: #111827;
+  --bg-table: #ffffff;
+}
+
+[data-theme='dark'] {
+  --text-primary: #f1f1f1;
+  --bg-table: #2a2a3b;
+}
+
+
 .list-institutions-page {
   color: var(--text-primary);
   min-height: 100vh;
@@ -28,7 +39,6 @@
   user-select: none;
 }
 
-/* Tabla general */
 .list-institutions-page table {
   width: 100%;
   border-collapse: separate;
@@ -49,6 +59,7 @@
   padding: 1rem;
   font-weight: 600;
   color: var(--text-primary);
+  background-color: var(--bg-table);
   border-bottom: 2px solid var(--border-color);
   text-align: center;
   text-transform: uppercase;
@@ -62,7 +73,6 @@
   overflow: hidden;
   
 }
-
 
 .list-institutions-page tbody tr:hover {
   background-color: var(--bg-hover);
@@ -85,7 +95,6 @@
   border-right: none;
 }
 
-/* Imagen */
 .list-institutions-page img {
   max-height: 75px;
   border-radius: var(--radius);
@@ -93,13 +102,11 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
 }
 
-/* Texto alternativo */
 .list-institutions-page .text-muted {
   color: var(--text-muted);
   font-style: italic;
 }
 
-/* Botón eliminar */
 .list-institutions-page .btn-danger {
   background-color: var(--danger);
   border: none;
@@ -117,7 +124,6 @@
   background-color: var(--danger-hover);
 }
 
-/* Responsive tabla */
 @media (max-width: 768px) {
   .list-institutions-page table,
   .list-institutions-page thead,
@@ -126,6 +132,7 @@
   .list-institutions-page td,
   .list-institutions-page tr {
     display: block;
+    width: 100%;
   }
 
   .list-institutions-page thead {
@@ -134,16 +141,18 @@
 
   .list-institutions-page tbody tr {
     margin-bottom: 1.5rem;
+    background-color: var(--bg-table);
+    border: 1px solid var(--border-color);
     border-radius: var(--radius);
     padding: 1rem;
-    background-color: var(--bg-table);
   }
 
   .list-institutions-page tbody td {
     border: none;
     position: relative;
-    padding-left: 50%;
+    padding: 0.75rem 1rem 0.75rem 50%;
     text-align: left;
+    font-weight: 500;
   }
 
   .list-institutions-page tbody td::before {
@@ -152,13 +161,12 @@
     left: 1rem;
     top: 50%;
     transform: translateY(-50%);
-    color: var(--accent);
     font-weight: 700;
-    text-transform: uppercase;
+    color: var(--accent);
     white-space: nowrap;
   }
 
   .list-institutions-page tbody td:last-child {
-    padding-left: 1rem;
+    padding-left: 50%;
   }
 }
