@@ -14,6 +14,8 @@ const InstitutionDetail = () => {
   const { publications, loading: loadingPublications, error: errorPublications } = usePublicationsByInstitution(id)
   const { user } = useAuthenticatedUser()
   const navigate = useNavigate()
+  const [showLoginModal, setShowLoginModal] = useState(false)
+
 
   useEffect(() => {
     fetchInstitutionById(id)
@@ -77,12 +79,26 @@ const InstitutionDetail = () => {
   return (
     <div className={`institution-detail ${carouselActive ? 'carousel-active' : 'carousel-inactive'}`}>
       <h1>{institution.name}</h1>
-      <p><strong>Descripción:</strong> {institution.description}</p>
 
-      <button
+      <div className="details-list">
+        <p className="details-description">
+          <i className="fa-solid fa-info-circle"></i> <strong>Descripción:</strong> {institution.description}
+        </p>
+        <p className="details-address">
+          <i className="fa-solid fa-location-dot"></i> <strong>Dirección:</strong> {institution.address}
+        </p>
+        <p className="details-phone">
+          <i className="fa-solid fa-phone"></i> <strong>Teléfono:</strong> {institution.phone}
+        </p>
+        <p className="details-type">
+          <i className="fa-solid fa-tags"></i> <strong>Tipo:</strong> {translateType(institution.type) || 'No especificado'}
+        </p>
+      </div>
+
+            <button
         onClick={() => {
           if (!user) {
-            alert('Debes iniciar sesión para donar')
+            setShowLoginModal(true)
             return
           }
           navigate(`/main/institution/${institution._id}/donate`)
@@ -129,11 +145,6 @@ const InstitutionDetail = () => {
         {carouselActive ? 'Ver imágenes estáticas' : 'Ver como carrusel'}
       </button>
 
-      <p><strong>Dirección:</strong> {institution.address}</p>
-      <p><strong>Teléfono:</strong> {institution.phone}</p>
-      <p><strong>Tipo:</strong> {translateType(institution.type) || 'No especificado'}</p>
-      <p><strong>Estado:</strong> {translateState(institution.state) || 'Desconocido'}</p>
-
       <div>
         <h2>Publicaciones recientes</h2>
         {loadingPublications ? (
@@ -176,13 +187,22 @@ const InstitutionDetail = () => {
                 </p>
 
                 <Link to={`/main/publication/${pub._id}`} className="btn btn-dark btn-sm px-3 shadow-sm" onClick={() => window.scrollTo(0, 0)}>
-                  Ver más
+                  Ver comentarios
                 </Link>
               </li>
             ))}
           </ul>
         )}
       </div>
+
+      {showLoginModal && (
+  <div className="modal-overlay">
+    <div className="modal-content">
+      <p>Debes iniciar sesión para donar</p>
+      <button onClick={() => setShowLoginModal(false)} className="btn btn-secondary">Cerrar</button>
+    </div>
+  </div>
+)}
     </div>
   )
 }
