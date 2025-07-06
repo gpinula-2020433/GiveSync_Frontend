@@ -176,8 +176,8 @@
   border: 1px solid var(--primary-color);
   border-radius: 10px;
   overflow: hidden;
-  min-width: 220px; /* <- aumenta de 180px a 220px */
-  z-index: 1000;
+  min-width: 220px;
+  z-index: 2000;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
@@ -347,5 +347,37 @@
   /* Ajuste del texto en navbar-brand para móvil */
   .brand-text {
     font-size: 1.2rem;
+  }
+}
+@media (max-width: 768px) {
+  .menu-items.open {
+    overflow: visible !important;
+  }
+
+  /* Perfil centrado en menú */
+  .profile-container {
+    position: relative; /* para que el dropdown se posicione relativo a este contenedor */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .profile-img {
+    width: 56px;
+    height: 56px;
+    border-width: 3px;
+  }
+
+  /* Ajustar dropdown para que quede dentro del menú */
+  .profile-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px; /* un poco menos que el ancho del menú */
+    right: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
   }
 }

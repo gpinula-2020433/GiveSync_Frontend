@@ -27,7 +27,7 @@ const HomePage = () => {
 
   return (
     <div className="homepage-container">
-      <h1 className="title">Instituciones Aceptadas</h1>
+      <h1 className="title">Instituciones</h1>
 
       <div className="filter-buttons">
         <button onClick={() => setFilteredType('ALL')}>Todas</button>
