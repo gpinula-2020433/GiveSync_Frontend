@@ -324,3 +324,78 @@
         font-size: 13px;
     }
 }
+
+/* Mejoras para dispositivos pequeños */
+@media (max-width: 768px) {
+    .login-container,
+    .register-container {
+        padding: 24px 18px;
+        margin: 10px;
+        max-width: 95%;
+    }
+
+    .auth-form-logo-container img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .auth-form-logo-container h1 {
+        font-size: clamp(18px, 5vw, 22px);
+    }
+
+    .auth-form input,
+    .auth-form button {
+        padding: 12px 14px 12px 42px;
+        font-size: 14px;
+    }
+
+    .auth-form-label {
+        font-size: 13px;
+    }
+
+    .auth-form button {
+        padding: 12px;
+        font-size: 15px;
+    }
+
+    .redirect-to-login {
+        padding: 10px;
+    }
+
+    .redirect-to-login p {
+        font-size: 13px;
+        line-height: 1.4;
+    }
+
+    .redirect-to-login a {
+        font-size: 13px;
+    }
+
+    .auth-form-validation-message {
+        font-size: 12px;
+    }
+
+    .input-icon {
+        font-size: 16px;
+        left: 12px;
+    }
+}
+
+/* Extra small screens (phones < 480px) */
+@media (max-width: 480px) {
+    .auth-form input {
+        padding: 12px 12px 12px 38px;
+    }
+
+    .auth-form-logo-container h1 {
+        font-size: 18px;
+    }
+
+    .auth-form button {
+        font-size: 14px;
+    }
+
+    .auth-form-validation-message {
+        font-size: 11px;
+    }
+}
