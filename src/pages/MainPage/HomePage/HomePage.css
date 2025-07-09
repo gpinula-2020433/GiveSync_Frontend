@@ -214,3 +214,11 @@ html, body {
     grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   }
 }
+
+.no-institutions-message {
+  color: var(--color-muted-text);
+  font-style: italic;
+  text-align: center; /* Centra horizontalmente el texto */
+  margin: 80px 0; /* Añade espacio vertical */
+  font-size: 1.2rem;
+}
