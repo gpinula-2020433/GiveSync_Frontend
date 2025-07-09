@@ -75,10 +75,10 @@ export function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg bg-dark text-white px-4 shadow fixed-top">
       <div className="container-fluid d-flex justify-content-between align-items-center">
-        <div className="navbar-brand d-flex align-items-center">
-          <img src={logo} alt="logo" className="navbar-logo" />
-          <span className="brand-text">GiveSync</span>
-        </div>
+        <Link to="/main/home" className="navbar-brand d-flex align-items-center text-decoration-none">
+        <img src={logo} alt="logo" className="navbar-logo" />
+        <span className="brand-text">GiveSync</span>
+      </Link>
 
         {/* Botón hamburguesa móvil */}
         <button
