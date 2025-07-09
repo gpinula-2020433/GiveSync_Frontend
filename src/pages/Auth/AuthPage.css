@@ -19,7 +19,6 @@
     overflow: auto;
     position: relative;
     padding: 20px;
-    animation: fadeIn 1s ease-in-out;
 }
  
 /* Contenedor del formulario */

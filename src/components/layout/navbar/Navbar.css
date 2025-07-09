@@ -120,15 +120,6 @@
   }
 }
  
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
- 
-.navbar {
-  animation: fadeIn 0.5s ease-out forwards;
-}
- 
 .navbar a:hover i {
   text-shadow: 0 0 8px rgba(52, 152, 219, 0.7);
 }

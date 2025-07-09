@@ -10,7 +10,7 @@ const MainPage = () => {
     <div className="main-page-container">
       <div className="d-flex flex-column" style={{ minHeight: '100vh' }}>
         <Navbar />
-        <div className="flex-grow-1" style={{ marginTop: '60px', minHeight: '70vh' }}>
+        <div className="flex-grow-1" style={{ marginTop: '60px', minHeight: '80vh' }}>
           <Outlet />
         </div>
         <Footer />
