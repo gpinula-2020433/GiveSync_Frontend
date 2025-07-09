@@ -80,6 +80,7 @@ export function Navbar() {
         <span className="brand-text">GiveSync</span>
       </Link>
 
+
         {/* Botón hamburguesa móvil */}
         <button
           className={`hamburger-btn ${isMenuOpen ? 'open' : ''}`}
@@ -102,12 +103,12 @@ export function Navbar() {
             <i className={`fas fa-${isDarkMode ? 'sun' : 'moon'}`}></i>
           </button>
 
-          <Link to="/main/home" className="text-light text-decoration-none" onClick={() => setIsMenuOpen(false)}>
+          <Link to="/main/home" className="navbar-link text-light text-decoration-none" onClick={() => setIsMenuOpen(false)}>
             <i className="fas fa-house"></i> Principal
           </Link>
 
           {!isLoggedIn && (
-            <Link to="/auth/login" className="text-light text-decoration-none" onClick={() => setIsMenuOpen(false)}>
+            <Link to="/auth/login" className="navbar-link text-light text-decoration-none" onClick={() => setIsMenuOpen(false)}>
               <i className="fas fa-right-to-bracket"></i> Iniciar Sesión
             </Link>
           )}
@@ -115,18 +116,18 @@ export function Navbar() {
           {isLoggedIn && user && !isLoading && (
             <>
               {user.hasInstitution && (
-                <Link to="/sectioninstitution" className="text-light text-decoration-none" onClick={() => setIsMenuOpen(false)}>
+                <Link to="/sectioninstitution" className="navbar-link text-light text-decoration-none" onClick={() => setIsMenuOpen(false)}>
                   <i className="fas fa-hands-helping"></i> Institución
                 </Link>
               )}
               {isAdmin && (
-                <Link to="/admin" className="text-light text-decoration-none" onClick={() => setIsMenuOpen(false)}>
+                <Link to="/admin" className="navbar-link text-light text-decoration-none" onClick={() => setIsMenuOpen(false)}>
                   <i className="fas fa-tools"></i> Administración
                 </Link>
               )}
                 <Link
                   to="/main/myNotifications"
-                  className="text-light text-decoration-none position-relative"
+                  className="navbar-link text-light text-decoration-none position-relative"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <i className="fas fa-bell me-2"></i> Notificaciones
