@@ -12,7 +12,7 @@
  
 .navbar {
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, var(--dark-color), #1a1a2e) !important;
+  background: linear-gradient(#1a1a2e, #1a1a2e) !important;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
   padding: 0.8rem 1rem !important;
   transition: all var(--transition-speed) ease;

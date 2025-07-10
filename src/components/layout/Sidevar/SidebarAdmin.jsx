@@ -53,22 +53,22 @@ function SidebarAdmin() {
         <div className="d-flex flex-column justify-content-center flex-grow-1" style={{ position: 'relative', top: '-40px' }}>
           <ul className="list-unstyled mt-3">
             <li>
-              <Link to="/admin/ListOfInstitutions" className="py-2 px-3 rounded d-block hover-sidebar">
+              <Link to="/admin/ListOfInstitutions"  onClick={() => isMobile && setIsOpen(false)} className="py-2 px-3 rounded d-block hover-sidebar">
                 <FaHotel className="me-2" />Instituciones
               </Link>
             </li>
             <li>
-              <Link to="/admin/RequestFromInstitutions" className="py-2 px-3 rounded d-block hover-sidebar">
+              <Link to="/admin/RequestFromInstitutions"  onClick={() => isMobile && setIsOpen(false)} className="py-2 px-3 rounded d-block hover-sidebar">
                 <FaClipboardList className="me-2" />Solicitudes de Instituciones
               </Link>
             </li>
             <li>
-              <Link to="/admin/AllDonationsMade" className="py-2 px-3 rounded d-block hover-sidebar">
+              <Link to="/admin/AllDonationsMade"  onClick={() => isMobile && setIsOpen(false)} className="py-2 px-3 rounded d-block hover-sidebar">
                 <FaDonate className="me-2" />Donaciones
               </Link>
             </li>
             <li>
-              <Link to="/admin/RegisteredUsers" className="py-2 px-3 rounded d-block hover-sidebar">
+              <Link to="/admin/RegisteredUsers"  onClick={() => isMobile && setIsOpen(false)} className="py-2 px-3 rounded d-block hover-sidebar">
                 <FaUsers className="me-2" />Usuarios
               </Link>
             </li>

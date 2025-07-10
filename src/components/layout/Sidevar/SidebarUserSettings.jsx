@@ -53,17 +53,17 @@ function SidebarUserSettings() {
         <div className="d-flex flex-column justify-content-center flex-grow-1" style={{ position: 'relative', top: '-40px' }}>
           <ul className="list-unstyled mt-3">
             <li>
-              <Link to="/usersettings/UserInformation" className="py-2 px-3 rounded d-block hover-sidebar">
+              <Link to="/usersettings/UserInformation"  onClick={() => isMobile && setIsOpen(false)} className="py-2 px-3 rounded d-block hover-sidebar">
                 <FaUser className="me-2" />Información de mi usuario
               </Link>
             </li>
             <li>
-              <Link to="/usersettings/DonationHistory" className="py-2 px-3 rounded d-block hover-sidebar">
+              <Link to="/usersettings/DonationHistory"  onClick={() => isMobile && setIsOpen(false)} className="py-2 px-3 rounded d-block hover-sidebar">
                 <FaHistory className="me-2" />Historial de donaciones hechas
               </Link>
             </li>
             <li>
-              <Link to="/usersettings/RequestToRegisterAnInstitution" className="py-2 px-3 rounded d-block hover-sidebar">
+              <Link to="/usersettings/RequestToRegisterAnInstitution"  onClick={() => isMobile && setIsOpen(false)} className="py-2 px-3 rounded d-block hover-sidebar">
                 <FaPlusCircle className="me-2" />Solicitud para registrar mi institución
               </Link>
             </li>

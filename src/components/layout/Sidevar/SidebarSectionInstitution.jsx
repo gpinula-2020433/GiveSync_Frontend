@@ -51,22 +51,22 @@ function SidebarSectionInstitution() {
         <div className="d-flex flex-column justify-content-center flex-grow-1" style={{ position: 'relative', top: '-40px' }}>
           <ul className="list-unstyled mt-3">
             <li>
-              <Link to="/sectioninstitution/MyInstitution" className="py-2 px-3 rounded d-block hover-sidebar">
+              <Link to="/sectioninstitution/MyInstitution"  onClick={() => isMobile && setIsOpen(false)} className="py-2 px-3 rounded d-block hover-sidebar">
                 <FaHotel className="me-2" />Mi Institución
               </Link>
             </li>
             <li>
-              <Link to="/sectioninstitution/DonationsToMyInstitution" className="py-2 px-3 rounded d-block hover-sidebar">
+              <Link to="/sectioninstitution/DonationsToMyInstitution"  onClick={() => isMobile && setIsOpen(false)} className="py-2 px-3 rounded d-block hover-sidebar">
                 <FaDonate className="me-2" />Donaciones a mi Institución
               </Link>
             </li>
             <li>
-              <Link to="/sectioninstitution/ConfigurationOfTheInstitution" className="py-2 px-3 rounded d-block hover-sidebar">
+              <Link to="/sectioninstitution/ConfigurationOfTheInstitution"  onClick={() => isMobile && setIsOpen(false)} className="py-2 px-3 rounded d-block hover-sidebar">
                 <FaCog className="me-2" />Configurar Institución
               </Link>
             </li>
             <li>
-              <Link to="/sectioninstitution/ConfigurationPublication" className="py-2 px-3 rounded d-block hover-sidebar">
+              <Link to="/sectioninstitution/ConfigurationPublication"  onClick={() => isMobile && setIsOpen(false)} className="py-2 px-3 rounded d-block hover-sidebar">
                 <FaCog className="me-2" />Administrar Publicaciones
               </Link>
             </li>
