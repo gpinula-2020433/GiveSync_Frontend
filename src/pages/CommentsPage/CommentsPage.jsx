@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { usePublicationComments } from '../../shared/hooks/comments/usePublicationComments'
 import { deleteComment, addComment, editComment } from '../../services/api'
 import { CommentForm } from '../../components/comments/CommentForm'
-import { useAuthenticatedUser } from '../../shared/hooks/User/useAuthenticatedUser'
+import { useAuthenticatedUserContext } from '../../shared/hooks/User/useAuthenticatedUser'
 import './CommentsPage.css'
 
 export const CommentsPage = () => {
@@ -14,7 +14,7 @@ export const CommentsPage = () => {
   const [showForm, setShowForm] = useState(false)
   const [editData, setEditData] = useState(null)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
-  const { user } = useAuthenticatedUser()
+  const { user } = useAuthenticatedUserContext()
 
   useEffect(() => {
     setComments(initialComments)

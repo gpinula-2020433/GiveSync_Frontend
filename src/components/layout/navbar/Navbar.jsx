@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import './Navbar.css'
 import { useEffect, useState } from 'react'
 import DefaultUserImage from '../../../assets/DefaultUserImage.jpg'
-import { useAuthenticatedUser } from '../../../shared/hooks/User/useAuthenticatedUser'
+import { useAuthenticatedUserContext } from '../../../shared/hooks/User/useAuthenticatedUser'
 import { useNotificationContext } from '../../../shared/hooks/context/NotificationContext'
 import logo from '../../../assets/logo.png'
 
@@ -10,7 +10,7 @@ export function Navbar() {
   const navigate = useNavigate()
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [showDropdown, setShowDropdown] = useState(false)
-  const { user, isLoading } = useAuthenticatedUser()
+  const { user, isLoading } = useAuthenticatedUserContext()
   const [isDarkMode, setIsDarkMode] = useState(true)
   const { unreadCount } = useNotificationContext()
 

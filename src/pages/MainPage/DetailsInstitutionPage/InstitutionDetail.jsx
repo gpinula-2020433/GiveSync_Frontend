@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useInstitutions } from '../../../shared/hooks/Institution/useInstitution'
 import { usePublicationsByInstitution } from '../../../shared/hooks/publication/usePublication'
-import { useAuthenticatedUser } from '../../../shared/hooks/User/useAuthenticatedUser'
+import { useAuthenticatedUserContext } from '../../../shared/hooks/User/useAuthenticatedUser'
 import './InstitutionDetail.css'
 
 const InstitutionDetail = () => {
@@ -12,7 +12,7 @@ const InstitutionDetail = () => {
   const [carouselActive, setCarouselActive] = useState(true)
   const [publicationImageIndexes, setPublicationImageIndexes] = useState({})
   const { publications, loading: loadingPublications, error: errorPublications } = usePublicationsByInstitution(id)
-  const { user } = useAuthenticatedUser()
+  const { user } = useAuthenticatedUserContext()
   const navigate = useNavigate()
   const [showLoginModal, setShowLoginModal] = useState(false)
 
