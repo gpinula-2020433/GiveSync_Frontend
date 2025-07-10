@@ -39,9 +39,9 @@ export const RequestToRegisterAnInstitution = () => {
 
     if(name === 'phone'){
       if(validatePhone(value)){
-        setPhoneError(true)
-      }else{
         setPhoneError(false)
+      }else{
+        setPhoneError(true)
       }
     }
   }
@@ -82,10 +82,23 @@ export const RequestToRegisterAnInstitution = () => {
   }
 
   if (loading) return (
-    <div className="flex items-center justify-center h-screen bg-zinc-950 text-white text-lg">
+    <div >
       Cargando...
     </div>
   )
+
+  const translateType = (type) => {
+    switch (type) {
+      case 'ORPHANAGE':
+        return 'ORFANATO'
+      case 'ACYL':
+        return 'ASILO'
+      case 'EATERS':
+        return 'COMEDOR'
+      default:
+        return type
+    }
+  }
 
   if (hasInstitution && institution) {
     return (
@@ -93,26 +106,24 @@ export const RequestToRegisterAnInstitution = () => {
       <h1>Ya tienes una institución registrada</h1>
       
       <div>
-        <div>
+        <div className='institution-details'>
           <p><span>Nombre:</span> {institution.name}</p>
           <p><span>Descripción:</span> {institution.description}</p>
           <p><span>Dirección:</span> {institution.address}</p>
           <p><span>Teléfono:</span> {institution.phone}</p>
-          <p><span>Tipo:</span> {institution.type}</p>
+          <p><span>Tipo:</span> {translateType(institution.type)}</p>
         </div>
 
         <div>
-          <p className="font-semibold mb-2">Imágenes:</p>
-          <div className="row g-3">
+          <p className="institution-images-title">Imágenes:</p>
+          <div className="institution-images">
             {(institution.imageInstitution || []).map((imgUrl, i) => (
-              <div className='col-6 col-md-3'>
                 <img
                   key={i}
                   src={`/uploads/img/users/${imgUrl}`}
                   alt={institution.name}
                   className="my-institution-image"
                 />
-              </div>
             ))}
           </div>
         </div>
@@ -125,7 +136,7 @@ export const RequestToRegisterAnInstitution = () => {
     <div className="register-institution-page">
     <div className="form-container">
       <div>
-        <h1 className="text-4xl font-bold text-white mb-8 text-center">
+        <h1 className="text-4xl font-bold mb-8 text-center">
           Nueva institución
         </h1>
 
@@ -168,7 +179,7 @@ export const RequestToRegisterAnInstitution = () => {
               value={formData.type}
               onChange={handleChange}
               required
-              className="w-full bg-zinc-800 border border-zinc-600 text-white rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-full bg-zinc-800 border border-zinc-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-500"
             >
               <option value="">Selecciona una opción</option>
               <option value="ORPHANAGE">Orfanato</option>
@@ -186,13 +197,13 @@ export const RequestToRegisterAnInstitution = () => {
               accept="image/*"
               multiple
               onChange={handleFileChange}
-              className="w-full bg-zinc-800 text-zinc-300 file:mr-4 file:px-4 file:py-2 file:rounded-lg file:border-0 file:bg-emerald-600 file:text-white hover:file:bg-emerald-700 transition"
+              className="w-full bg-zinc-800 text-zinc-300 file:mr-4 file:px-4 file:py-2 file:rounded-lg file:border-0 file:bg-emerald-600 file: hover:file:bg-emerald-700 transition"
             />
           </div>
 
           <button
             type="submit"
-            className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl transition-shadow shadow-lg hover:shadow-emerald-500/30"
+            className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 font-bold rounded-xl transition-shadow shadow-lg hover:shadow-emerald-500/30"
           >
             Enviar solicitud
           </button>
@@ -212,9 +223,10 @@ const Field = ({ label, name, type, value, onChange, error }) => (
         value={value}
         onChange={onChange}
         required
+        maxLength={name === 'phone' ? 15: undefined}
         className={`w-full bg-zinc-800 border ${
           error ? 'border-red-500' : 'border-zinc-600'
-        } text-white rounded-lg px-4 py-3 focus:outline-none focus:ring-2 ${
+        } rounded-lg px-4 py-3 focus:outline-none focus:ring-2 ${
           error ? 'focus:ring-red-500' : 'focus:ring-emerald-500'
         } resize-none`}
       />
@@ -225,14 +237,15 @@ const Field = ({ label, name, type, value, onChange, error }) => (
         value={value}
         onChange={onChange}
         required
-        className={`w-full bg-zinc-800 border text-white rounded-lg px-4 
+        maxLength={name === 'phone' ? 8 : undefined}
+        className={`w-full bg-zinc-800 border rounded-lg px-4 
           py-3 focus:outline-none focus:ring-2 focus:ring-emerald-500 
           ${error ? 'input-error' : 'border-zinc-600'}`}
       />
     )}
     {error && (
       <p className="error-message">
-          El telefono debe tener entre 8 y 15 dígitos y solo contener números.
+          El telefono debe tener 8 dígitos y solo contener números.
       </p>
     )}
   </div>

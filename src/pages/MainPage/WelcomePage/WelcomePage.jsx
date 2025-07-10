@@ -9,7 +9,7 @@ const WelcomePage = () => {
       <div className="overlay" />
       <div className="content text-center">
         <img src={logo} alt="Logo Hotel" className="logo" />
-        <h1 className="tagline">Bienvenido a GyveSync</h1>
+        <h1 className="tagline">Bienvenido a GiveSync</h1>
         <p className="subtext">Ayudar es primero</p>
         <a href="/main/home" className="enter-btn">
           Entrar <FaArrowRight />

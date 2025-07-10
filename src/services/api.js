@@ -1,3 +1,4 @@
+import { config } from "@fortawesome/fontawesome-svg-core"
 import axios from "axios"
 import { data } from "react-router-dom"
 
@@ -28,6 +29,20 @@ const apiComment = axios.create({
   timeout: 2000
 })
 
+const apiReport = axios.create({
+  baseURL: 'http://localhost:3200/v1',
+  timeout: 2000
+})
+
+apiReport.interceptors.request.use(
+  (config)=>{
+    const token = localStorage.getItem('token')
+    if(token){
+      config.headers.Authorization = token
+    }
+    return config
+  }
+)
 
 apiClient.interceptors.request.use(
     (config)=> {
@@ -161,12 +176,18 @@ export const deleteInstitutionRequest = async (id) => {
 }
 
 //ruta para el home donde se mostraran las instituciones acpetadas
-
 export const getAcceptedInstitutions = async () => {
   try {
     const res = await apiClient.get('/v1/institution/all?state=ACCEPTED')
     return res.data
   } catch (err) {
+    if (err.response && err.response.status === 404) {
+      // No hay instituciones, devuelve estructura válida pero vacía
+      return {
+        success: true,
+        institutions: []
+      }
+    }
     return { error: true, err }
   }
 }
@@ -442,5 +463,27 @@ export const updateInstitutionState = async (id, newState) => {
   } catch (error) {
     console.error('Error al actualizar estado:', error)
     return { status: false, data: { message: 'Error al actualizar estado' } }
+  }
+}
+
+//Generar excel
+export const generateExcel = async ()=>{
+  try {
+    const response = await apiReport.get('/export-excel',{
+      responseType: 'blob'
+    })
+
+    const url = window.URL.createObjectURL(new Blob([response.data]))
+    const link = document.createElement('a')
+    link.href = url
+    link.setAttribute('download', 'instituciones.xlsx')
+    document.body.appendChild(link)
+    link.click()
+    link.remove()
+
+    return {success: true}
+  } catch (error) {
+    console.error('Error al generar excel')
+    return { error: true, message: 'Error al generar excel' }
   }
 }

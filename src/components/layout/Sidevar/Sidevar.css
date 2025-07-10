@@ -4,44 +4,47 @@
   left: 0;
   height: 100vh;
   width: 290px;
-  background-color: #264653 !important; /* color fijo */
-  transition: width 0.3s ease, padding 0.3s ease;
+  background-color: #264653 !important;
+  transition: transform 0.3s ease;
   overflow-x: hidden;
-  z-index: 1;
-  color: white; /* color fijo */
+  z-index: 1000;
+  color: white !important;
+  transform: translateX(0);
 }
 
 .sidebar.closed {
-  width: 0;
-  padding: 0 !important;
-  overflow: hidden;
+  transform: translateX(-100%);
+  width: 290px;
 }
 
 .sidebar-toggle-btn {
   position: fixed;
-  top: 15px;
-  left: 230px;
-  z-index: 1002;
-  background-color: #264653 !important; /* color fijo */
+  top: 150px;
+  left: 10px;
+  
+  z-index: 1100;
+  background-color: #264653 !important;
   border: none;
-  color: white; /* color fijo */
+  color: white !important;
   padding: 6px 12px;
   cursor: pointer;
   border-radius: 4px;
-  transition: left 0.3s ease;
   font-weight: 600;
   user-select: none;
+  display: none;
+  transition: left 0.3s ease;
+  background-color: #13b38b !important; /* azul dodger */
+  color: #fff !important; /* texto blanco */
 }
 
-.sidebar.closed + .sidebar-toggle-btn {
-  left: 10px;
-}
+
+
 
 .hover-sidebar {
   cursor: pointer;
   transition: background-color 0.3s, transform 0.2s;
   text-decoration: none;
-  color: white; /* color fijo */
+  color: white !important;
   font-weight: 500;
   display: block;
   white-space: nowrap;
@@ -50,9 +53,18 @@
 }
 
 .hover-sidebar:hover {
-  background-color: rgba(255, 255, 255, 0.2); /* efecto claro fijo */
+  background-color: rgba(255, 255, 255, 0.2);
   color: #A3D9B1 !important;
   transform: translateX(8px);
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
   text-decoration: none;
+}
+
+
+
+/* Mostrar botón solo en móvil */
+@media (max-width: 768px) {
+  .sidebar-toggle-btn {
+    display: block;
+  }
 }

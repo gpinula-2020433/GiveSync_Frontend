@@ -5,12 +5,15 @@ import './ListOfInstitutions.css';
 
 import {
   getInstitutionsRequest,
-  deleteInstitutionRequest
+  deleteInstitutionRequest,
+  generateExcel
 } from "../../../services/api";
 
 export const ListOfInstitutions = () => {
   const [institutions, setInstitutions] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const [institutionToDelete, setInstitutionToDelete] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -22,23 +25,31 @@ export const ListOfInstitutions = () => {
   }, [])
 
   useEffect(() => {
-  const interval = setInterval(async () => {
-    const res = await getInstitutionsRequest()
-    if (!res.error) setInstitutions(res)
-  }, 5000)
-  return () => clearInterval(interval)
+    const interval = setInterval(async () => {
+      const res = await getInstitutionsRequest()
+      if (!res.error) setInstitutions(res)
+    }, 5000)
+    return () => clearInterval(interval)
   }, [])
 
-  const handleDelete = async (id) => {
-    if (!confirm("¿Eliminar esta institución permanentemente?")) return
+  const handleDeleteClick = (id) => {
+    setInstitutionToDelete(id);
+    setShowModal(true);
+  }
 
-    const res = await deleteInstitutionRequest(id)
+  const confirmDelete = async () => {
+    if (!institutionToDelete) return;
+
+    const res = await deleteInstitutionRequest(institutionToDelete);
     if (!res.error) {
-      toast.info("Institución eliminada.")
-      setInstitutions(institutions.filter((i) => i._id !== id))
+      toast.info("Institución eliminada.");
+      setInstitutions(institutions.filter((i) => i._id !== institutionToDelete));
     } else {
       toast.error(res.message);
     }
+
+    setShowModal(false);
+    setInstitutionToDelete(null);
   }
 
   const translateType = (type) => {
@@ -58,7 +69,7 @@ export const ListOfInstitutions = () => {
     }
     return map[state] || state
   }
-  
+
   if (loading) return <div className="container mt-4">Cargando...</div>
 
   return (
@@ -66,11 +77,14 @@ export const ListOfInstitutions = () => {
       <div className="container mt-4">
         <ToastContainer position="top-right" autoClose={2500} />
         <h2 className="fw-bold mb-3">Todas las instituciones</h2>
-
+        <button className="btn btn-success" onClick={generateExcel}>
+          Descargar Excel
+        </button>
         <table className="table table-hover table-bordered align-middle shadow-sm">
-          <thead className="table-dark text-center">
+          <thead className="text-center">
             <tr>
               <th style={{ width: "110px" }}>Imagen</th>
+              <th>Usuario / Correo</th>
               <th>Nombre</th>
               <th>Descripción</th>
               <th>Tipo</th>
@@ -94,16 +108,22 @@ export const ListOfInstitutions = () => {
                     <span className="text-muted">Sin&nbsp;imagen</span>
                   )}
                 </td>
-
+                <td>
+                  {inst.userId ?
+                    <>
+                      <strong>{inst.userId.name} {inst.userId.surname}</strong><br />
+                      <small className="text-muted">{inst.userId.email}</small>
+                    </>
+                    : 'Sin datos'}
+                </td>
                 <td>{inst.name}</td>
                 <td>{inst.description}</td>
                 <td className="text-uppercase text-center">{translateType(inst.type)}</td>
                 <td className="text-uppercase text-center">{translateState(inst.state)}</td>
-
                 <td className="text-center">
                   <button
                     className="btn btn-danger btn-sm"
-                    onClick={() => handleDelete(inst._id)}
+                    onClick={() => handleDeleteClick(inst._id)}
                   >
                     Eliminar
                   </button>
@@ -112,6 +132,28 @@ export const ListOfInstitutions = () => {
             ))}
           </tbody>
         </table>
+
+        {/* Modal de Confirmación */}
+        {showModal && (
+          <div className="modal fade show" style={{ display: 'block' }} tabIndex="-1">
+            <div className="modal-dialog modal-dialog-centered">
+              <div className="modal-content">
+                <div className="modal-header bg-danger text-white">
+                  <h5 className="modal-title">Confirmar eliminación</h5>
+                  <button type="button" className="btn-close" onClick={() => setShowModal(false)}></button>
+                </div>
+                <div className="modal-body">
+                  <p>¿Estás seguro de que deseas eliminar esta institución permanentemente?</p>
+                </div>
+                <div className="modal-footer">
+                  <button className="btn btn-secondary" onClick={() => setShowModal(false)}>Cancelar</button>
+                  <button className="btn btn-danger" onClick={confirmDelete}>Eliminar</button>
+                </div>
+              </div>
+            </div>
+            <div className="modal-backdrop fade show"></div>
+          </div>
+        )}
       </div>
     </div>
   )

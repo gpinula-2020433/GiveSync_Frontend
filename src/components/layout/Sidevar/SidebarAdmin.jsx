@@ -5,16 +5,28 @@ import {
   FaUsers,
   FaDonate,
   FaClipboardList,
-  FaChartBar
 } from 'react-icons/fa';
 import './Sidevar.css';
 
 function SidebarAdmin() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(() => window.innerWidth > 768);
+
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   const toggleSidebar = () => setIsOpen(!isOpen);
 
   useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+      if (window.innerWidth > 768) setIsOpen(true);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) return;
+
     const handleMouseMove = (e) => {
       if (e.clientX < 60 && !isOpen) {
         setIsOpen(true);
@@ -25,7 +37,7 @@ function SidebarAdmin() {
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [isOpen]);
+  }, [isOpen, isMobile]);
 
   return (
     <>
@@ -37,28 +49,26 @@ function SidebarAdmin() {
         {isOpen ? '←' : '→'}
       </button>
 
-      <aside
-        className={`sidebar p-3 d-flex flex-column ${isOpen ? 'open' : 'closed'}`}
-      >
+      <aside className={`sidebar p-3 d-flex flex-column ${isOpen ? 'open' : 'closed'}`}>
         <div className="d-flex flex-column justify-content-center flex-grow-1" style={{ position: 'relative', top: '-40px' }}>
           <ul className="list-unstyled mt-3">
             <li>
-              <Link to="/admin/ListOfInstitutions" className="py-2 px-3 rounded d-block hover-sidebar">
+              <Link to="/admin/ListOfInstitutions"  onClick={() => isMobile && setIsOpen(false)} className="py-2 px-3 rounded d-block hover-sidebar">
                 <FaHotel className="me-2" />Instituciones
               </Link>
             </li>
             <li>
-              <Link to="/admin/RequestFromInstitutions" className="py-2 px-3 rounded d-block hover-sidebar">
+              <Link to="/admin/RequestFromInstitutions"  onClick={() => isMobile && setIsOpen(false)} className="py-2 px-3 rounded d-block hover-sidebar">
                 <FaClipboardList className="me-2" />Solicitudes de Instituciones
               </Link>
             </li>
             <li>
-              <Link to="/admin/AllDonationsMade" className="py-2 px-3 rounded d-block hover-sidebar">
+              <Link to="/admin/AllDonationsMade"  onClick={() => isMobile && setIsOpen(false)} className="py-2 px-3 rounded d-block hover-sidebar">
                 <FaDonate className="me-2" />Donaciones
               </Link>
             </li>
             <li>
-              <Link to="/admin/RegisteredUsers" className="py-2 px-3 rounded d-block hover-sidebar">
+              <Link to="/admin/RegisteredUsers"  onClick={() => isMobile && setIsOpen(false)} className="py-2 px-3 rounded d-block hover-sidebar">
                 <FaUsers className="me-2" />Usuarios
               </Link>
             </li>

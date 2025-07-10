@@ -12,7 +12,7 @@
  
 .navbar {
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, var(--dark-color), #1a1a2e) !important;
+  background: linear-gradient(#1a1a2e, #1a1a2e) !important;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
   padding: 0.8rem 1rem !important;
   transition: all var(--transition-speed) ease;
@@ -29,15 +29,12 @@
   background: linear-gradient(to right, var(--primary-color), #9b59b6);
   -webkit-background-clip: text;
   background-clip: text;
-  color: transparent;
   position: relative;
-  padding-left: 40px;
+  padding-left: 0px;
   transition: all var(--transition-speed) ease;
 }
  
 .navbar-brand::before {
-  content: '\f594';
-  font-family: 'Font Awesome 6 Free';
   font-weight: 900;
   position: absolute;
   left: 0;
@@ -71,7 +68,7 @@
   gap: 8px;
 }
  
-.navbar a::before {
+/* .navbar a::before {
   content: '';
   position: absolute;
   width: 0;
@@ -84,7 +81,23 @@
  
 .navbar a:hover::before {
   width: 100%;
+} */
+
+.navbar-link::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--primary-color);
+  transition: width var(--transition-speed) ease;
 }
+
+.navbar-link:hover::before {
+  width: 100%;
+}
+
  
 .navbar a:hover {
   color: var(--primary-color) !important;
@@ -121,15 +134,6 @@
   .navbar a {
     font-size: 0.9rem;
   }
-}
- 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
- 
-.navbar {
-  animation: fadeIn 0.5s ease-out forwards;
 }
  
 .navbar a:hover i {
@@ -179,8 +183,8 @@
   border: 1px solid var(--primary-color);
   border-radius: 10px;
   overflow: hidden;
-  min-width: 220px; /* <- aumenta de 180px a 220px */
-  z-index: 1000;
+  min-width: 220px;
+  z-index: 2000;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
@@ -217,4 +221,170 @@
   font-size: 0.7rem;
   padding: 2px 6px;
   font-weight: bold;
+}
+
+
+.navbar-logo {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* Responsivo para móvil */
+@media (max-width: 576px) {
+  .navbar-logo {
+    height: 26px;
+  }
+}
+
+.brand-text {
+  font-weight: 600;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: white;
+  transition: all var(--transition-speed) ease;
+}
+
+
+/* Reducir espacio entre logo y texto */
+.navbar-brand {
+  gap: 6px; /* antes no había gap, agregamos 6px para menos espacio */
+}
+
+/* Botón hamburguesa (solo visible en móvil) */
+.hamburger-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 28px;
+  height: 22px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1100; /* para que quede sobre todo */
+}
+
+.hamburger-btn .bar {
+  width: 100%;
+  height: 3px;
+  background-color: var(--light-color);
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+/* Animación de botón hamburguesa cuando está abierto */
+.hamburger-btn.open .bar:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger-btn.open .bar:nth-child(2) {
+  opacity: 0;
+}
+.hamburger-btn.open .bar:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Contenedor de menú para desktop (flex row) y móvil (oculto o block) */
+.menu-items {
+  transition: max-height 0.3s ease;
+}
+
+/* Para pantallas pequeñas */
+@media (max-width: 768px) {
+  /* Mostrar botón hamburguesa */
+  .hamburger-btn {
+    display: flex;
+  }
+
+  /* Ocultar menú por defecto */
+  .menu-items {
+    position: fixed;
+    top: 60px; /* debajo del navbar */
+    right: 0;
+    background-color: var(--dark-color);
+    width: 220px;
+    height: calc(100vh - 60px);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 1.5rem;
+    gap: 1rem !important;
+    overflow-y: auto;
+    max-height: 0;
+    opacity: 0;
+    pointer-events: none;
+    box-shadow: -3px 0 10px rgba(0,0,0,0.5);
+    border-left: 1px solid var(--primary-color);
+    z-index: 1050;
+  }
+
+  /* Mostrar menú cuando está abierto */
+  .menu-items.open {
+    max-height: 100vh;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Links del menú en columna */
+  .menu-items a,
+  .menu-items button {
+    width: 100%;
+  }
+
+  /* Ajustar botón de tema para que no quede muy ancho */
+  .theme-btn {
+    padding: 0.3rem 0.6rem;
+    font-size: 1rem;
+  }
+
+  /* Ajustar notificaciones para que se vea bien */
+  .notification-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.5rem 0.75rem;
+  }
+
+  /* Ajuste del texto en navbar-brand para móvil */
+  .brand-text {
+    font-size: 1.2rem;
+  }
+}
+@media (max-width: 768px) {
+  .menu-items.open {
+    overflow: visible !important;
+  }
+
+  /* Perfil centrado en menú */
+  .profile-container {
+    position: relative; /* para que el dropdown se posicione relativo a este contenedor */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .profile-img {
+    width: 56px;
+    height: 56px;
+    border-width: 3px;
+  }
+
+  /* Ajustar dropdown para que quede dentro del menú */
+  .profile-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px; /* un poco menos que el ancho del menú */
+    right: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  }
 }

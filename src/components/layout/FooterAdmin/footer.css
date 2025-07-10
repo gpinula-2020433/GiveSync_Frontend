@@ -9,12 +9,11 @@ body {
   background-color: #2C3E50;
   color: #F5F5F5;
   text-align: center;
-  padding: 1.5rem;
+  padding: 1rem 0;
   font-size: 1rem;
   font-family: 'Poppins', sans-serif;
   box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
-  position: fixed;
-  bottom: 0;
-  width: calc(100% - 220px); /* ancho restante dejando espacio al sidebar */
-  left: 220px; /* mover para no tapar el sidebar */
+  width: calc(100% - 220px);
+  margin-left: 220px; /* espacio para el sidebar */
 }
+

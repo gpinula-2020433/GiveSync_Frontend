@@ -1,0 +1,12 @@
+.user-sidebar {
+  width: 290px;
+}
+
+.user-sidebar.open {
+  width: 340px; /* o el ancho que quieras cuando está desplegado */
+  transition: width 0.3s ease;
+}
+
+.user-sidebar.closed {
+  width: 290px; /* mantiene el ancho base cuando está cerrada */
+}

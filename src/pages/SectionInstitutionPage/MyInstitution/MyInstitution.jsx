@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
 import { getMyInstitutionsRequest } from "../../../services/api"
 import './MyInstitution.css'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import {
+  faLocationDot,
+  faPhone,
+  faBuilding,
+  faCircleCheck
+} from "@fortawesome/free-solid-svg-icons"
 
 export const MyInstitution = () => {
   const [institution, setInstitution] = useState(null)
@@ -47,15 +54,17 @@ export const MyInstitution = () => {
     <div className="container py-4 my-institution-container">
       <h2 className="my-institution-title">{institution.name}</h2>
       <p className="my-institution-description">{institution.description}</p>
-      <p className="my-institution-description">Tipo: {traducirTipo(institution.type)}</p>
-      <p className="my-institution-description">Estado: {traducirEstado(institution.state)}</p>
+      <p className="my-institution-description"><strong><FontAwesomeIcon icon={faLocationDot}/>  Dirección: </strong> {institution.address}</p>
+      <p className="my-institution-description"><strong><FontAwesomeIcon icon={faPhone} /> Teléfono:</strong> {institution.phone}</p>
+      <p className="my-institution-description"><strong><FontAwesomeIcon icon={faBuilding} /> Tipo:</strong> {traducirTipo(institution.type)}</p>
+      <p className="my-institution-description"><strong><FontAwesomeIcon icon={faCircleCheck} /> Estado:</strong> {traducirEstado(institution.state)}</p>
 
       {institution.imageInstitution?.length > 0 && (
         <>
           <h4 className="my-institution-images-title">Imágenes de la Institución</h4>
           <div className={`my-institution-images-container ${institution.imageInstitution.length === 1 ? 'single' : ''}`}>
             {institution.imageInstitution.map((img, i) => (
-              <div className="my-institution-image-wrapper" key={i}>
+              <div className="my-institution-image-wrapper frame" key={i} style={{ backgroundImage: `url(/uploads/img/users/${img})` }}>
                 <img
                   src={`/uploads/img/users/${img}`}
                   alt={institution.name}
