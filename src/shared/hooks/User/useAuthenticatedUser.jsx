@@ -1,4 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
 import { getAuthenticatedUserRequest } from '../../../services/api'
 import { decodeToken } from '../../utils/decodeToken'
 import { useSocket } from '../useSocket'
@@ -16,23 +18,32 @@ export const AuthenticatedUserProvider = ({ children }) => {
   const [user, setUser] = useState(null)
   const [userId, setUserId] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
-
-  const token = localStorage.getItem('token')
-  const decoded = token ? decodeToken(token) : null
-  const uid = decoded?.uid
+  const navigate = useNavigate()
 
   const fetchUser = async () => {
-    const newToken = localStorage.getItem('token') // actualiza por si cambió
+    const token = localStorage.getItem('token')
+    const decoded = token ? decodeToken(token) : null
+    const uid = decoded?.uid
 
-    if (!newToken || !isTokenValid(newToken)) {
+    if (!token) {
       localStorage.removeItem('token')
       setIsLoading(false)
       return
     }
 
-    const decodedNew = decodeToken(newToken)
-    const newUid = decodedNew?.uid
-    setUserId(newUid)
+    if (!isTokenValid(token)) {
+      localStorage.removeItem('token')
+      toast.error('Tu sesión ha expirado.')
+      navigate('/main/home')
+      setIsLoading(false)
+      return
+    }
+
+    if (uid) {
+      setUserId(uid)
+    } else {
+      console.warn('No se pudo obtener el ID del token')
+    }
 
     try {
       const res = await getAuthenticatedUserRequest()
@@ -55,11 +66,11 @@ export const AuthenticatedUserProvider = ({ children }) => {
 
   useEffect(() => {
     fetchUser()
-  }, [token, uid])
+  }, [navigate]) // Solo depende de navigate
 
   // 🔌 Socket: imagen de perfil
   useSocket('updateUserImage', (updatedUser) => {
-    if (updatedUser?._id === uid) {
+    if (updatedUser?._id === userId) {
       setUser(prev => ({
         ...prev,
         imageUser: updatedUser.imageUser
@@ -69,7 +80,7 @@ export const AuthenticatedUserProvider = ({ children }) => {
 
   // 🔌 Socket: institución del usuario
   useSocket('updateUserHasInstitution', (updatedUser) => {
-    if (updatedUser?._id === uid) {
+    if (updatedUser?._id === userId) {
       setUser(prev => ({
         ...prev,
         hasInstitution: updatedUser.hasInstitution,
@@ -84,7 +95,7 @@ export const AuthenticatedUserProvider = ({ children }) => {
         user,
         userId,
         isLoading,
-        fetchUser // ✅ lo exponemos
+        fetchUser // 🔁 lo exponemos correctamente
       }}
     >
       {children}
