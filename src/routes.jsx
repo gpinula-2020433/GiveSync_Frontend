@@ -30,6 +30,7 @@ import ConfigurationPublication from './pages/SectionInstitutionPage/configurati
 import { UserNotifications } from './components/layout/navbar/UserNotifications'
 import { UnderConstruction } from './components/underConstruction/UnderConstruction'
 import { ProtectedRoute, ProtectedRouteAdmin, ProtectedRouteInstitution } from './shared/utils/ProtectedRoute'
+import { ServiceUnavailable } from './components/ServiceUnavailable/ServiceUnavailable'
 
 export const routes = [
   {
@@ -156,6 +157,9 @@ export const routes = [
     {
       path: '/cookie',
       element: <UnderConstruction />
+    },{
+      path: '/serviceunavailable',
+      element: <ServiceUnavailable />
     },
   {
     path:'*',

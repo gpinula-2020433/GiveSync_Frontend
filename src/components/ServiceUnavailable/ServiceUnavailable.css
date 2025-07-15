@@ -1,0 +1,54 @@
+.service-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  height: 100vh;
+  text-align: center;
+  background-color: #f5f6fa;
+  color: #2f3640;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.service-container h1 {
+  font-size: 5rem;
+  color: #1872e8;
+  margin-bottom: 0.5rem;
+}
+
+.service-container h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.service-container p {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  max-width: 500px;
+}
+
+.service-container ul {
+  text-align: left;
+  max-width: 500px;
+  margin-bottom: 2rem;
+}
+
+.service-container li {
+  margin-bottom: 0.5rem;
+}
+
+.service-container button {
+  padding: 10px 20px;
+  background-color: #1853e8;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.service-container button:hover {
+  background-color: #1635c2;
+}
