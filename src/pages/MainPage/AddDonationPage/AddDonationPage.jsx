@@ -105,6 +105,7 @@ const AddDonationPage = () => {
 
   return (
     <div className="donation-container">
+      
       <h2 className="donation-title">Donar a {institution?.name}</h2>
       <p className="donation-description">{institution?.description}</p>
       <form onSubmit={handleSubmit} className="donation-form" noValidate>
@@ -187,7 +188,10 @@ const AddDonationPage = () => {
           </div>
         </div>
         <button type="submit" className="btn-donate" aria-label="Confirmar donación">Donar</button>
+        <button onClick={() => navigate(-1)} className="btn-donate1">Cancelar</button> {/* Botón de regresar */}
       </form>
+
+
 
       {modal.visible && (
         <div
