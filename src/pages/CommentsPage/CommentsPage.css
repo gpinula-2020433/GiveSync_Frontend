@@ -1,29 +1,8 @@
-/* === MODO CLARO === */
-:root {
-  --color-bg: #f5f5f5;
-  --color-text-primary: #111;
-  --color-card-bg: #ffffff;
-  --color-card-border: #ccc;
-  --color-button-bg: #007bff;
-  --color-button-hover: #0056b3;
-  --color-muted-text: #666;
-}
-
-/* === MODO OSCURO === */
-[data-theme='dark'] {
-  --color-bg: #121212;
-  --color-text-primary: #ffffff;
-  --color-card-bg: #1e1e1e;
-  --color-card-border: #444;
-  --color-button-bg: #3399ff;
-  --color-button-hover: #2370b8;
-  --color-muted-text: #aaa;
-}
-
 /* === Estilos globales === */
 html, body {
   background-color: var(--color-bg);
   color: var(--color-text-primary);
+  font-family: Arial, sans-serif;
 }
 
 /* === CommentsPage === */
@@ -50,39 +29,7 @@ html, body {
   background-color: var(--color-button-hover);
 }
 
-.publication-images {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.publication-img {
-  width: 100%;
-  max-width: 100%;
-  border-radius: 6px;
-  object-fit: cover;
-}
-
-.toggle-form-button {
-  background-color: var(--color-button-bg);
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  margin: 20px 0;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.toggle-form-button:hover {
-  background-color: var(--color-button-hover);
-}
-
-.comments-list {
-  margin-top: 20px;
-}
-
+/* === Comment Box (Cajas de comentario) === */
 .comment-card {
   background-color: var(--color-card-bg);
   border: 1px solid var(--color-card-border);
@@ -90,8 +37,12 @@ html, body {
   padding: 16px;
   margin-bottom: 16px;
   color: var(--color-text-primary);
+  word-wrap: break-word; /* Asegura que el texto se ajuste al contenedor */
+  overflow-wrap: break-word; /* Para evitar desbordamiento de texto largo */
+  max-width: 100%; /* Mantener dentro del rango */
 }
 
+/* La imagen dentro del comentario */
 .comment-img {
   display: block;
   margin: 10px auto 0 auto; /* margen superior de 10px, centrado horizontal */
@@ -99,7 +50,7 @@ html, body {
   border-radius: 6px;
 }
 
-
+/* Nombre y fecha del comentario */
 .author,
 .date {
   display: block;
@@ -108,6 +59,7 @@ html, body {
   margin-bottom: 6px;
 }
 
+/* Botones de editar y eliminar comentario */
 .comment-actions {
   margin-top: 10px;
   display: flex;
@@ -128,4 +80,80 @@ html, body {
 .edit-btn:hover,
 .delete-btn:hover {
   background-color: var(--color-button-hover);
+}
+
+/* === Carrusel de imágenes === */
+.carousel-container {
+  position: relative;
+  max-width: 100%;
+  height: 400px; /* Ajusta la altura según sea necesario */
+}
+
+.publication-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 1.5rem;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 50px;
+}
+
+.carousel-btn.prev {
+  left: 10px;
+}
+
+.carousel-btn.next {
+  right: 10px;
+}
+
+
+/* === Estilo para el botón "Agregar comentario" === */
+.toggle-form-button {
+  background-color: var(--color-button-bg);
+  color: white;
+  border: none;
+  padding: 6px 15px;
+  margin: 20px 0;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Efecto hover */
+.toggle-form-button:hover {
+  background-color: var(--color-button-hover);
+  transform: translateY(-2px); /* Pequeña elevación al hacer hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Efecto de sombra más grande */
+}
+
+/* Efecto focus */
+.toggle-form-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-button-hover);
+}
+
+/* Estilo para el icono o texto del botón */
+.toggle-form-button:before {
+  content: "💬 "; /* Icono de comentario */
+  margin-right: 8px;
+  font-size: 1.25rem;
 }
