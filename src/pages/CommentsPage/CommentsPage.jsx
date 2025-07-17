@@ -14,39 +14,30 @@ export const CommentsPage = () => {
   const [showForm, setShowForm] = useState(false);
   const [editData, setEditData] = useState(null);
   const { user } = useAuthenticatedUser();
-  const [commentContent, setCommentContent] = useState('');
-  const [error, setError] = useState('');
+
+  // Estado para controlar el índice de la imagen visible en el carrusel
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     setComments(initialComments);
   }, [initialComments]);
 
   const handleNewComment = async (formData) => {
-    if (formData.content.length > 500) {
-      setError('El comentario no puede superar los 500 caracteres.');
-      return;
-    }
     const result = await addComment(formData);
     if (!result.error) {
       setComments([result.comment, ...comments]);
       setShowForm(false);
-      setError('');
       return result;
     }
     return result;
   };
 
   const handleEditComment = async (id, formData) => {
-    if (formData.content.length > 500) {
-      setError('El comentario no puede superar los 500 caracteres.');
-      return;
-    }
     const result = await editComment(id, formData);
     if (!result.error) {
       setComments(comments.map((c) => (c._id === id ? result.comment : c)));
       setEditData(null);
       setShowForm(false);
-      setError('');
     }
     return result;
   };
@@ -64,19 +55,33 @@ export const CommentsPage = () => {
   const handleEditClick = (comment) => {
     setEditData(comment);
     setShowForm(true);
-    setCommentContent(comment.content); // Cargar contenido para editar
   };
 
   const handleCancel = () => {
     setEditData(null);
     setShowForm(false);
-    setCommentContent(''); // Limpiar el contenido del comentario
   };
 
   const handleClick = (e) => {
     if (!user) {
       e.preventDefault();
       alert('Debes iniciar sesión para ver detalles');
+    }
+  };
+
+  // Lógica para navegar entre las imágenes
+  const handlePrevImage = () => {
+    if (currentImageIndex > 0) {
+      setCurrentImageIndex(currentImageIndex - 1);
+    }
+  };
+
+  const handleNextImage = () => {
+    if (
+      publication?.imagePublication &&
+      currentImageIndex < publication.imagePublication.length - 1
+    ) {
+      setCurrentImageIndex(currentImageIndex + 1);
     }
   };
 
@@ -87,19 +92,24 @@ export const CommentsPage = () => {
 
       {publication?.imagePublication && (
         <div className="publication-images">
-          {(typeof publication.imagePublication === 'string'
-            ? publication.imagePublication.split(',')
-            : Array.isArray(publication.imagePublication)
-            ? publication.imagePublication
-            : []
-          ).map((img, i) => (
+          <div className="carousel-container">
+            {/* Imagen actual */}
             <img
-              key={i}
-              src={`http://localhost:3200/uploads/img/users/${encodeURIComponent(img.trim())}`}
-              alt={`Imagen ${i + 1}`}
+              src={`http://localhost:3200/uploads/img/users/${encodeURIComponent(
+                publication.imagePublication[currentImageIndex].trim()
+              )}`}
+              alt={`Imagen ${currentImageIndex + 1}`}
               className="publication-img"
             />
-          ))}
+
+            {/* Botones de navegación */}
+            <button onClick={handlePrevImage} className="carousel-btn prev">
+              &#8592;
+            </button>
+            <button onClick={handleNextImage} className="carousel-btn next">
+              &#8594;
+            </button>
+          </div>
         </div>
       )}
 
@@ -112,7 +122,6 @@ export const CommentsPage = () => {
           }
           setShowForm(!showForm);
           setEditData(null);
-          setCommentContent(''); // Limpiar contenido para agregar nuevo comentario
         }}
         className="toggle-form-button"
       >
@@ -126,13 +135,8 @@ export const CommentsPage = () => {
           onCancel={handleCancel}
           editCommentData={editData}
           onEditComment={handleEditComment}
-          commentContent={commentContent} // Pasar el contenido
-          setCommentContent={setCommentContent} // Actualizar el contenido
         />
       )}
-
-      {/* Mostrar mensaje de error si el comentario excede los 500 caracteres */}
-      {error && <p className="error-message">{error}</p>}
 
       <div className="comments-list">
         {comments.length === 0 ? (
