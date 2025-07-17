@@ -93,28 +93,31 @@ export const CommentsPage = () => {
 
       <h1>{publication?.title}</h1>
 
-      {publication?.imagePublication && (
-        <div className="publication-images">
-          <div className="carousel-container">
-            {/* Imagen actual */}
-            <img
-              src={`http://localhost:3200/uploads/img/users/${encodeURIComponent(
-                publication.imagePublication[currentImageIndex].trim()
-              )}`}
-              alt={`Imagen ${currentImageIndex + 1}`}
-              className="publication-img"
-            />
+    {publication?.imagePublication && publication.imagePublication.length > 0 ? (
+  <div className="publication-images">
+    <div className="carousel-container">
+      {/* Imagen actual */}
+      <img
+        src={`http://localhost:3200/uploads/img/users/${encodeURIComponent(
+          publication.imagePublication[currentImageIndex]?.trim() || ""
+        )}`}
+        alt={`Imagen ${currentImageIndex + 1}`}
+        className="publication-img"
+      />
 
-            {/* Botones de navegación */}
-            <button onClick={handlePrevImage} className="carousel-btn prev">
-              &#8592;
-            </button>
-            <button onClick={handleNextImage} className="carousel-btn next">
-              &#8594;
-            </button>
-          </div>
-        </div>
-      )}
+      {/* Botones de navegación */}
+      <button onClick={handlePrevImage} className="carousel-btn prev">
+        &#8592;
+      </button>
+      <button onClick={handleNextImage} className="carousel-btn next">
+        &#8594;
+      </button>
+    </div>
+  </div>
+) : (
+  <p>No hay imágenes en esta publicación.</p> // Mensaje en caso de no tener imágenes
+)}
+
 
       <button
         onClick={(e) => {
