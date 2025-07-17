@@ -1,10 +1,10 @@
 import React from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
-import { useAuthenticatedUser } from '../hooks/User/useAuthenticatedUser'
+import { useAuthenticatedUserContext } from '../hooks/User/useAuthenticatedUser'
 import toast from 'react-hot-toast'
 
 export const ProtectedRoute = () => {
-  const { user, isLoading } = useAuthenticatedUser()
+  const { user, isLoading } = useAuthenticatedUserContext()
 
   if (isLoading) return null
 
@@ -12,7 +12,7 @@ export const ProtectedRoute = () => {
 }
 
 export const ProtectedRouteAdmin = () => {
-  const { user, isLoading } = useAuthenticatedUser()
+  const { user, isLoading } = useAuthenticatedUserContext()
 
   if (isLoading) return null
 
@@ -29,7 +29,7 @@ export const ProtectedRouteAdmin = () => {
 }
 
 export const ProtectedRouteInstitution = () => {
-  const { user, isLoading } = useAuthenticatedUser()
+  const { user, isLoading } = useAuthenticatedUserContext()
 
   if (isLoading) return null
 

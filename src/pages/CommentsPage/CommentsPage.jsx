@@ -1,21 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { usePublicationComments } from '../../shared/hooks/comments/usePublicationComments';
-import { deleteComment, addComment, editComment } from '../../services/api';
-import { CommentForm } from '../../components/comments/CommentForm';
-import { useAuthenticatedUser } from '../../shared/hooks/User/useAuthenticatedUser';
-import './CommentsPage.css';
+import React, { useState, useEffect } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+import { usePublicationComments } from '../../shared/hooks/comments/usePublicationComments'
+import { deleteComment, addComment, editComment } from '../../services/api'
+import { CommentForm } from '../../components/comments/CommentForm'
+import { useAuthenticatedUserContext } from '../../shared/hooks/User/useAuthenticatedUser'
+import './CommentsPage.css'
 
 export const CommentsPage = () => {
-  const { publicationId } = useParams();
-  const navigate = useNavigate();
-  const { publication, comments: initialComments } = usePublicationComments(publicationId);
-  const [comments, setComments] = useState([]);
-  const [showForm, setShowForm] = useState(false);
-  const [editData, setEditData] = useState(null);
-  const { user } = useAuthenticatedUser();
-  const [commentContent, setCommentContent] = useState('');
-  const [error, setError] = useState('');
+  const { publicationId } = useParams()
+  const navigate = useNavigate()
+  const { publication, comments: initialComments } = usePublicationComments(publicationId)
+  const [comments, setComments] = useState([])
+  const [showForm, setShowForm] = useState(false)
+  const [editData, setEditData] = useState(null)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const { user } = useAuthenticatedUserContext()
 
   useEffect(() => {
     setComments(initialComments);

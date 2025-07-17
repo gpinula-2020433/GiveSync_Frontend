@@ -7,11 +7,14 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 
 // 👉 Importa el provider
 import { NotificationProvider } from './shared/hooks/context/NotificationContext.jsx'
+import { AuthenticatedUserProvider } from './shared/hooks/User/useAuthenticatedUser.jsx'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-    <NotificationProvider> {/* ✅ Envolvemos la app */}
-      <App />
-    </NotificationProvider>
+    <AuthenticatedUserProvider> {/* ✅ Nuevo provider agregado */}
+      <NotificationProvider>
+        <App />
+      </NotificationProvider>
+    </AuthenticatedUserProvider>
   </BrowserRouter>
 )
