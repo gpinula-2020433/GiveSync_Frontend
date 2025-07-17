@@ -496,3 +496,48 @@ export const generateExcel = async ()=>{
     return { error: true, message: 'Error al generar excel' }
   }
 }
+
+
+const handleResponseError = (error) => {
+  const isOn503Page = window.location.pathname === "/serviceunavailable";
+
+  if (!error.response) {
+    if (!isOn503Page) {
+      window.location.href = "/serviceunavailable";
+    }
+  } else {
+    const status = error.response.status;
+
+    if (status === 503 && !isOn503Page) {
+      window.location.href = "/serviceunavailable";
+    }
+  }
+
+  return Promise.reject(error);
+};
+
+
+apiClient.interceptors.response.use(
+  response => response,
+  handleResponseError
+);
+
+apiInstitucion.interceptors.response.use(
+  response => response,
+  handleResponseError
+);
+
+apiPublication.interceptors.response.use(
+  response => response,
+  handleResponseError
+);
+
+apiComment.interceptors.response.use(
+  response => response,
+  handleResponseError
+);
+
+apiReport.interceptors.response.use(
+  response => response,
+  handleResponseError
+);
