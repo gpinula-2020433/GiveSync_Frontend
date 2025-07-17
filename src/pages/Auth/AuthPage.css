@@ -7,6 +7,7 @@
 }
  
 /* Fondo elegante azul */
+/* Fondo elegante azul más oscuro solo en la imagen */
 .auth-container {
     width: 100%;
     min-height: 100vh;
@@ -16,10 +17,22 @@
     background-size: cover;
     background-position: center;
     background-image: url("../../assets/fondoAuthN.jpg");
-    overflow: auto;
     position: relative;
     padding: 20px;
+    overflow: auto;
 }
+
+.auth-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.62); /* Filtro oscuro */
+    z-index: 0; /* Asegura que el filtro no tape los elementos */
+}
+
  
 /* Contenedor del formulario */
 .login-container, .register-container {
