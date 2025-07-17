@@ -72,13 +72,17 @@ export const RequestToRegisterAnInstitution = () => {
     })
 
     const res = await createInstitutionRequest(dataToSend)
-    if (res.error) {
-      toast.error('Error al registrar institución')
-    } else {
-      toast.success('Institución registrada con éxito')
-      navigate('/usersettings/RequestToRegisterAnInstitution')
-      window.location.reload()
-    }
+     if (res.error) {
+    const errorMessage = Array.isArray(res.message) 
+    ? res.message[0]?.msg || 'Error desconocido'
+    : res.message || 'Error desconocido'
+
+  toast.error(errorMessage)
+  } else {
+    toast.success('Institución registrada con éxito')
+    navigate('/usersettings/RequestToRegisterAnInstitution')
+    window.location.reload()
+  }
   }
 
   if (loading) return (

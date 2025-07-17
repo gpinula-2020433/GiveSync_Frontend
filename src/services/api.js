@@ -113,11 +113,16 @@ export const createInstitutionRequest = async (data) => {
     const res = await apiInstitucion.post('/add', data, {
       headers: { 'Content-Type': 'multipart/form-data' }
     })
+    // Retornamos la respuesta de manera más detallada
     return res.data
   } catch (err) {
-    return { error: true, err }
+    return {
+      error: true,
+      message: err.response?.data?.message || 'Error al registrar institución'
+    }
   }
 }
+
 
 
 // Obtener instituciones del usuario autenticado
@@ -126,9 +131,13 @@ export const getMyInstitutionsRequest = async () => {
     const res = await apiInstitucion.get('/my')
     return res.data
   } catch (err) {
-    return { error: true, err }
+    return {
+      error: true,
+      message: err.response?.data?.message || 'Error al obtener las instituciones'
+    }
   }
 }
+
 
 
 //Listar todas las instituciones
