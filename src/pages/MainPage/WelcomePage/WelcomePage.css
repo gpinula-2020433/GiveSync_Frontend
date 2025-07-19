@@ -37,6 +37,7 @@
 .tagline {
   font-size: 3.2rem;
   font-weight: 700;
+  color: #ffffff;
   margin: 0;
   line-height: 1.2;
   animation: slideIn 3s ease;
@@ -50,7 +51,7 @@
 }
 
 .enter-btn {
-  background-color: #A3D9B1;
+  background-color: #5f95d7;
   color: #2C3E50;
   padding: 14px 28px;
   border-radius: 10px;
@@ -65,7 +66,7 @@
 }
 
 .enter-btn:hover {
-  background-color: #89c8a0;
+  background-color: #4b8ee0;
   transform: translateY(-3px);
 }
 
