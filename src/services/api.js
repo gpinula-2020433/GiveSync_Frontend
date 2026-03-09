@@ -1,36 +1,34 @@
-import { config } from "@fortawesome/fontawesome-svg-core"
 import axios from "axios"
-import { data } from "react-router-dom"
 
 const apiClient = axios.create(
     {
-        baseURL: 'http://localhost:3200',
+        baseURL: import.meta.env.VITE_API_URL,
         timeout: 2000
     }
 )
 
 const apiInstitucion = axios.create(
     {
-        baseURL: 'http://localhost:3200/v1/institution',
+        baseURL: `${import.meta.env.VITE_API_URL}/v1/institution`,
         timeout: 2000
     }
 )
 
 const apiPublication = axios.create(
   {
-      baseURL: 'http://localhost:3200/v1/publication',
+      baseURL: `${import.meta.env.VITE_API_URL}/v1/publication`,
       timeout: 2000
   }
 )
 
 
 const apiComment = axios.create({
-  baseURL: 'http://localhost:3200/v1/comment',
+  baseURL: `${import.meta.env.VITE_API_URL}/v1/comment`,
   timeout: 2000
 })
 
 const apiReport = axios.create({
-  baseURL: 'http://localhost:3200/v1',
+  baseURL: `${import.meta.env.VITE_API_URL}/v1`,
   timeout: 2000
 })
 
@@ -445,7 +443,7 @@ export const deleteNotificationRequest = async (id) => {
 export const fetchPendingInstitutions = async () => {
   try {
     const token = localStorage.getItem('token')
-    const res = await fetch('http://localhost:3200/v1/institution/pending', {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/v1/institution/pending`, {
       headers: { Authorization: token }
     })
     const data = await res.json()
@@ -459,7 +457,7 @@ export const fetchPendingInstitutions = async () => {
 export const updateInstitutionState = async (id, newState) => {
   try {
     const token = localStorage.getItem('token')
-    const res = await fetch(`http://localhost:3200/v1/institution/updateState/${id}`, {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/v1/institution/updateState/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

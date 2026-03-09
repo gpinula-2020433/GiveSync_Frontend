@@ -8,7 +8,7 @@ export default defineConfig({
     cors: true,
     proxy: {
       '/uploads': {
-        target: 'http://localhost:3200',
+        target: process.env.VITE_API_URL,
         changeOrigin: true,
         secure: false,
       },

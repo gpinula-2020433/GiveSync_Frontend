@@ -21,7 +21,7 @@ const AddDonationPage = () => {
     const fetchInstitution = async () => {
       try {
         const token = localStorage.getItem('token')
-        const res = await axios.get(`http://localhost:3200/v1/institution/${id}`, {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/v1/institution/${id}`, {
           headers: { Authorization: token }
         })
         setInstitution(res.data.institution)
@@ -85,7 +85,7 @@ const AddDonationPage = () => {
       const token = localStorage.getItem('token')
       const maintenanceAmount = amount * 0.10
       const institutionAmount = amount - maintenanceAmount
-      await axios.post('http://localhost:3200/v1/donation/add',
+      await axios.post(`${import.meta.env.VITE_API_URL}/v1/donation/add`,
         { amount: Number(amount), maintenanceAmount, institutionAmount, institution: id },
         { headers: { Authorization: token } }
       )

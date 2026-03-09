@@ -17,7 +17,7 @@ export const DonationsToMyInstitution = () => {
   const fetchDonations = async () => {
     try {
       const token = localStorage.getItem('token')
-      const res = await fetch('http://localhost:3200/v1/donation/institution/my', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/v1/donation/institution/my`, {
         headers: {
           Authorization: token,
         },

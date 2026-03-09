@@ -98,7 +98,7 @@ export const CommentsPage = () => {
     <div className="carousel-container">
       {/* Imagen actual */}
       <img
-        src={`http://localhost:3200/uploads/img/users/${encodeURIComponent(
+        src={`${import.meta.env.VITE_API_URL}/uploads/img/users/${encodeURIComponent(
           publication.imagePublication[currentImageIndex]?.trim() || ""
         )}`}
         alt={`Imagen ${currentImageIndex + 1}`}
@@ -154,7 +154,7 @@ export const CommentsPage = () => {
               <p>{comment.content}</p>
               {comment.commentImage && (
                 <img
-                  src={`http://localhost:3200/uploads/img/users/${encodeURIComponent(comment.commentImage)}`}
+                  src={`${import.meta.env.VITE_API_URL}/uploads/img/users/${encodeURIComponent(comment.commentImage)}`}
                   alt="Imagen comentario"
                   className="comment-img"
                 />
