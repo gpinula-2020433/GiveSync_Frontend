@@ -1,1 +1,1 @@
-# GyveSync_Frontend
+# GiveSync_Frontend
