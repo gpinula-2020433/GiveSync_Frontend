@@ -12,7 +12,7 @@ export const AllDonationsMade = () => {
     const fetchDonations = async () => {
       try {
         const token = localStorage.getItem('token')
-        const res = await axios.get('http://localhost:3200/v1/donation/', {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/v1/donation/`, {
           headers: { Authorization: token }
         })
         if (res.data.success) {

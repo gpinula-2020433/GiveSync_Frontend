@@ -130,7 +130,7 @@ const [formData, setFormData] = useState(form)
             onSubmit={handleSubmit}>
             <Input
                 field='name'
-                label='Name'
+                label='Nombre'
                 value={formData.name.value}
                 onChangeHandler={handleValueChange}
                 placeholder={formData.name.value}
@@ -141,7 +141,7 @@ const [formData, setFormData] = useState(form)
             />
             <Input
                 field='surname'
-                label='Surname'
+                label='Apellido'
                 value={formData.surname.value}
                 onChangeHandler={handleValueChange}
                 placeholder={formData.surname.value}
@@ -152,7 +152,7 @@ const [formData, setFormData] = useState(form)
             />
             <Input 
                 field='email' //Tiene que llamarse igual que el formData
-                label='Email' 
+                label='Correo Electrónico' 
                 value={formData.email.value}
                 onChangeHandler={handleValueChange}
                 placeholder={formData.email.value}
@@ -163,7 +163,7 @@ const [formData, setFormData] = useState(form)
             />
             <Input 
                 field='username'
-                label='Username' 
+                label='Nombre de usuario (Se guardará en minúscula)' 
                 onChangeHandler={handleValueChange}
                 value={formData.username.value} 
                 placeholder={formData.username.value}
@@ -174,7 +174,7 @@ const [formData, setFormData] = useState(form)
             />
             <Input 
                 field='password'
-                label='Password' 
+                label='Contraseña' 
                 onChangeHandler={handleValueChange}
                 value={formData.password.value} 
                 type='password'
@@ -184,7 +184,7 @@ const [formData, setFormData] = useState(form)
             />
             <Input 
                 field='passwordConfirm'
-                label='Password Confirmation' 
+                label='Confirmar contraseña' 
                 onChangeHandler={handleValueChange}
                 value={formData.passwordConfirm.value} 
                 type='password'

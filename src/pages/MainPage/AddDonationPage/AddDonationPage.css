@@ -8,6 +8,8 @@
   --input-error: #dc2626;
   --btn-bg: #1d4ed8;
   --btn-hover-bg: #2563eb;
+    --btn-hover-bg1: #dc2626;
+    --btn-bg1: #dc2626;
   --btn-text: #ffffff;
   --shadow: rgba(0,0,0,0.1);
   --text-muted: #687280;
@@ -22,6 +24,7 @@
   --input-placeholder: #9ca3af;
   --input-error: #f87171;
   --btn-bg: #7aaaff;
+  --btn-bg1: #f87171;
   --btn-hover-bg: #5d8fed;
   --btn-text: #1e1e2f;
   --shadow: rgba(0,0,0,0.6);
@@ -229,3 +232,28 @@ body, html {
     min-width: 100%;
   }
 }
+
+.btn-donate1 {
+  background-color: var(--btn-bg1);
+  color: var(--btn-text);
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 0.8rem 0;
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 10px var(--shadow);
+  user-select: none;
+}
+
+.btn-donate1:hover,
+.btn-donate1:focus {
+  background-color: var(--btn-hover-bg1);
+  outline: none;
+  box-shadow: 0 0 15px var(--btn-hover-bg1);
+}
+  .btn-donate1 {
+    font-size: 1rem;
+    padding: 0.7rem 0;
+  }

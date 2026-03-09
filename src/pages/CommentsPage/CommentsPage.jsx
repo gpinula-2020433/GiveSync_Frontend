@@ -7,45 +7,36 @@ import { useAuthenticatedUserContext } from '../../shared/hooks/User/useAuthenti
 import './CommentsPage.css'
 
 export const CommentsPage = () => {
-  const { publicationId } = useParams()
-  const navigate = useNavigate()
-  const { publication, comments: initialComments } = usePublicationComments(publicationId)
-  const [comments, setComments] = useState([])
-  const [showForm, setShowForm] = useState(false)
-  const [editData, setEditData] = useState(null)
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
-  const { user } = useAuthenticatedUserContext()
+  const { publicationId } = useParams();
+  const navigate = useNavigate();
+  const { publication, comments: initialComments } = usePublicationComments(publicationId);
+  const [comments, setComments] = useState([]);
+  const [showForm, setShowForm] = useState(false);
+  const [editData, setEditData] = useState(null);
+  const { user } = useAuthenticatedUser();
+  const [commentContent, setCommentContent] = useState('');
+  const [error, setError] = useState('');
 
   useEffect(() => {
     setComments(initialComments);
   }, [initialComments]);
 
   const handleNewComment = async (formData) => {
-    if (formData.content.length > 500) {
-      setError('El comentario no puede superar los 500 caracteres.');
-      return;
-    }
     const result = await addComment(formData);
     if (!result.error) {
       setComments([result.comment, ...comments]);
       setShowForm(false);
-      setError('');
       return result;
     }
     return result;
   };
 
   const handleEditComment = async (id, formData) => {
-    if (formData.content.length > 500) {
-      setError('El comentario no puede superar los 500 caracteres.');
-      return;
-    }
     const result = await editComment(id, formData);
     if (!result.error) {
       setComments(comments.map((c) => (c._id === id ? result.comment : c)));
       setEditData(null);
       setShowForm(false);
-      setError('');
     }
     return result;
   };
@@ -63,13 +54,11 @@ export const CommentsPage = () => {
   const handleEditClick = (comment) => {
     setEditData(comment);
     setShowForm(true);
-    setCommentContent(comment.content); // Cargar contenido para editar
   };
 
   const handleCancel = () => {
     setEditData(null);
     setShowForm(false);
-    setCommentContent(''); // Limpiar el contenido del comentario
   };
 
   const handleClick = (e) => {
@@ -79,28 +68,55 @@ export const CommentsPage = () => {
     }
   };
 
+  // Lógica para navegar entre las imágenes
+  const handlePrevImage = () => {
+    if (currentImageIndex > 0) {
+      setCurrentImageIndex(currentImageIndex - 1);
+    }
+  };
+
+  const handleNextImage = () => {
+    if (
+      publication?.imagePublication &&
+      currentImageIndex < publication.imagePublication.length - 1
+    ) {
+      setCurrentImageIndex(currentImageIndex + 1);
+    }
+  };
+
   return (
     <div className="comments-page">
-      <button onClick={() => navigate(-1)} className="back-button">⬅️ Regresar</button>
+      <button onClick={() => navigate(-1)} className="back-button">
+        ⬅️ Regresar
+      </button>
+
       <h1>{publication?.title}</h1>
 
-      {publication?.imagePublication && (
-        <div className="publication-images">
-          {(typeof publication.imagePublication === 'string'
-            ? publication.imagePublication.split(',')
-            : Array.isArray(publication.imagePublication)
-            ? publication.imagePublication
-            : []
-          ).map((img, i) => (
-            <img
-              key={i}
-              src={`http://localhost:3200/uploads/img/users/${encodeURIComponent(img.trim())}`}
-              alt={`Imagen ${i + 1}`}
-              className="publication-img"
-            />
-          ))}
-        </div>
-      )}
+    {publication?.imagePublication && publication.imagePublication.length > 0 ? (
+  <div className="publication-images">
+    <div className="carousel-container">
+      {/* Imagen actual */}
+      <img
+        src={`${import.meta.env.VITE_API_URL}/uploads/img/users/${encodeURIComponent(
+          publication.imagePublication[currentImageIndex]?.trim() || ""
+        )}`}
+        alt={`Imagen ${currentImageIndex + 1}`}
+        className="publication-img"
+      />
+
+      {/* Botones de navegación */}
+      <button onClick={handlePrevImage} className="carousel-btn prev">
+        &#8592;
+      </button>
+      <button onClick={handleNextImage} className="carousel-btn next">
+        &#8594;
+      </button>
+    </div>
+  </div>
+) : (
+  <p>No hay imágenes en esta publicación.</p> // Mensaje en caso de no tener imágenes
+)}
+
 
       <button
         onClick={(e) => {
@@ -111,7 +127,6 @@ export const CommentsPage = () => {
           }
           setShowForm(!showForm);
           setEditData(null);
-          setCommentContent(''); // Limpiar contenido para agregar nuevo comentario
         }}
         className="toggle-form-button"
       >
@@ -125,13 +140,8 @@ export const CommentsPage = () => {
           onCancel={handleCancel}
           editCommentData={editData}
           onEditComment={handleEditComment}
-          commentContent={commentContent} // Pasar el contenido
-          setCommentContent={setCommentContent} // Actualizar el contenido
         />
       )}
-
-      {/* Mostrar mensaje de error si el comentario excede los 500 caracteres */}
-      {error && <p className="error-message">{error}</p>}
 
       <div className="comments-list">
         {comments.length === 0 ? (
@@ -143,7 +153,7 @@ export const CommentsPage = () => {
               <p>{comment.content}</p>
               {comment.commentImage && (
                 <img
-                  src={`http://localhost:3200/uploads/img/users/${encodeURIComponent(comment.commentImage)}`}
+                  src={`${import.meta.env.VITE_API_URL}/uploads/img/users/${encodeURIComponent(comment.commentImage)}`}
                   alt="Imagen comentario"
                   className="comment-img"
                 />

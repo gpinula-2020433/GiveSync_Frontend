@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { io } from 'socket.io-client';
 
-const socket = io('http://localhost:3200'); // o la URL de tu server
+const socket = io(import.meta.env.VITE_API_URL); // o la URL de tu server
 
 export function useSocket(eventName, callback) {
   useEffect(() => {

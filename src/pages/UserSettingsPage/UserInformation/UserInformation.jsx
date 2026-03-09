@@ -113,7 +113,7 @@ const [showConfirmDeleteModal, setShowConfirmDeleteModal] = useState(false)
     <div className="user-container">
       <div className="user-image-box">
         <img
-          src={user.imageUser ? `http://localhost:3200/uploads/img/users/${user.imageUser}` : DefaultUserImage}
+          src={user.imageUser ? `${import.meta.env.VITE_API_URL}/uploads/img/users/${user.imageUser}` : DefaultUserImage}
           alt="Perfil"
           className="user-profile-img"
           onError={(e) => { e.currentTarget.src = DefaultUserImage }}

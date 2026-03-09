@@ -161,6 +161,10 @@ export const routes = [
       path: '/serviceunavailable',
       element: <ServiceUnavailable />
     },
+    ,{
+      path: '/serviceunavailable',
+      element: <ServiceUnavailable />
+    },
   {
     path:'*',
     element: <NotFoundPage/>

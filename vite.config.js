@@ -1,5 +1,8 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import { config } from 'dotenv';
+
+config()
 
 export default defineConfig({
   plugins: [react()],
@@ -8,7 +11,7 @@ export default defineConfig({
     cors: true,
     proxy: {
       '/uploads': {
-        target: 'http://localhost:3200',
+        target: process.env.VITE_API_URL,
         changeOrigin: true,
         secure: false,
       },
